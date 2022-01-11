@@ -120,7 +120,7 @@ class RealEstateEntity {
             $sql1 = "DELETE FROM realestate WHERE id='" . $this->id . "'";
             $sql2 = "DELETE FROM typology WHERE realstateid='" . $this->id . "'";
             if ($connection->query($sql1) === TRUE) {
-                if ($connection->query($sql1) === TRUE)
+                if ($connection->query($sql2) === TRUE)
                     $result = true;
                 else
                     $result = false;

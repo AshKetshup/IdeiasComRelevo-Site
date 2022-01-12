@@ -18,6 +18,12 @@ class RealEstateEntity {
     private $value;
     private $has_elevator;
 
+    /** Refs */
+    private $appts;
+
+    /** Lazy Load Flags */
+    private $loaded_appts = false;
+
     /** External Modules */
     private $db_context;
     
@@ -184,7 +190,7 @@ class RealEstateEntity {
 
             if ($result->num_rows <= 0) {
                 $connection->close();
-                return NULL;
+                return 0;
             }
 
             $row = $result->fetch_assoc()[0];
@@ -199,6 +205,33 @@ class RealEstateEntity {
     public function get_has_elevator() { return $this->has_elevator; } // true || false
     public function get_photos() { return $this->photos; } // string array with photos names (these names will be uuid's to ensure photo names are uniques)
     public function get_main_photo() { return $this->main_photo; }
+    public function get_appartments() {
+        if ($this->loaded_appts)
+            return $this->$appts;
+
+        $result = array();
+
+        $connection = $this->db_context->initialize_connection();
+        if ($connection != NULL) {            
+            $sql = "SELECT * FROM typology WHERE rid='" . $this->id . "'";
+            $result = $connection->query($sql);
+
+            if ($result->num_rows <= 0) {
+                $connection->close();
+                return $result;
+            }
+
+            while($row = $result->fetch_assoc()) {
+                array_push($result, TypologyEntity::fromRow($row));
+            }
+            $this->appts = $result;
+            $this->loaded_appts = true;
+        } else 
+            $result = false;
+
+        $connection->close();
+        return $result;
+    }
 
     /** Setters */        
     public function set_zone($value) { $this->zone = $value; }
@@ -209,6 +242,32 @@ class RealEstateEntity {
     public function set_has_elevator($value) { $this->has_elevator = $value; }
     public function set_photos($value) { $this->photos = $value; } // string array with photos names (these names will be uuid's to ensure photo names are unique)
     public function set_main_photo($value) { $this->main_photo = $value; }
+
+    /** Refresh References */
+    public function reload_appartments() {
+        $result = array();
+
+        $connection = $this->db_context->initialize_connection();
+        if ($connection != NULL) {            
+            $sql = "SELECT * FROM typology WHERE rid='" . $this->id . "'";
+            $result = $connection->query($sql);
+
+            if ($result->num_rows <= 0) {
+                $connection->close();
+                return $result;
+            }
+
+            while($row = $result->fetch_assoc()) {
+                array_push($result, TypologyEntity::fromRow($row));
+            }
+            $this->appts = $result;
+            $this->loaded_appts = true;
+        } else 
+            $result = false;
+
+        $connection->close();
+        return $result;
+    }
 
 }
 

@@ -26,6 +26,9 @@ class TypologyEntity {
     /** Ref */
     private $realestate;
 
+    /** Lazy Load Flags */
+    private $loaded_realestate = false;
+
     /** External Modules */
     private $db_context;
 
@@ -90,6 +93,84 @@ class TypologyEntity {
         $this->rid = $entry['rid'];
     }
 
+    public function get_id() { return $this->id; }
+    public function get_area() { return $this->area; }
+    public function get_energy_category() { return $this->energy_category; }
+    public function get_typology() { return $this->typology; }
+    public function get_state() { return $this->state; }
+    public function get_has_garage() { return $this->has_garage; }
+    public function get_rent_price() { return $this->rent_price; }
+    public function get_sell_price() { return $this->sell_price; }
+    public function get_floor() { return $this->floor; }
+    public function get_has_parking() { return $this->has_parking; }
+    public function get_wc_count() { return $this->wc_count; }
+    public function get_available() { return $this->available; }
+    public function get_description() { return $this->description; }
+    public function get_photos() { return $this->photos; }
+    public function get_building() {
+        if ($this->loaded_realestate)
+            return $this->realestate;
+
+        $result = NULL;
+
+        $connection = $this->db_context->initialize_connection();
+        if ($connection != NULL) {            
+            $sql = "SELECT * FROM realestate WHERE id='" . $this->rid . "'";
+            $result = $connection->query($sql);
+
+            if ($result->num_rows <= 0) {
+                $connection->close();
+                return NULL;
+            }
+
+            $this->realestate = RealEstateEntity::fromRow($result->fetch_assoc()[0]);
+            $this->loaded_realestate = true;
+        } else 
+            $result = false;
+
+        $connection->close();
+        return $result;
+    }
+
+    public function set_area($value) { $this->area = $value; }
+    public function set_energy_category($value) { $this->energy_category = $value; }
+    public function set_typology($value) { $this->typology = $value; }
+    public function set_state($value) { $this->state = $value; }
+    public function set_has_garage($value) { $this->has_garage = $value; }
+    public function set_rent_price($value) { $this->rent_price = $value; }
+    public function set_sell_price($value) { $this->sell_price = $value; }
+    public function set_floor($value) { $this->floor = $value; }
+    public function set_has_parking($value) { $this->has_parking = $value; }
+    public function set_wc_count($value) { $this->wc_count = $value; }
+    public function set_available($value) { $this->available = $value; }
+    public function set_description($value) { $this->description = $value; }
+    public function set_photos($value) { $this->photos = $value; }
+    public function set_building($value) { 
+        $this->rid = $value->get_id(); 
+        $this->realestate = $value;
+    }
+
+    public function reload_building() {
+        $result = NULL;
+
+        $connection = $this->db_context->initialize_connection();
+        if ($connection != NULL) {            
+            $sql = "SELECT * FROM realestate WHERE id='" . $this->rid . "'";
+            $result = $connection->query($sql);
+
+            if ($result->num_rows <= 0) {
+                $connection->close();
+                return NULL;
+            }
+
+            $this->realestate = RealEstateEntity::fromRow($result->fetch_assoc()[0]);
+            $this->loaded_realestate = true;
+        } else 
+            $result = false;
+
+        $connection->close();
+        return $result;
+    }
 }
 
 ?>

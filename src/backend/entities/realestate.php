@@ -207,7 +207,7 @@ class RealEstateEntity {
     public function get_main_photo() { return $this->main_photo; }
     public function get_appartments() {
         if ($this->loaded_appts)
-            return $this->$appts;
+            return $this->appts;
 
         $result = array();
 

@@ -2,6 +2,7 @@
 
 require_once 'typology.php';
 require_once '../database/dbconnection.php';
+require_once '../helpers/extensions.php';
 
 class RealEstateEntity {
 
@@ -13,7 +14,6 @@ class RealEstateEntity {
     private $county;
     private $city;
     private $building_type;
-    private $appartment_count;
     private $state;
     private $value;
     private $has_elevator;
@@ -26,6 +26,7 @@ class RealEstateEntity {
         $this->db_context = new DbContext();        
     }
 
+    /** Creates a new Instance from the typology id */
     public static function fromId($id) {
         $instance = new self();
         $result = $instance->loadByID($id);
@@ -34,12 +35,14 @@ class RealEstateEntity {
         return $instance;
     }
 
+    /** Creates a new Instance from a row */
     public static function fromRow($entry) {
         $instance = new self();
         $instance->fill($entry);
         return $instance;
     }
 
+    /** Performs the query to create a new instance with data */
     protected function loadByID($id) {
         $connection = $this->db_context->initialize_connection();
         if ($connection == NULL) {
@@ -60,6 +63,7 @@ class RealEstateEntity {
         $this->fill($row);
     }
 
+    /** Creates the new instance giving the values from the row */
     protected function fill($entry) {
         $this->id = $entry['id'];
         $this->main_photo['main_photo'];
@@ -75,6 +79,38 @@ class RealEstateEntity {
     }
 
     /** Database Operations */
+
+    /** Adds the entity to the database 
+     * If there's a error initializing the connection or inserting the record an error returns false, otherwise returns true
+    */
+    public function insert() {
+        $result = false;
+
+        $connection = $this->db_context->initialize_connection();
+        if ($connection != NULL) {
+            $this->id = guidv4();
+            $escaped_zone = $connection->real_escape_string($this->zone);
+            $escaped_county = $connection->real_escape_string($this->county);
+            $escaped_city = $connection->real_escape_string($this->city);
+            $escaped_building_type = $connection->real_escape_string($this->building_type);            
+            $escaped_state = $connection->real_escape_string($this->state);
+            $escaped_value = $connection->real_escape_string($this->value);
+            $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
+            $escaped_main_photo = $connection->real_escape_string($this->main_photo);
+            $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
+
+            $sql = "INSERT INTO realestate (id, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator) VALUES ('" . $this->id . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_value  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . $escaped_has_elevator . "')";
+            if ($connection->query($sql) === TRUE)
+                $result = true;
+            else
+                $result = false;
+        } else 
+            $result = false;
+
+        $connection->close();
+        return $result;
+    }
+
     /** 
      * Updates the entry on the database 
      * If there's a error initializing the connection or updating the record an error returns false, otherwise returns true
@@ -88,14 +124,13 @@ class RealEstateEntity {
             $escaped_county = $connection->real_escape_string($this->county);
             $escaped_city = $connection->real_escape_string($this->city);
             $escaped_building_type = $connection->real_escape_string($this->building_type);
-            $escaped_appartment_count = $connection->real_escape_string($this->appartment_count);
             $escaped_state = $connection->real_escape_string($this->state);
             $escaped_value = $connection->real_escape_string($this->value);
             $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
             $escaped_main_photo = $connection->real_escape_string($this->main_photo);
             $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
 
-            $sql = "UPDATE realestate SET photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', zone='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', appartment_count='" . $escaped_appartment_count . "', state='" . $escaped_state . "', value='" . $escaped_value . "', has_elevator='" . $escaped_has_elevator . " WHERE id='" . $this->id . "'";
+            $sql = "UPDATE realestate SET photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', `zone`='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', `state`='" . $escaped_state . "', `value`='" . $escaped_value . "', has_elevator='" . $escaped_has_elevator . " WHERE id='" . $this->id . "'";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -139,7 +174,27 @@ class RealEstateEntity {
     public function get_county() { return $this->county; }
     public function get_city() { return $this->city; }
     public function get_building_type() { return $this->building_type; }
-    public function get_appartment_count() { return $this->appartment_count; }
+    public function get_appartment_count() { 
+        $result = false;
+
+        $connection = $this->db_context->initialize_connection();
+        if ($connection != NULL) {            
+            $sql = "SELECT COUNT(id) AS apptcount FROM typology WHERE rid='" . $this->id . "'";
+            $result = $connection->query($sql);
+
+            if ($result->num_rows <= 0) {
+                $connection->close();
+                return NULL;
+            }
+
+            $row = $result->fetch_assoc()[0];
+            $result = $row["apptcount"];
+        } else 
+            $result = false;
+
+        $connection->close();
+        return $result;
+    }
     public function get_state() { return $this->value; }
     public function get_has_elevator() { return $this->has_elevator; } // true || false
     public function get_photos() { return $this->photos; } // string array with photos names (these names will be uuid's to ensure photo names are uniques)
@@ -150,7 +205,6 @@ class RealEstateEntity {
     public function set_county($value) { $this->county = $value; }
     public function set_city($value) { $this->city = $value; }
     public function set_building_type($value) { $this->building_type = $value; }
-    public function set_appartment_count($value) { $this->appartment_count = $value; }
     public function set_state($_value) { $this->value = $_value; }
     public function set_has_elevator($value) { $this->has_elevator = $value; }
     public function set_photos($value) { $this->photos = $value; } // string array with photos names (these names will be uuid's to ensure photo names are unique)

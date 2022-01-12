@@ -13,7 +13,7 @@ class RealEstateEntity {
     private $zone;
     private $county;
     private $city;
-    private $building_type;
+    private $building_type; // 0 = appt buiding 
     private $state;
     private $value;
     private $has_elevator;
@@ -201,7 +201,7 @@ class RealEstateEntity {
         $connection->close();
         return $result;
     }
-    public function get_state() { return $this->value; }
+    public function get_state() { return $this->state; }
     public function get_has_elevator() { return $this->has_elevator; } // true || false
     public function get_photos() { return $this->photos; } // string array with photos names (these names will be uuid's to ensure photo names are uniques)
     public function get_main_photo() { return $this->main_photo; }
@@ -232,13 +232,38 @@ class RealEstateEntity {
         $connection->close();
         return $result;
     }
+    public function get_value() {
+        if ($this->building_type == 0) {
+            $result = array();
+
+            $connection = $this->db_context->initialize_connection();
+            if ($connection != NULL) {            
+                $sql = "SELECT rent_price, sell_price FROM typology WHERE rid='" . $this->id . "' ORDER BY rent_price ASC, sell_price ASC";
+                $result = $connection->query($sql);
+
+                if ($result->num_rows <= 0) {
+                    $connection->close();
+                    return NULL;
+                }
+
+                $connection->close();
+                return $result->fetch_assoc()[0];
+            } else 
+                $result = false;
+
+            $connection->close();
+            return $result;
+        } else
+            return $this->value;
+    }    
 
     /** Setters */        
     public function set_zone($value) { $this->zone = $value; }
     public function set_county($value) { $this->county = $value; }
     public function set_city($value) { $this->city = $value; }
     public function set_building_type($value) { $this->building_type = $value; }
-    public function set_state($_value) { $this->value = $_value; }
+    public function set_value($_value) { $this->value = $_value; }
+    public function set_state($value) { $this->state = $value; }
     public function set_has_elevator($value) { $this->has_elevator = $value; }
     public function set_photos($value) { $this->photos = $value; } // string array with photos names (these names will be uuid's to ensure photo names are unique)
     public function set_main_photo($value) { $this->main_photo = $value; }

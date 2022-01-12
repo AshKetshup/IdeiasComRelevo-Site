@@ -21,6 +21,7 @@ class TypologyEntity {
     private $available;
     private $description;
     private $photos;
+    private $rid; // this will hold the id to the realestate allowing lazy load
 
     /** Ref */
     private $realestate;
@@ -72,6 +73,21 @@ class TypologyEntity {
 
     /** Creates the new instance giving the values from the row */
     protected function fill($entry) {
+        $this->id = $entry['id'];
+        $this->area['area'];
+        $this->photos = explode(",", $entry['photos']);
+        $this->energy_category = $entry['energy_category'];
+        $this->typology = $entry['typology'];
+        $this->state = $entry['state'];
+        $this->has_garage = $entry['has_garage'];
+        $this->rent_price = $entry['rent_price'];
+        $this->sell_price = $entry['sell_price'];
+        $this->floor = $entry['floor'];
+        $this->has_parking = $entry['has_parking'];
+        $this->wc_count = $entry['wc_count'];
+        $this->available = $entry['available'];
+        $this->description = $entry['description'];
+        $this->rid = $entry['rid'];
     }
 
 }

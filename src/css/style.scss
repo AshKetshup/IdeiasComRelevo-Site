@@ -1,6 +1,7 @@
 :root {
     --backgroundColor: #edebde;
     --foregroundColor: #000000;
+    --secondaryColor: #808080;
     --accentColor: #ff4d23;
 }
 
@@ -8,150 +9,35 @@
     margin: 0;
     padding: 0;
 
+    box-sizing: border-box;
+
+    // &:where(:not(iframe, canvas, img, svg, video):not(svg *, symbol *)) {
+    //     all: unset;
+    //     display: revert;
+    // }
+
+    &, &::before, &::after {box-sizing: border-box;}
+    
+    ol, ul {list-style: none;}
+    img {max-width: 100%;}
+
     /* Verdana-based sans serif stack */
     font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
 }
 
 body {
     background-color: var(--backgroundColor);
+    height: 100%;
 }
 
-button {
-    padding: 20px 40px;
-    height: fit-content;
-    width: fit-content;
-
-    // Center div
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    border: 3px solid #000000;
-    background-color: white;
-    color: var(--foregroundColor);
-    box-shadow: 10px 5px 5px rgba($color: #000000, $alpha: 0.3);
+section {
+    padding: 3rem;
 }
 
-.shelf {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: start space-evenly;
-    align-items: flex-start;
-    align-content: flex-start;
-
-    a.item {
-        text-decoration: none;
-        margin: 10px;
-        background-color: white;
-        width: 200px;
-        position: relative;
-
-        box-shadow: 0px 0px 3px rgba($color: #000000, $alpha: 0.2);
-
-        &[visible="true"] {
-            .popup {
-                visibility: visible;
-            }
-        }
-
-        .popup {
-            visibility: hidden;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 20px;
-            height: 20px;
-            
-            box-shadow: 0px 0px 3px rgba($color: #000000, $alpha: 0.2);
-            border-radius: 50% 50% 50% 50% ;
-            
-            background-color: #ff4d23;
-            color: white;
-
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-        }
-
-        .wrapper {
-            padding: 10px;
-
-            img {
-                display: block;
-                height: auto;
-                width: 100%;
-                aspect-ratio: 16 / 9;
-            }
-
-            .details {
-                padding: 20px 10px;
-                color: var(--foregroundColor);
-
-                // Title
-                h4 {
-                    font-weight: bold;
-                }
-
-                // Description
-                h5 {
-                    font-weight: lighter;
-                }
-            }
-        }
-
-        .content {
-            text-transform: uppercase;
-            font-weight: bold;
-
-            // A partir de
-            > div {
-                display: flex;
-                justify-content: flex-end;
-                
-
-                .from {
-                    &[visible="false"] {
-                        visibility: hidden;
-                    }
-
-                    box-shadow: 0px -3px 3px rgba($color: #000000, $alpha: 0.2);
-                    background-color: var(--accentColor);
-                    width: fit-content;
-                    padding: 2% 5%;
-
-                    p {
-                        color: white;
-                        text-align: end;
-                    }
-                }
-            }
-        }
-
-        // VENDA/ALUGAR & PREÇO
-        .show {
-            box-shadow: 0px -3px 3px rgba($color: #000000, $alpha: 0.2);
-            padding: 10px 20px;
-            display: flex;
-            flex-flow: row;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--accentColor);
-            font-weight: bold;
-            text-transform: uppercase;
-
-            #sell {
-                text-align: start;
-            }
-        
-            #amount {
-                text-align: end;
-            }
-        }
-    
-        &:hover {
-            scale: 1.005;
-            box-shadow: 0px 0px 9px rgba($color: #000000, $alpha: 0.2);
-            transition: 0.2s ease-in-out;
-        }
-    }    
-}
+@import "navbar";
+@import "home";
+@import "slider";
+@import "item-display";
+@import "about-us";
+@import "contacts";
+@import "footer";

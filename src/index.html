@@ -8,7 +8,81 @@
     <title>Ideias com Relevo</title>
 </head>
 <body>
-    
+    <nav id="navbar">
+        <a href="./index.html">
+            <img class="mini-logo" src="img/Sign.png">
+        </a>
+        <ul>
+            <li>
+                <a href="./imoveis.html">
+                    <div class="navbar-selection">Imoveis</div>
+                </a>
+            </li>
+            <li>
+                <a href="./portefolio.html">
+                    <div class="navbar-selection">Portefolio</div>
+                </a>
+            </li>
+            <li>
+                <a href="#footer">
+                    <div class="navbar-selection">Contactos</div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div id="slider"></div>
+    <div id="footer">
+        <div class="contacts"> 
+            <h2>Contactos</h2>
+            <!-- Flexbox de contactos por linha -->
+            <div>
+                <div class="card">
+                    <h3 id="phone">Fixo</h3>
+                    <p>+351 213 213 213</p>
+                </div>
+                <div class="card">
+                    <h3 id="telephone">Telemovel</h3>
+                    <p>+351 912 312 312</p>
+                </div>
+                <div class="card">
+                    <h3 id="Email">E-mail</h3>
+                    <p>email@email.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="associates">
+            <h2>Associados</h2>
+            <div class="associates-img">
+                <div class="card">
+                    <img src="https://fakeimg.pl/200x100/?text=Hello">
+                </div>
+                <div class="card">
+                    <img src="https://fakeimg.pl/200x100/?text=Hello">
+                </div>
+                <div class="card">
+                    <img src="https://fakeimg.pl/200x100/?text=Hello">
+                </div>
+                <div class="card">
+                    <img src="https://fakeimg.pl/200x100/?text=Hello">
+                </div>
+                <div class="card">
+                    <img src="https://fakeimg.pl/200x100/?text=Hello">
+                </div>
+                <div class="card">
+                    <img src="https://fakeimg.pl/200x100/?text=Hello">
+                </div>
+                
+            </div>
+            <script type="text/javascript">
+                var allCards = document.querySelectorAll(".associates-img > .cards")
+                var count = allCards.length
+
+                allCards.forEach(x, () => {
+                    x.style.height = (100/(count/4)).toString() + "%"
+                })
+            </script>
+        </div>
+    </div>
 </body>
 </html>
 

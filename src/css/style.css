@@ -1,35 +1,167 @@
 :root {
   --backgroundColor: #edebde;
   --foregroundColor: #000000;
+  --secondaryColor: #808080;
   --accentColor: #ff4d23;
 }
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   /* Verdana-based sans serif stack */
   font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* ol, * ul {
+  list-style: none;
+}
+* img {
+  max-width: 100%;
 }
 
 body {
   background-color: var(--backgroundColor);
+  height: 100%;
 }
 
-button {
-  padding: 20px 40px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+section {
+  padding: 3rem;
+}
+
+nav {
+  z-index: 1;
+  margin-bottom: 10px;
+  position: fixed;
+  height: 80px;
+  width: 100%;
+  background: var(--secondaryColor);
+  display: block;
+  transition: top 0.3s;
+}
+nav ul {
+  float: right;
+  margin-right: 20px;
+}
+nav ul li {
+  list-style: none;
+  display: inline-block;
+  line-height: 80px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-family: "Alegreya Sans", sans-serif;
+  transition: 0.4s;
+}
+nav .navbar-selection {
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: 200ms ease;
+}
+nav .navbar-selection:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 0px;
+}
+nav .mini-logo {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 2.5%;
+  height: 60px;
+}
+
+#slides .slide {
+  color: #fff;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.zoetrope {
+  position: relative;
+}
+.zoetrope .zoetrope-track-wrapper {
+  cursor: -webkit-grab;
+  cursor: grab;
+  overflow: hidden;
+  position: relative;
+  transition: height 0.1s;
+}
+.zoetrope.isDragging .zoetrope-track-wrapper {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+.zoetrope .zoetrope-track {
+  align-items: flex-start;
   display: flex;
+  left: 0;
+  position: absolute;
+  right: auto;
+  top: 0;
+  width: auto;
+}
+.zoetrope .zoetrope-track > * {
+  flex: 0 0 0;
+  min-width: calc(var(--slide-width) * 1px * (1 / var(--slides-to-show)));
+}
+.zoetrope.isDragging .zoetrope-track {
+  pointer-events: none;
+}
+.zoetrope .zoetrope-dots {
+  bottom: 1rem;
+  display: flex;
+  font-size: 0;
+  left: 50%;
   justify-content: center;
-  align-items: center;
-  border: 3px solid #000000;
-  background-color: white;
-  color: var(--foregroundColor);
-  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  transform: translateX(-50%);
+}
+.zoetrope .zoetrope-dots button {
+  background: #666;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 0.75rem;
+  width: 0.75rem;
+}
+.zoetrope .zoetrope-dots button:not(:last-child) {
+  margin-right: 0.5rem;
+}
+.zoetrope .zoetrope-dots button.active {
+  background: #222;
+}
+.zoetrope .slide {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+.zoetrope.isDragging .slide {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+.zoetrope.fade .slide {
+  left: 100%;
+  opacity: 0;
+  position: absolute;
+}
+.zoetrope .zoetrope-button {
+  height: 5rem;
+  width: 1.875rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-repeat: no-repeat;
+  background-size: contain;
+  font-size: 0;
+  cursor: pointer;
+}
+.zoetrope .zoetrope-button-prev {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 512'%3E%3Cpath fill='%23222' d='M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z'%3E%3C/path%3E%3C/svg%3E");
+  left: 1rem;
+}
+.zoetrope .zoetrope-button-next {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 512'%3E%3Cpath fill='%23222' d='M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z'%3E%3C/path%3E%3C/svg%3E");
+  right: 1rem;
 }
 
 .shelf {
@@ -128,4 +260,48 @@ button {
   scale: 1.005;
   box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.2);
   transition: 0.2s ease-in-out;
+}
+
+#footer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 50vh;
+  position: absolute;
+  bottom: 0%;
+  padding: 3rem;
+  color: white;
+  background: var(--secondaryColor);
+}
+#footer > * {
+  width: 50%;
+  padding: 1rem;
+}
+#footer > * div {
+  display: flex;
+  flex-flow: column wrap;
+}
+#footer > * div > .card {
+  max-height: 200px;
+  height: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0.5rem;
+  margin-left: 0;
+}
+#footer > * div > .card img {
+  max-height: 200px;
+}
+#footer > * .associates-img {
+  overflow: scroll;
+  overflow-x: hidden;
+  flex-flow: row wrap;
+}
+#footer > * > h2 {
+  text-align: start;
 }/*# sourceMappingURL=style.css.map */

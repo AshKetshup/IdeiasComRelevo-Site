@@ -1,3 +1,17 @@
+<?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    if (!isset($_GET['id']))
+        header("location: /");
+
+    require_once 'backend/entities/realestate.php';
+
+    $id = $_GET['id'];    
+    $product = RealEstateEntity::fromId($id);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,87 +54,51 @@
             <!-- Slider + Tabela com detalhes -->
             <div class="column">
                 <div class="demo slider">
-                    <ul id="lightSlider">
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/programming.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/programming.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/programming.jpg" />
-                            </a>
-                        </li>
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/hardware.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/hardware.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/hardware.jpg" />
-                            </a>
-                        </li>
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/gadget.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/gadget.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/gadget.jpg" />
-                            </a>
-                        </li>
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/design.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/design.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/design.jpg" />
-                            </a>
-                        </li>
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/cons.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/cons.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/cons.jpg" />
-                            </a>
-                        </li>
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/auto.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/auto.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/auto.jpg" />
-                            </a>
-                        </li>
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/black-background.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/black-background.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/black-background.jpg" />
-                            </a>
-                        </li>
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/coding.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/coding.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/coding.jpg" />
-                            </a>
-                        </li>
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/1st.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/1st.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/1st.jpg" />
-                            </a>
-                        </li>
-                        <li data-thumb="https://webdevtrick.com/wp-content/uploads/sunset-background.jpg">
-                            <a href="https://webdevtrick.com/wp-content/uploads/sunset-background.jpg" data-fancybox="gallery">
-                                <img src="https://webdevtrick.com/wp-content/uploads/sunset-background.jpg" />
-                            </a>
-                        </li>
+                    <ul id="lightSlider">                        
+                        <?php foreach($product->get_photos() as $photo): ?>
+                            <li data-thumb="<?= $photo ?>">
+                                <a href="<?= $photo ?>" data-fancybox="gallery">
+                                    <img src="<?= $photo ?>" />
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>
             <div class="table column columns">
                 <!-- Nome + Preço -->
                 <div id="title" class="container aspect-container">
-                    <h1 class="name">Predio Habitacional</h1>
-                    <h2 class="amount accent-color">9999999€</h2>
+                    <h1 class="name">
+                        <?php
+                            if ($product->get_building_type() == 0)
+                                echo 'Prédio Habitacional';
+                            else
+                                echo 'Desconhecido';
+                        ?>
+                    </h1>
+                    <h2 class="amount accent-color"><?= $product->get_value() == NULL ? 0 : $product->get_value() ?>€</h2>
                 </div>
                 <!-- table -->
                 <table class="local aspect-container">
                     <tr>
                         <th>Zona</th>
-                        <td>Centro</td>
+                        <td><?= $product->get_zone() ?></td>
                     </tr>
                     <tr>
                         <th>Concelho</th>
-                        <td>Ourém</td>
+                        <td><?= $product->get_county() ?></td>
                     </tr>
                     <tr>
                         <th>Freguesia</th>
-                        <td>Vilar</td>
+                        <td><?= $product->get_city() ?></td>
                     </tr>
                     <tr>
                         <th>Elevador</th>
-                        <td>Sim</td>
+                        <td><?= $product->get_has_elevator() == 1 ? "Sim" : "Não"  ?></td>
                     </tr>
                     <tr>
                         <th>Nº Apartamentos</th>
-                        <td>12</td>                        
+                        <td><?= $product->get_appartment_count() ?></td>                        
                     </tr>
                     <tr>
                         <th>Pisos</th>
@@ -132,7 +110,7 @@
         <div id="description">
             <h2>Descrição:</h2>
             <!-- Descrição -->
-            <p class="container aspect-container">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum magnam dolores delectus nemo. Asperiores enim quibusdam cupiditate officiis, recusandae consequuntur est soluta eum id qui nobis. Doloribus saepe ipsam rerum aut.</p>
+            <p class="container aspect-container"><?= $product->get_description() ?></p>
         </div>
         <div id="availability">
             <h2>Disponibilidade:</h2>
@@ -194,49 +172,8 @@
             </div>
         </div>
     </div>
-    <div id="footer">
-        <div class="row">
-            <div id="contacts" class="col">
-                <h3>Contacte-nos</h3>
-                
-                <h4>Escritorio</h4>
-                <p>Estrada da santa cona do assobio</p>
-                <p>no. 69</p>
-
-                <br>
-                
-                <h4>Email</h4>
-                <a href="mailto:email@email.com?subject=Mail from Our Site">
-                    <p class="email-id">email@email.com</p>
-                </a>
-
-                <br>
-                
-                <h4>Telefone</h4>
-                <p class="phone-id">+351 922 222 222</p>
-            </div>
-            <div id="links" class="col">
-                <h3>Links</h3>
-                <ul>
-                    <li><a href="index.html"><p>Home</p></a></li>
-                    <li><a href="index.html"><p>Imoveis</p></a></li>
-                    <li><a href="index.html"><p>Portefolio</p></a></li>
-                    <li><a href="index.html"><p>Contactos</p></a></li>
-                </ul>
-            </div>
-            <div id="associates" class="col">
-                <h3>Associados</h3>
-                <div class="associates-content">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    <?php include 'includes/footer.php'; ?>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js'></script>

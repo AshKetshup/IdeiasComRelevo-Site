@@ -1,0 +1,121 @@
+.search-grid {
+    height: 100vh;
+    padding: 0;
+    display: grid; 
+    grid-template-columns: 1fr 6fr; 
+    grid-template-rows: 1fr 6fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+        "filter-wrapper searchbar-wrapper"
+        "filter-wrapper shelf-wrapper"; 
+
+    // .filter-wrapper:hover {
+    //     width: 100%;
+
+    //     .checkmark ion-icon {
+    //         transition: 0.5s ease;
+    //         rotate: 45deg;
+    //     }
+    // }
+}
+
+.filter-wrapper {
+    width: 100%;
+    grid-area: filter-wrapper;
+    position: relative;
+
+    // input[type="checkbox"].open-drawer {
+    //     position: absolute;
+    //     top: 50%;
+    //     right: -2rem;
+    //     width: 4rem;
+    //     height: 4rem;
+        
+    //     opacity: 0;
+    // }
+
+    // .checkmark {
+    //     position: absolute;
+    //     top: 50%;
+    //     right: -2rem;
+    //     width: 4rem;
+    //     height: 4rem;
+        
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+        
+    //     border-radius: 50%;
+    //     background: var(--accentColor);
+    //     color: var(--clearColor);
+        
+    //     font-size: 3rem;
+    //     cursor: pointer;
+    // }
+
+    // transition: 0.3s ease;
+}
+
+.shelf-wrapper {
+    grid-area: shelf-wrapper;
+    overflow-y: auto;
+}
+
+.searchbar-wrapper {
+    grid-area: searchbar-wrapper;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+
+    form {
+        position: relative;
+        width: 80%;
+    }
+
+    input, button {
+        height: 5rem;
+        border: 0;
+        font-size: 1.8rem;
+        color: var(--complementaryColor);
+    }
+
+    input[type="search"] {
+        outline: 0;
+        width: 100%;
+        background: var(--clearColor);
+        padding: 0 1.6rem;
+        appearance: none;
+        transition: all .3s ease-in-out;
+        transition-property: width;
+        z-index: 1;
+        position: relative;
+    }
+
+    button {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 6rem;
+        font-weight: bold;
+        background: var(--accentColor);
+        color: var(--clearColor);
+    }
+
+    input:not(:placeholder-shown) {
+        width: calc(100% - 6rem);
+    
+        + button {
+            display: block;
+        }
+    }
+
+    label {
+        position: absolute;
+        clip: rect(1px, 1px, 1px, 1px);
+        padding: 0;
+        border: 0;
+        height: 1px;
+        width: 1px;
+    }
+}

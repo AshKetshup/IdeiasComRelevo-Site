@@ -17,6 +17,7 @@ class RealEstateEntity {
     private $state;
     private $value;
     private $has_elevator;
+    private $description;
 
     /** Refs */
     private $appts;
@@ -71,6 +72,7 @@ class RealEstateEntity {
         $this->state = $entry['state'];
         $this->value = $entry['value'];
         $this->has_elevator = $entry['has_elevator'];
+        $this->description = $entry['description'];
     }
 
     /** Database Operations */
@@ -93,8 +95,9 @@ class RealEstateEntity {
             $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
             $escaped_main_photo = $connection->real_escape_string($this->main_photo);
             $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
+            $escaped_description = $connection->real_escape_string($this->$description);
 
-            $sql = "INSERT INTO realestate (id, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator) VALUES ('" . $this->id . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_value  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . $escaped_has_elevator . "')";
+            $sql = "INSERT INTO realestate (`description`, id, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator) VALUES ('" . $escaped_description . "', '" . $this->id . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_value  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . $escaped_has_elevator . "')";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -124,8 +127,9 @@ class RealEstateEntity {
             $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
             $escaped_main_photo = $connection->real_escape_string($this->main_photo);
             $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
+            $escaped_description = $connection->real_escape_string($this->$description);
 
-            $sql = "UPDATE realestate SET photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', `zone`='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', `state`='" . $escaped_state . "', `value`='" . $escaped_value . "', has_elevator='" . $escaped_has_elevator . " WHERE id='" . $this->id . "'";
+            $sql = "UPDATE realestate SET `description`='" . $escaped_description . "' photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', `zone`='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', `state`='" . $escaped_state . "', `value`='" . $escaped_value . "', has_elevator='" . $escaped_has_elevator . " WHERE id='" . $this->id . "'";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -182,7 +186,7 @@ class RealEstateEntity {
                 return 0;
             }
 
-            $row = $result->fetch_assoc()[0];
+            $row = $result->fetch_assoc();
             $result = $row["apptcount"];
         } else 
             $result = false;
@@ -245,6 +249,7 @@ class RealEstateEntity {
         } else
             return $this->value;
     }    
+    public function get_description() { return $this->description; }
 
     /** Setters */        
     public function set_zone($value) { $this->zone = $value; }
@@ -256,6 +261,7 @@ class RealEstateEntity {
     public function set_has_elevator($value) { $this->has_elevator = $value; }
     public function set_photos($value) { $this->photos = $value; } // string array with photos names (these names will be uuid's to ensure photo names are unique)
     public function set_main_photo($value) { $this->main_photo = $value; }
+    public function set_description($value) { $this->description = $value; }
 
     /** Refresh References */
     public function reload_appartments() {

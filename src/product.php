@@ -10,7 +10,6 @@
 
     $id = $_GET['id'];    
     $product = RealEstateEntity::fromId($id);
-    var_dump($product);
 
 ?>
 <!DOCTYPE html>
@@ -69,30 +68,37 @@
             <div class="table column columns">
                 <!-- Nome + Preço -->
                 <div id="title" class="container aspect-container">
-                    <h1 class="name">Predio Habitacional</h1>
-                    <h2 class="amount accent-color">9999999€</h2>
+                    <h1 class="name">
+                        <?php
+                            if ($product->get_building_type() == 0)
+                                echo 'Prédio Habitacional';
+                            else
+                                echo 'Desconhecido';
+                        ?>
+                    </h1>
+                    <h2 class="amount accent-color"><?= $product->get_value() == NULL ? 0 : $product->get_value() ?>€</h2>
                 </div>
                 <!-- table -->
                 <table class="local aspect-container">
                     <tr>
                         <th>Zona</th>
-                        <td>Centro</td>
+                        <td><?= $product->get_zone() ?></td>
                     </tr>
                     <tr>
                         <th>Concelho</th>
-                        <td>Ourém</td>
+                        <td><?= $product->get_county() ?></td>
                     </tr>
                     <tr>
                         <th>Freguesia</th>
-                        <td>Vilar</td>
+                        <td><?= $product->get_city() ?></td>
                     </tr>
                     <tr>
                         <th>Elevador</th>
-                        <td>Sim</td>
+                        <td><?= $product->get_has_elevator() == 1 ? "Sim" : "Não"  ?></td>
                     </tr>
                     <tr>
                         <th>Nº Apartamentos</th>
-                        <td>12</td>                        
+                        <td><?= $product->get_appartment_count() ?></td>                        
                     </tr>
                     <tr>
                         <th>Pisos</th>
@@ -104,7 +110,7 @@
         <div id="description">
             <h2>Descrição:</h2>
             <!-- Descrição -->
-            <p class="container aspect-container">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum magnam dolores delectus nemo. Asperiores enim quibusdam cupiditate officiis, recusandae consequuntur est soluta eum id qui nobis. Doloribus saepe ipsam rerum aut.</p>
+            <p class="container aspect-container"><?= $product->get_description() ?></p>
         </div>
         <div id="availability">
             <h2>Disponibilidade:</h2>

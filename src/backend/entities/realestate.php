@@ -1,8 +1,8 @@
 <?php
 
-require_once 'typology.php';
-require_once '../database/dbconnection.php';
-require_once '../helpers/extensions.php';
+require_once 'backend/entities/typology.php';
+require_once 'backend/database/dbconnection.php';
+require_once 'backend/helpers/extensions.php';
 
 class RealEstateEntity {
 
@@ -36,8 +36,6 @@ class RealEstateEntity {
     public static function fromId($id) {
         $instance = new self();
         $result = $instance->loadByID($id);
-        if ($result == NULL)
-            return NULL;
         return $instance;
     }
 
@@ -51,20 +49,11 @@ class RealEstateEntity {
     /** Performs the query to create a new instance with data */
     protected function loadByID($id) {
         $connection = $this->db_context->initialize_connection();
-        if ($connection == NULL) {
-            $connection->close();
-            return NULL;
-        }
 
         $sql = "SELECT * FROM realestate WHERE id='" . $id . "'";
         $result = $connection->query($sql);
 
-        if ($result->num_rows <= 0) {
-            $connection->close();
-            return NULL;
-        }
-
-        $row = $result->fetch_assoc()[0];
+        $row = $result->fetch_assoc();
 
         $this->fill($row);
     }
@@ -72,7 +61,7 @@ class RealEstateEntity {
     /** Creates the new instance giving the values from the row */
     protected function fill($entry) {
         $this->id = $entry['id'];
-        $this->main_photo['main_photo'];
+        $this->main_photo = $entry['main_photo'];
         $this->photos = explode(",", $entry['photos']);
         $this->zone = $entry['zone'];
         $this->county = $entry['county'];

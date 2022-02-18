@@ -1,8 +1,8 @@
 <?php
 
-require_once 'typology.php';
-require_once '../database/dbconnection.php';
-require_once '../helpers/extensions.php';
+require_once 'backend/entities/typology.php';
+require_once 'backend/database/dbconnection.php';
+require_once 'backend/helpers/extensions.php';
 
 class TypologyEntity {
 
@@ -40,9 +40,7 @@ class TypologyEntity {
     /** Creates a new Instance from the typology id */
     public static function fromId($id) {
         $instance = new self();
-        $result = $instance->loadByID($id);
-        if ($result == NULL)
-            return NULL;
+        $instance->loadByID($id);
         return $instance;
     }
 
@@ -77,7 +75,7 @@ class TypologyEntity {
     /** Creates the new instance giving the values from the row */
     protected function fill($entry) {
         $this->id = $entry['id'];
-        $this->area['area'];
+        $this->area = $entry['area'];
         $this->photos = explode(",", $entry['photos']);
         $this->energy_category = $entry['energy_category'];
         $this->typology = $entry['typology'];

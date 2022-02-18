@@ -1,7 +1,7 @@
 <?php
 
-require_once '../database/dbconnection.php';
-require_once '../helpers/extensions.php';
+require_once 'backend/database/dbconnection.php';
+require_once 'backend/helpers/extensions.php';
 
 class UserEntity {
 
@@ -16,9 +16,7 @@ class UserEntity {
     /** Creates a new Instance from the typology id */
     public static function fromId($id) {
         $instance = new self();
-        $result = $instance->loadByID($id);
-        if ($result == NULL)
-            return NULL;
+        $instance->loadByID($id);
         return $instance;
     }
 

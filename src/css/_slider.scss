@@ -1,114 +1,53 @@
-#slides {	
-    .slide {
-        //border: 1px solid black;
-        color: #fff;
-        //padding: 1.5rem;
-        font-size: 3rem;
-        
-        text-align: center;
-    
-        // img {
-        //   object-fit: cover;
-        // }
-    }
-}
-
-.zoetrope {
-    position: relative;
-    
-    .zoetrope-track-wrapper {
-        cursor: grab;
+#highlight {
+    .demo {
         overflow: hidden;
-        position: relative;
-        transition: height .1s;
+        width: 100%;
     }
-    
-    &.isDragging .zoetrope-track-wrapper {
-        cursor: grabbing;
-    }
-    
-    .zoetrope-track {
-        align-items: flex-start;
-        display: flex;
-        left: 0;
-        position: absolute;
-        right: auto;
-        top: 0;
-        width: auto;
-    
-        & > * {
-            flex: 0 0 0;
-            min-width: calc(var(--slide-width) * 1px * (1 / var(--slides-to-show)));
-        }
-    }
-    
-    &.isDragging .zoetrope-track {
-        pointer-events: none;
-    }
-    
-    .zoetrope-dots {
-        bottom: 1rem;
-        display: flex;
-        font-size: 0;
-        left: 50%;
-        justify-content: center;
-        position: absolute;
-        transform: translateX(-50%);
 
-        button {
-            background: #666;
-            border-radius: 50%;
-            cursor: pointer;
-            height: .75rem;
-            width: .75rem;
-            
-            &:not(:last-child) {
-                margin-right: .5rem;
-            }
-            
-            &.active {
-                background: #222;
-            }
-        }
+    #lightSlider {
+        list-style: none outside none;
+        padding-left: 0;
+        margin-bottom:0;
     }
-    
-    .slide {
-        cursor: grab;	
-    }
-    
-    &.isDragging {
-        .slide {
-            cursor: grabbing;
-        }
-    }
-    
-    &.fade {
-        .slide {
-            left: 100%;
-            opacity: 0;
-            position: absolute;
-        }
-    }
-    
-    .zoetrope-button {
-        height: 5rem;
-        width: 1.875rem;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-repeat: no-repeat;
-        background-size: contain;
-        font-size: 0;
+
+    li {
+        display: block;
+        float: left;
         cursor: pointer;
     }
-    
-    .zoetrope-button-prev {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 512'%3E%3Cpath fill='%23222' d='M4.2 247.5L151 99.5c4.7-4.7 12.3-4.7 17 0l19.8 19.8c4.7 4.7 4.7 12.3 0 17L69.3 256l118.5 119.7c4.7 4.7 4.7 12.3 0 17L168 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 264.5c-4.7-4.7-4.7-12.3 0-17z'%3E%3C/path%3E%3C/svg%3E");
-        left: 1rem;
+
+    img {
+        display: block;
+        height: auto;
+        text-align: center;
+        width: 100%;
+        object-fit: contain;
     }
-    
-    .zoetrope-button-next {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 512'%3E%3Cpath fill='%23222' d='M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z'%3E%3C/path%3E%3C/svg%3E");
-        right: 1rem;
+
+    .lSSlideOuter {
+        .lSPager.lSGallery {
+            li {
+                opacity: 0.5;
+
+                &.active {
+                    opacity: 1;
+                }
+            }
+
+            img {
+                display: block;
+                height: 64px;
+                max-width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    lSSlideOuter .lSPager.lSGallery li.active, .lSSlideOuter .lSPager.lSGallery li{
+        border-radius: 0;
+    }
+
+    lSSlideOuter .lSPager.lSGallery li.active:hover, .lSSlideOuter .lSPager.lSGallery li:hover {
+        border-radius: 0;
     }
 }

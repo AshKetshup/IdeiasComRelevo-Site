@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css'>
+    <link rel='stylesheet' href='https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css'>
     <link rel="stylesheet" href="css/style.css">
     <title>Ideias com Relevo</title>
 </head>
 <body>
-    <nav id="navbar">
+    <nav>
         <a href="./index.html">
-            <img class="mini-logo" src="img/Sign.png">
+            <img class="mini-logo" src="./assets/img/Logotipo.png" style="height: 100%;">
         </a>
         <ul>
             <li>
@@ -30,57 +32,50 @@
             </li>
         </ul>
     </nav>
-    <div id="slider"></div>
+    <div id="main">
+        
+    </div>
     <div id="footer">
-        <div class="contacts"> 
-            <h2>Contactos</h2>
-            <!-- Flexbox de contactos por linha -->
-            <div>
-                <div class="card">
-                    <h3 id="phone">Fixo</h3>
-                    <p>+351 213 213 213</p>
-                </div>
-                <div class="card">
-                    <h3 id="telephone">Telemovel</h3>
-                    <p>+351 912 312 312</p>
-                </div>
-                <div class="card">
-                    <h3 id="Email">E-mail</h3>
-                    <p>email@email.com</p>
-                </div>
-            </div>
-        </div>
-        <div class="associates">
-            <h2>Associados</h2>
-            <div class="associates-img">
-                <div class="card">
-                    <img src="https://fakeimg.pl/200x100/?text=Hello">
-                </div>
-                <div class="card">
-                    <img src="https://fakeimg.pl/200x100/?text=Hello">
-                </div>
-                <div class="card">
-                    <img src="https://fakeimg.pl/200x100/?text=Hello">
-                </div>
-                <div class="card">
-                    <img src="https://fakeimg.pl/200x100/?text=Hello">
-                </div>
-                <div class="card">
-                    <img src="https://fakeimg.pl/200x100/?text=Hello">
-                </div>
-                <div class="card">
-                    <img src="https://fakeimg.pl/200x100/?text=Hello">
-                </div>
+        <div class="row">
+            <div id="contacts" class="col">
+                <h3>Contacte-nos</h3>
                 
-            </div>
-            <script type="text/javascript">
-                var allCards = document.querySelectorAll(".associates-img > .cards")
-                var count = allCards.length
+                <h4>Escritorio</h4>
+                <p>Estrada da santa cona do assobio</p>
+                <p>no. 69</p>
 
-                allCards.forEach(x, () => {
-                    x.style.height = (100/(count/4)).toString() + "%"
-                })
-            </script>
+                <br>
+                
+                <h4>Email</h4>
+                <a href="mailto:email@email.com?subject=Mail from Our Site">
+                    <p class="email-id">email@email.com</p>
+                </a>
+
+                <br>
+                
+                <h4>Telefone</h4>
+                <p class="phone-id">+351 922 222 222</p>
+            </div>
+            <div id="links" class="col">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="index.html"><p>Home</p></a></li>
+                    <li><a href="index.html"><p>Imoveis</p></a></li>
+                    <li><a href="index.html"><p>Portefolio</p></a></li>
+                    <li><a href="index.html"><p>Contactos</p></a></li>
+                </ul>
+            </div>
+            <div id="associates" class="col">
+                <h3>Associados</h3>
+                <div class="associates-content">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                </div>
+            </div>
         </div>
     </div>
 </body>

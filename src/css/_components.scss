@@ -23,37 +23,74 @@
     width: 100%;
     grid-area: filter-wrapper;
     position: relative;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 20rem;
+    overflow-y: auto;
 
-    // input[type="checkbox"].open-drawer {
-    //     position: absolute;
-    //     top: 50%;
-    //     right: -2rem;
-    //     width: 4rem;
-    //     height: 4rem;
-        
-    //     opacity: 0;
-    // }
+    .accordion-filter {
+        border-bottom: 2px solid var(--accentColor);
 
-    // .checkmark {
-    //     position: absolute;
-    //     top: 50%;
-    //     right: -2rem;
-    //     width: 4rem;
-    //     height: 4rem;
-        
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-        
-    //     border-radius: 50%;
-    //     background: var(--accentColor);
-    //     color: var(--clearColor);
-        
-    //     font-size: 3rem;
-    //     cursor: pointer;
-    // }
+        button {
+            background-color: var(--clearColor);
+            font-size: 1.8rem;
+            width: 100%;
+            padding: 1rem;
+            text-align: left;
+            
+            cursor: pointer;
+            outline: none;
+            border: none;
 
-    // transition: 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            
+            ion-icon {
+                font-size: 1.8rem;
+                text-align: right;
+                height: auto;
+                transition: rotate 625ms ease;
+            }
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            position: relative;
+            transition: max-height 625ms ease;
+            
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            label {
+                font-size: 2rem;
+            }
+
+            div {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                
+                padding: 0 0 0.5rem 1rem;
+                gap: 1rem;
+            }
+        }
+        
+        &[open="true"] {
+            ion-icon {
+                rotate: 45deg;
+            }
+            
+            .accordion-content {
+                max-height: 20rem;
+                display: block;
+            }
+        }
+    }
+
 }
 
 .shelf-wrapper {
@@ -64,8 +101,18 @@
 .searchbar-wrapper {
     grid-area: searchbar-wrapper;
     display: flex; 
+
     align-items: center; 
     justify-content: center;
+
+    flex-direction: column;
+
+    .sort-by {
+        padding: 1rem 0;
+        display: flex;
+        width: 80%;
+        gap: 1rem;
+    }
 
     form {
         position: relative;

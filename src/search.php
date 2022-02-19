@@ -44,15 +44,55 @@
                     <ion-icon name="search-outline"></ion-icon>
                 </button>
             </form>
+            <div class="sort-by">
+                <h4>Ordenar por:</h4>
+                <select>
+                    <option value="0">---</option>
+                    <option value="1">Preço (&#x2191;)</option>
+                    <option value="2">Preço (&#x2193;)</option>
+                </select>
+            </div>
         </div>
         <div class="filter-wrapper aspect-container">
-            <!-- <input type="checkbox" class="open-drawer">
-                <span class="checkmark">
-                    <ion-icon name="add-outline"></ion-icon>
-                </span>
-            </input> -->
+            <!-- Filtro -->
+            <h3>Filtrar</h3>
             <form onsubmit="event.preventDefault();" role="filter">
-            
+                <!-- Moradia / Apartamento -->
+                <div class="accordion-filter" open="false">
+                    <button onclick="open_accordion(this)">
+                        Tipo
+                        <ion-icon name="add-outline"></ion-icon>
+                    </button>
+                    <div class="accordion-content">
+                        <!-- <p>Dumb Shit saying here</p> -->
+                        <div>
+                            <input type="checkbox" name="Moradia">
+                            <label for="Moradia">Moradia</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="Apartamento">
+                            <label for="Apartamemto">Apartamento</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Alugar/Venda -->
+                <div class="accordion-filter" open="false">
+                    <button onclick="open_accordion(this)">
+                        Tipo de Venda
+                        <ion-icon name="add-outline"></ion-icon>
+                    </button>
+                    <div class="accordion-content">
+                        <!-- <p>Dumb Shit saying here</p> -->
+                        <div>
+                            <input type="checkbox" name="Moradia">
+                            <label for="Moradia">Moradia</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="Apartamento">
+                            <label for="Apartamemto">Apartamento</label>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="shelf-wrapper">
@@ -78,414 +118,12 @@
                         <p id="amount">200.000€</p>
                     </div>
                 </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>    
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a><a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-                <a href="" class="item" visible="true">
-                    <div class="popup" title="Ultima unidade">!</div>
-                    <div class="wrapper">
-                        <img src="./assets/img/dummie/d-moradia.jpg" alt="">
-                        <div class="details">
-                            <h4>Moradia T4</h4>
-                            <h5>Entroncamento - Casal do Grilo</h5>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div>
-                            <div class="from" visible="true">
-                                <p>A partir de</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="show">
-                        <p id="sell">Venda</p>
-                        <p id="amount">200.000€</p>
-                    </div>
-                </a>
-
             </div>
         </div>
     </div>
     
     <?php include 'includes/footer.php'; ?>
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js'></script>
-    <script src="./js/function.js"></script>
+    <script src="./js/accordion.js"></script>
 </body>
 </html>

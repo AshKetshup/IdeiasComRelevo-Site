@@ -86,6 +86,10 @@ p {
   font-size: 1.5rem;
 }
 
+button {
+  cursor: pointer;
+}
+
 nav {
   z-index: 1;
   height: 80px;
@@ -258,6 +262,59 @@ nav .mini-logo {
   width: 100%;
   grid-area: filter-wrapper;
   position: relative;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 20rem;
+  overflow-y: auto;
+}
+.filter-wrapper .accordion-filter {
+  border-bottom: 2px solid var(--accentColor);
+}
+.filter-wrapper .accordion-filter button {
+  background-color: var(--clearColor);
+  font-size: 1.8rem;
+  width: 100%;
+  padding: 1rem;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+}
+.filter-wrapper .accordion-filter button ion-icon {
+  font-size: 1.8rem;
+  text-align: right;
+  height: auto;
+  transition: rotate 625ms ease;
+}
+.filter-wrapper .accordion-filter .accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 625ms ease;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.filter-wrapper .accordion-filter .accordion-content label {
+  font-size: 2rem;
+}
+.filter-wrapper .accordion-filter .accordion-content div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 0 0 0.5rem 1rem;
+  gap: 1rem;
+}
+.filter-wrapper .accordion-filter[open=true] ion-icon {
+  rotate: 45deg;
+}
+.filter-wrapper .accordion-filter[open=true] .accordion-content {
+  max-height: 20rem;
+  display: block;
 }
 
 .shelf-wrapper {
@@ -270,6 +327,13 @@ nav .mini-logo {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+.searchbar-wrapper .sort-by {
+  padding: 1rem 0;
+  display: flex;
+  width: 80%;
+  gap: 1rem;
 }
 .searchbar-wrapper form {
   position: relative;

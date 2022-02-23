@@ -2,7 +2,13 @@ nav {
     z-index: 1;
     height: 80px;
     width: 100%;
-    background: var(--secondaryColor);
+    background: 
+    linear-gradient(
+        to right, 
+        var(--secondaryColor), 
+        var(--complementaryColor)
+    );
+    color: var(--clearColor);
     display: block;
     transition: top 0.3s;
 

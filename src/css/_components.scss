@@ -5,18 +5,10 @@
     grid-template-columns: 1fr 6fr; 
     grid-template-rows: 1fr 6fr; 
     gap: 0px 0px; 
+    // row-gap: 1rem;
     grid-template-areas: 
         "filter-wrapper searchbar-wrapper"
         "filter-wrapper shelf-wrapper"; 
-
-    // .filter-wrapper:hover {
-    //     width: 100%;
-
-    //     .checkmark ion-icon {
-    //         transition: 0.5s ease;
-    //         rotate: 45deg;
-    //     }
-    // }
 }
 
 .filter-wrapper {
@@ -91,6 +83,20 @@
         }
     }
 
+    form[role="filter"] > button {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bolder;
+        
+        border: none;
+        background: var(--accentColor);
+        color: var(--clearColor);
+        margin: 2rem 0;
+        padding: 1rem
+    }
 }
 
 .shelf-wrapper {
@@ -100,12 +106,13 @@
 
 .searchbar-wrapper {
     grid-area: searchbar-wrapper;
+    
     display: flex; 
-
     align-items: center; 
     justify-content: center;
-
     flex-direction: column;
+    
+    margin: 2rem 0;
 
     .sort-by {
         padding: 1rem 0;

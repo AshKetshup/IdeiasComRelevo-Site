@@ -94,7 +94,8 @@ nav {
   z-index: 1;
   height: 80px;
   width: 100%;
-  background: var(--secondaryColor);
+  background: linear-gradient(to right, var(--secondaryColor), var(--complementaryColor));
+  color: var(--clearColor);
   display: block;
   transition: top 0.3s;
 }
@@ -316,6 +317,18 @@ nav .mini-logo {
   max-height: 20rem;
   display: block;
 }
+.filter-wrapper form[role=filter] > button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  border: none;
+  background: var(--accentColor);
+  color: var(--clearColor);
+  margin: 2rem 0;
+  padding: 1rem;
+}
 
 .shelf-wrapper {
   grid-area: shelf-wrapper;
@@ -328,6 +341,7 @@ nav .mini-logo {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin: 2rem 0;
 }
 .searchbar-wrapper .sort-by {
   padding: 1rem 0;
@@ -395,19 +409,23 @@ nav .mini-logo {
   width: 1px;
 }
 
+:root {
+  --shelf-item-size: 20rem;
+}
+
 .shelf {
   width: 80%;
-  display: flex;
-  flex-flow: row wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--shelf-item-size));
+  gap: 1rem;
+  row-gap: 1rem;
   justify-content: space-between;
-  align-items: flex-start;
   align-content: flex-start;
 }
 .shelf a.item {
   text-decoration: none;
-  margin: 10px;
   background-color: var(--clearColor);
-  width: 200px;
+  width: var(--shelf-item-size);
   position: relative;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
 }
@@ -465,7 +483,7 @@ nav .mini-logo {
 }
 .shelf a.item .content > div .from {
   padding: 1rem 2rem;
-  box-shadow: 0px -3px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px -3px 3px rgba(0, 0, 0, 0.1);
   background-color: var(--accentColor);
 }
 .shelf a.item .content > div .from[visible=false] {
@@ -476,7 +494,7 @@ nav .mini-logo {
   text-align: end;
 }
 .shelf a.item .show {
-  box-shadow: 0px -3px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px -3px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-flow: row;
   justify-content: space-between;

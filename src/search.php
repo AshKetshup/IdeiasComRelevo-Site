@@ -71,25 +71,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-filter" open="false">
-                    <button onclick="open_accordion(this)">
+                <div class="accordion-filter" id="Tipo" open="false">
+                    <button>
                         Tipo
                         <ion-icon name="add-outline"></ion-icon>
                     </button>
                     <div class="accordion-content">
                         <!-- Tipo (fixo) -->
                         <div>
-                            <input type="checkbox" name="Moradia">
+                            <input type="checkbox" id="checkMoradia" name="Moradia">
                             <label for="Moradia">Moradia</label>
                         </div>
                         <div>
-                            <input type="checkbox" name="Apartamento">
+                            <input type="checkbox" id="checkApartment" name="Apartamento">
                             <label for="Apartamemto">Apartamento</label>
                         </div>
                     </div>
                 </div>
-                <div class="accordion-filter" open="false">
-                    <button onclick="open_accordion(this)">
+                <div class="accordion-filter" id="Tipologia" open="false">
+                    <button>
                         Tipologia
                         <ion-icon name="add-outline"></ion-icon>
                     </button>
@@ -113,8 +113,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-filter" open="false">
-                    <button onclick="open_accordion(this)">
+                <div class="accordion-filter" id="nPisos" open="false">
+                    <button>
                         Nº Pisos
                         <ion-icon name="add-outline"></ion-icon>
                     </button>
@@ -138,8 +138,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-filter" open="false">
-                    <button onclick="open_accordion(this)">
+                <div class="accordion-filter" id="Piso" open="false">
+                    <button>
                         Piso
                         <ion-icon name="add-outline"></ion-icon>
                     </button>
@@ -156,8 +156,8 @@
                         </div>
                     </div>
                 </div>                
-                <div class="accordion-filter" open="false">
-                    <button onclick="open_accordion(this)">
+                <div class="accordion-filter" id="Garagem" open="false">
+                    <button>
                         Garagem
                         <ion-icon name="add-outline"></ion-icon>
                     </button>
@@ -329,9 +329,7 @@
             </div>
         </div>
     </div>
-    
     <?php include 'includes/footer.php'; ?>
-
     <script src="./js/accordion.js"></script>
 </body>
 </html>

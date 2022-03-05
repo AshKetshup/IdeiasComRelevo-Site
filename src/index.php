@@ -10,7 +10,9 @@
     <title>Ideias com Relevo</title>
 </head>
 <body>
-    <nav>
+    <?php include 'includes/navbar.php'; ?>
+
+<!-- <nav>
         <a href="./index.html">
             <img class="mini-logo" src="./assets/img/Logotipo.png" style="height: 100%;">
         </a>
@@ -31,7 +33,7 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav> -->
     <div id="main">
         
     </div>

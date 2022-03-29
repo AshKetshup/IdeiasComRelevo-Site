@@ -11,33 +11,20 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-
-<!-- <nav>
-        <a href="./index.html">
-            <img class="mini-logo" src="./assets/img/Logotipo.png" style="height: 100%;">
-        </a>
-        <ul>
-            <li>
-                <a href="./imoveis.html">
-                    <div class="navbar-selection">Imoveis</div>
-                </a>
-            </li>
-            <li>
-                <a href="./portefolio.html">
-                    <div class="navbar-selection">Portefolio</div>
-                </a>
-            </li>
-            <li>
-                <a href="#footer">
-                    <div class="navbar-selection">Contactos</div>
-                </a>
-            </li>
-        </ul>
-    </nav> -->
     <div id="main">
-        
-    </div>
+        <div class="slider-wrapper">
+            <div class="slider">
+                
 
+            </div>
+        </div>
+        <section title="Welcome">
+            <h4>
+                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident blanditiis voluptatum iure odio doloremque? Eaque dolores cupiditate non ea tempore fuga veniam explicabo quas? Velit voluptate fugit ducimus autem consequatur!"
+            </h4>
+        </section>
+
+    </div>
     <?php include 'includes/footer.php'; ?>
 
 </body>

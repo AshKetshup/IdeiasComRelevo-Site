@@ -5,9 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=., initial-scale=1.0">
     <title>Ideias com Relevo</title>
-    <!-- <link rel="stylesheet" href="https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"> -->
-    <!-- <link rel="canonical" href="https://webdevtrick.com/fancybox-product-slider/"> -->
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -37,7 +34,7 @@
             <h3>Filtrar</h3>
             <form onsubmit="event.preventDefault();" role="filter">
                 <!-- Moradia / Apartamento -->
-                <div class="accordion-filter" open="true">
+                <div class="accordion-wrapper" open="true">
                     <div class="accordion-content">
                         <!-- Tipo de venda (fixo) -->
                         <div>
@@ -50,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-filter" id="Tipo" open="false">
+                <div class="accordion-wrapper" id="Tipo" open="false">
                     <button>
                         Tipo
                         <ion-icon name="add-outline"></ion-icon>
@@ -67,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-filter" id="Tipologia" open="false">
+                <div class="accordion-wrapper" id="Tipologia" open="false">
                     <button>
                         Tipologia
                         <ion-icon name="add-outline"></ion-icon>
@@ -92,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-filter" id="nPisos" open="false">
+                <div class="accordion-wrapper" id="nPisos" open="false">
                     <button>
                         Nº Pisos
                         <ion-icon name="add-outline"></ion-icon>
@@ -117,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-filter" id="Piso" open="false">
+                <div class="accordion-wrapper" id="Piso" open="false">
                     <button>
                         Piso
                         <ion-icon name="add-outline"></ion-icon>
@@ -135,7 +132,7 @@
                         </div>
                     </div>
                 </div>                
-                <div class="accordion-filter" id="Garagem" open="false">
+                <div class="accordion-wrapper" id="Garagem" open="false">
                     <button>
                         Garagem
                         <ion-icon name="add-outline"></ion-icon>
@@ -307,8 +304,11 @@
                 </a>
             </div>
         </div>
-    </div>
+    </div>  
+    
     <?php include 'includes/footer.php'; ?>
+
     <script src="./js/accordion.js"></script>
+    <script src="./js/filter.js"></script>
 </body>
 </html>

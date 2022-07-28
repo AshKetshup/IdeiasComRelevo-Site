@@ -5,8 +5,8 @@ class DbContext {
     /** Db Credentials (dummy or empty for repo) */
     private $servername = "localhost";
     private $username = "root";
-    private $password = "root";
-    private $database = "ideas_com_relevo";
+    private $password = "";
+    private $database = "ideias_com_relevo";
 
     /**
      * Opens the database connection

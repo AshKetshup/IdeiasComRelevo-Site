@@ -569,7 +569,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 this.#wcs = wcs;
                 this.#piso = piso;
                 this.#hasGaragem = hasGaragem;
-                console.log(hasGaragem);
                 this.#hasParking = hasParking;
                 this.#descricao = descricao;
                 this.#venda = venda;
@@ -644,7 +643,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 var return_value = document.createElement("i");
                 return_value.classList.add("fa-solid");
 
-                this.hasParking
+                console.log(this.#hasParking);
+
+                this.#hasParking
                     ? return_value.classList.add("text-success", "fa-check") 
                     : return_value.classList.add("text-danger", "fa-close")
             
@@ -683,8 +684,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             // Insert a row at the end of table
             var newRow = tableBody.insertRow();
-            // var newText = document.createTextNode('new row');
-            // newRow.insertCell().appendChild(newText);
 
             let tip = new Tipologia(
                 area.value,
@@ -711,6 +710,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             newRow.insertCell().appendChild(tip.descricao());
             newRow.insertCell().appendChild(tip.venda());
             newRow.insertCell().appendChild(tip.aluguer());
+            
+            let elim = document.createElement("a");
+            elim.classList.add("badge", "bg-danger", "p-1", "px-2", "mr-1");
+            elim.title = "Eliminar";
+            elim.onclick = function deleteSelf() {
+                this.closest("tr").remove();
+            };
+
+            let icon = document.createElement("i");
+            icon.classList.add("fa-solid", "fa-trash-can");
+            elim.appendChild(icon);
+
+            newRow.insertCell().appendChild(elim);
         });
     </script>
 </body>

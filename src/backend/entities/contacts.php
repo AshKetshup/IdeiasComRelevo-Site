@@ -15,7 +15,7 @@ class ContactsEntity {
     
     /** Constructor covnerts database entry to Entity */
     function __construct() {
-        $this->db_context = new DbContext();        
+        $this->db_context = new DbContext();
     }
 
     /** Creates a new Instance from the typology id */
@@ -32,6 +32,7 @@ class ContactsEntity {
         return $instance;
     }
 
+    /** Creates a new Instance from a type */
     public static function fromType($type) {
         $instance = new self();
         $instance->loadByType($type);

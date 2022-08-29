@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index" class="brand-link w-100">
-        <img src="./dist/img/Brand/SVG/Logo.svg" alt="AdminLTE Logo" class="col-2 m-0">
-        <img src="./dist/img/Brand/SVG/Typo_Title_white.svg" class="col-10">
+        <img src="./assets/img/Brand/SVG/Logo.svg" alt="AdminLTE Logo" class="col-2 m-0">
+        <img src="./assets/img/Brand/SVG/Typo_Title_white.svg" class="col-10">
     </a>
 
     <!-- Sidebar -->
@@ -19,12 +19,6 @@
                         Projetos
                     </a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-item nav-link" href="">
-                        <i class="nav-icon fas fa-building"></i>
-                        Tipologia <!- TODO: Mudar o nome disto ->
-                    </a>
-                </li> -->
                 <li class="nav-item">
                     <a class="nav-item nav-link <?= $PAGE_ID == 'acabamentos' ? 'active' : '' ?>" href="/admin/acabamentos">
                         <i class="nav-icon fas fa-brush"></i>

@@ -87,6 +87,8 @@ class UserEntity {
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {
             $this->id = guidv4();
+            var_dump($this->name);
+            var_dump($this->email);
             $escaped_name = $connection->real_escape_string($this->name);
             $escaped_email = $connection->real_escape_string($this->email);
 
@@ -94,7 +96,7 @@ class UserEntity {
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
-                $result = false;
+                $result = false;            
         } else 
             $result = false;
 
@@ -108,8 +110,6 @@ class UserEntity {
 
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {
-            $escaped_name = $connection->real_escape_string($this->name);
-            $escaped_email = $connection->real_escape_string($this->email);
 
             $sql = "UPDATE users SET `name`='" . $escaped_name . "', email='" . $escaped_email . "' WHERE id='" . $this->id . "'";
             if ($connection->query($sql) === TRUE)
@@ -147,8 +147,8 @@ class UserEntity {
     public function get_name() { return $this->name; }
     public function get_email() { return $this->email; }
 
-    public function set_name() { return $this->name; }
-    public function set_email() { return $this->email; }
+    public function set_name($value) {  $this->name = $value; }
+    public function set_email($value) { $this->email = $value; }
     
 }
 

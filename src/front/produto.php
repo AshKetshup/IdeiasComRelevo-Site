@@ -1,36 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="./assets/img/Brand/SIMBOLO.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>
-        Ideias Com Relevo
-    </title>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
-        name="viewport" />
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- CSS Files -->
-    <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="./assets/css/now-ui-kit.css" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="./assets/demo/demo.css" rel="stylesheet" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"
-        integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-        </script>
-</head>
+<?php include_once '../includes/site/head.php'; ?>
 
 <style>
     *,
@@ -199,55 +170,13 @@
             </div>
         </div> -->
     <!--  End Modal -->
-    <footer class="footer" id="footer" data-background-color="black">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-3">
-                    <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="index.html">
-                        <span class="h5 m-0">Ideias com Relevo</span>
-                    </a>
-                    <ul class="list-unstyled small text-muted">
-                        <li class="mb-2"></li>
-                        <!-- <li class="mb-2">Code licensed <a href="https://github.com/AshKetshup/Correio-Privado/blob/TheMainTimeline/LICENSE" target="_blank" rel="license noopener">GPL-3.0</a>.</li> -->
-                    </ul>
-                </div>
-                <div class="col-2">
-                    <h5>Navigation</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2 w-100"><a href="index.html">Home</a></li>
-                        <li class="mb-2 w-100"><a href="#">Filter News</a></li>
-                        <li class="mb-2 w-100"><a href="#">Recent News</a></li>
-                        <li class="mb-2 w-100"><a href="about-us.html">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-7">
-                    <h5>Associados</h5>
-                    <div class="d-flex flex-wrap">
+    
+    <!-- footer -->
+    <?php include_once '../includes/site/footer.php'; ?>
+    
+    <!-- scripts -->
+    <?php include_once '../includes/site/scripts.php'; ?>
 
-                    </div>
-                </div>
-            </div>
-            <div class="pt-5 row w-100 small ">
-                <p class="col-12 text-center text-muted">Designed and built by <a
-                        class="p-1 link-dark text-decoration-none" href="index.html#devs">Diogo Simões</a> and <a
-                        class="p-1 link-dark text-decoration-none" href="index.html#devs">Pedro Cavaleiro</a></p>
-            </div>
-        </div>
-    </footer>
-    <!--   Core JS Files   -->
-    <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
-    <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-    <script src="./assets/js/plugins/bootstrap-switch.js"></script>
-    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-    <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-    <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-    <script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
-    <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
-    <script src="./assets/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
     <!-- <script>
         $(document).ready(function () {
             // the body of this function is in assets/js/now-ui-kit.js

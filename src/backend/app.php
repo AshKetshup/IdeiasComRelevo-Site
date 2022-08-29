@@ -24,6 +24,7 @@
     require_once $APP_PATHS["modules"] . '/projects_management.php';
     require_once $APP_PATHS["modules"] . '/associates_management.php';
     require_once $APP_PATHS["modules"] . '/finishes_management.php';
+    require_once $APP_PATHS["modules"] . '/contacts_management.php';
 
     class IdeiasComRelevo {
 
@@ -31,6 +32,7 @@
         public $ProjectsManagement;     
         public $AssociateManagement;   
         public $FinishesManagement;
+        public $ContactsManagement;
         
         /* Initializes the app modules */
         function __construct() { 
@@ -38,8 +40,14 @@
             $this->ProjectsManagement = new ProjectsManagement();   
             $this->AssociateManagement = new AssociatesManagement();
             $this->FinishesManagement = new FinishesManagement();
+            $this->ContactsManagement = new ContactManagement();
         }
 
+        /**
+         * Verifies if the user is logged in
+         * If it is, it returns an array with the session variables
+         * If it's not it returns false
+         */ 
         public static function verify_login() {
             if (isset($_SESSION['loggedin']) && $_SESSION["loggedin"]) {
                 return array(

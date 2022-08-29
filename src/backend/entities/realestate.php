@@ -230,7 +230,7 @@ class RealEstateEntity {
         return $result;
     }
     public function get_value() {
-        if ($this->building_type == 0) {
+        if ($this->building_type == 1) {
             $result = array();
 
             $connection = $this->db_context->initialize_connection();

@@ -48,6 +48,16 @@
             return $building_types[$id];
         }
 
+        public static function building_state_id_to_string($id) {
+            $building_types = array(
+                0 => "-",
+                1 => "Vende-se",
+                2 => "Aluga-se",
+                3 => "Vendido"
+            );
+            return $building_types[$id];
+        }
+
     }
 
 ?>

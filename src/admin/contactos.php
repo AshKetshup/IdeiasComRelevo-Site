@@ -127,14 +127,16 @@ include_once '../includes/admin/head.php';
                         <div class="row">
                             <div class="form-group col-5">
                                 <label for="inputTelemovel">Telemovel</label>
-                                <input id="inputTelemovel" class="form-control" type="text" placeholder="Insira a nº Telemovel" required>
+                                <input id="inputTelemovel" class="form-control" type="text" name="telemovel" 
+                                placeholder="Insira a nº Telemovel" required>
 
                                 <div class="valid-feedback">Valido.</div>
                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                             </div>
                             <div class="form-group col-7">
                                 <label for="inputEmail">E-Mail</label>
-                                <input id="inputEmail" class="form-control" type="text" placeholder="Insira o endereço E-mail" required>
+                                <input id="inputEmail" class="form-control" type="text" name="email" 
+                                placeholder="Insira o endereço E-mail" required>
 
                                 <div class="valid-feedback">Valido.</div>
                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -143,7 +145,8 @@ include_once '../includes/admin/head.php';
                         <div class="row">
                             <div class="form-group col-12">
                                 <label for="inputSede">Sede</label>
-                                <textarea id="inputSede" class="form-control" type="text" placeholder="Insira a morada da Sede" required></textarea>
+                                <textarea id="inputSede" class="form-control" type="text" name="sede"
+                                placeholder="Insira a morada da Sede" required></textarea>
 
                                 <div class="valid-feedback">Valido.</div>
                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>

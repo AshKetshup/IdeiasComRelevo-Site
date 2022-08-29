@@ -7,6 +7,7 @@
 -->
 <?php 
     $PAGE_NAME = "Contactos";
+    $PAGE_ID = "contactos";
     include_once '../includes/admin/head.php'; 
 ?>
 <style>

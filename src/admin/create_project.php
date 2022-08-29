@@ -7,6 +7,7 @@
 -->
 <?php 
     $PAGE_NAME = "Criar Projeto";
+    $PAGE_ID = "criar_projeto";
     include_once '../includes/admin/head.php'; 
 ?>
 <style>

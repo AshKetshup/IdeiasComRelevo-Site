@@ -5,6 +5,8 @@
     $login = IdeiasComRelevo::verify_login();
     if(!$login)
         header("Location: /admin/login");
+
+        $contacts = $app_instance->ContactsManagement->get_contacts();
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -83,15 +85,15 @@ include_once '../includes/admin/head.php';
                                         <tbody>
                                             <tr>
                                                 <td>Nº Telemovel</td>
-                                                <td>+3519XXXXXXXX</td>
+                                                <td><?= $contacts["phone"] ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Email</td>
-                                                <td>email@email.email</td>
+                                                <td><?= $contacts["email"] ?></td>
                                             </tr>
                                             <tr>
                                                 <td>Sede</td>
-                                                <td>Rua da quinta da glória usada, 2222-001</td>
+                                                <td><?= $contacts["office"] ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -128,7 +130,7 @@ include_once '../includes/admin/head.php';
                             <div class="form-group col-5">
                                 <label for="inputTelemovel">Telemovel</label>
                                 <input id="inputTelemovel" class="form-control" type="text" name="telemovel" 
-                                placeholder="Insira a nº Telemovel" required>
+                                placeholder="Insira a nº Telemovel" required value="<?= $contacts["phone"] ?>">
 
                                 <div class="valid-feedback">Valido.</div>
                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -136,7 +138,7 @@ include_once '../includes/admin/head.php';
                             <div class="form-group col-7">
                                 <label for="inputEmail">E-Mail</label>
                                 <input id="inputEmail" class="form-control" type="text" name="email" 
-                                placeholder="Insira o endereço E-mail" required>
+                                placeholder="Insira o endereço E-mail" required value="<?= $contacts["email"] ?>">
 
                                 <div class="valid-feedback">Valido.</div>
                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -146,7 +148,7 @@ include_once '../includes/admin/head.php';
                             <div class="form-group col-12">
                                 <label for="inputSede">Sede</label>
                                 <textarea id="inputSede" class="form-control" type="text" name="sede"
-                                placeholder="Insira a morada da Sede" required></textarea>
+                                placeholder="Insira a morada da Sede" required><?= $contacts["office"] ?></textarea>
 
                                 <div class="valid-feedback">Valido.</div>
                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>

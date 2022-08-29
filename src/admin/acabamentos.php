@@ -186,7 +186,7 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-    <?php include_once '../includes/admin/head.php'; ?>
+    <?php include_once '../includes/admin/scripts.php'; ?>
     
 </body>
 

@@ -13,10 +13,10 @@
     This contains the head part of the file.
     To set the page name change the $PAGE_NAME variable
 -->
-<?php 
-    $PAGE_NAME = "Contactos";
-    $PAGE_ID = "contactos";
-    include_once '../includes/admin/head.php'; 
+<?php
+$PAGE_NAME = "Contactos";
+$PAGE_ID = "contactos";
+include_once '../includes/admin/head.php';
 ?>
 <style>
     input::-webkit-outer-spin-button,
@@ -24,11 +24,12 @@
         -webkit-appearance: none;
         margin: 0;
     }
-    
+
     input[type=number] {
         -moz-appearance: textfield;
     }
 </style>
+
 <body class="hold-transition sidebar-mini dark-mode">
     <div class="wrapper">
 
@@ -75,55 +76,32 @@
                                     <table class="table table-bordered table-hover shadow">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>Campo</th>
                                                 <th>Valor</th>
-                                                <th>Ações</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1.</td>
                                                 <td>Nº Telemovel</td>
                                                 <td>+3519XXXXXXXX</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                </td>
                                             </tr>
                                             <tr>
-                                                <td>2.</td>
                                                 <td>Email</td>
                                                 <td>email@email.email</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                </td>
                                             </tr>
                                             <tr>
-                                                <td>3.</td>
                                                 <td>Sede</td>
                                                 <td>Rua da quinta da glória usada, 2222-001</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="card-footer d-flex">
-                                    <div class="w-50 d-flex justify-content-lg-start">
-                                        <ul class="pagination pagination-sm m-0 float-right">
-                                            <li class="page-item"><a class="page-link text-muted" href="#">«</a></li>
-                                            <li class="page-item"><a class="page-link text-muted" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link text-muted" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link text-muted" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link text-muted" href="#">»</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="w-50 d-flex justify-content-end">
-                                        <a type="submit" href="#" class="btn btn-primary">Criar</a>
+                                    <div class="w-100 d-flex justify-content-end">
+                                        <button type="button" href="#" class="btn btn-primary" data-toggle="modal" 
+                                            data-target="#modalContactForm">
+                                            Alterar
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -131,23 +109,59 @@
                         <!-- /.col-md-6 -->
                     </div>
                     <!-- /.row -->
-                </div><!-- /.container-fluid -->
+                </div>
             </div>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
-            </div>
-        </aside>
-        <!-- /.control-sidebar -->
+        <!-- Modal -->
+        <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" 
+            aria-labelledby="modalContactForm" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " role="document">
+                <form class="w-100 card modal-content" action="/backend/post_scripts/change_contacts.php" method="post">
+                    <div class="card-header modal-header">
+                        <h5 class="m-0">Alterar Contactos</h5>
+                    </div>
+                    <div class="card-body modal-body">
+                        <div class="row">
+                            <div class="form-group col-5">
+                                <label for="inputTelemovel">Telemovel</label>
+                                <input id="inputTelemovel" class="form-control" type="text" placeholder="Insira a nº Telemovel" required>
 
-        <!-- Main Footer -->        
+                                <div class="valid-feedback">Valido.</div>
+                                <div class="invalid-feedback">Por favor, preencher este campo.</div>
+                            </div>
+                            <div class="form-group col-7">
+                                <label for="inputEmail">E-Mail</label>
+                                <input id="inputEmail" class="form-control" type="text" placeholder="Insira o endereço E-mail" required>
+
+                                <div class="valid-feedback">Valido.</div>
+                                <div class="invalid-feedback">Por favor, preencher este campo.</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="inputSede">Sede</label>
+                                <textarea id="inputSede" class="form-control" type="text" placeholder="Insira a morada da Sede" required></textarea>
+
+                                <div class="valid-feedback">Valido.</div>
+                                <div class="invalid-feedback">Por favor, preencher este campo.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer modal-footer d-flex">
+                        <div class="w-100 d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary ml-1">Confirmar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Main Footer -->
         <?php include_once '../includes/admin/footer.php'; ?>
 
     </div>
@@ -155,7 +169,7 @@
 
     <!-- REQUIRED SCRIPTS -->
     <?php include_once '../includes/admin/scripts.php'; ?>
-    
+
 </body>
 
 </html>

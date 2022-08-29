@@ -17,12 +17,11 @@
     $PAGE_ID = "login";
     include_once '../includes/admin/head.php';
 ?>
-<body class="login-page" style="min-height: 466px;">
+<body class="login-page dark-mode" style="min-height: 466px;">
     <div class="login-box">
-
         <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <h1><b>Admin</b>LTE</h1>
+            <div class="card-header text-center my-2">
+                <img src="/assets/img/Brand/SVG/Typo_Title_white.svg" alt="" srcset="">
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
@@ -44,19 +43,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-4">
+                        <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                         </div>
-
                     </div>
                 </form>
 

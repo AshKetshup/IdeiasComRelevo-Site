@@ -18,7 +18,7 @@
             <div class="navbar-translate m-0 p-0 col-3">
                 <a class="navbar-brand w-100 h-100" href="index" rel="tooltip" data-placement="bottom">
                     <!-- Ideias Com Relevo -->
-                    <img src="./assets/img/Brand/SVG/Typo_Title_white.svg" alt="logo_brand">
+                    <img src="/assets/img/Brand/white_logotype.png" alt="logo_brand">
                 </a>
                 <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navigation" aria-controls="navigation-index" aria-expanded="false"
@@ -29,7 +29,7 @@
                 </button>
             </div>
             <div class="col-9 collapse navbar-collapse justify-content-end p-0" id="navigation"
-                data-nav-image="./assets/img/blurred-image-1.jpg">
+                data-nav-image="/assets/img/blurred-image-1.jpg">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="imoveis">
@@ -71,11 +71,11 @@
                                 alt="First slide"> <!-- PHP -->
                         </div>
                         <div class="carousel-item active">
-                            <img class="d-block img-fluid w-100" src="./assets/img/exemplos/IMG_20220402_102058823.jpg" alt="Second slide">
+                            <img class="d-block img-fluid w-100" src="/assets/img/exemplos/IMG_20220402_102058823.jpg" alt="Second slide">
                             <!-- PHP -->
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block img-fluid w-100" src="./assets/img/Template/bg4.jpg" alt="Third slide"> <!-- PHP -->
+                            <img class="d-block img-fluid w-100" src="/assets/img/Template/bg4.jpg" alt="Third slide"> <!-- PHP -->
                         </div>
                     </div>
                 </div>
@@ -86,8 +86,8 @@
                         <i class="now-ui-icons arrows-1_minimal-left"></i>
                     </a>
                     <div class="content-center brand justify-content-center d-flex flex-column w-100">
-                        <div class="w-100"><img class="n-logo" src="./assets/img/Brand/SVG/Logo.svg" alt="Ideias Com Relevo Logo"></div>
-                        <div class="w-100"><img class="w-75 h1" src="assets/img/Brand/SVG/Typo_white.svg" alt=""></div>
+                        <div class="w-100"><img class="n-logo" src="/assets/img/Brand/SVG/Logo.svg" alt="Ideias Com Relevo Logo"></div>
+                        <div class="w-100"><img class="w-75 h1" src="/assets/img/Brand/SVG/Typo_white.svg" alt=""></div>
                         <h3>Compramos o passado, vendemos o futuro</h3>
                     </div>
                     <a class="carousel-control-next" href="#carouselLandingPage" role="button" data-slide="next">

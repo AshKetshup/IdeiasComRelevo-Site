@@ -1,5 +1,14 @@
 <?php
 
+    session_start();
+
+    if (!$ALLOW_ANNONYMOUS && !$_SESSION["loggedin"])
+        header('Location: /admin/login');
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     $APP_PATHS = array(
         "entities" => $_SERVER["DOCUMENT_ROOT"] . "/backend/entities",
         "database" => $_SERVER["DOCUMENT_ROOT"] . "/backend/database",

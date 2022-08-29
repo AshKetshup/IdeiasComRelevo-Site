@@ -71,8 +71,6 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        
-
                         <!-- /.col-md-12 -->
                         <div class="col-lg-12">
                             <form class="needs-validation" action="/backend/post_scripts/create_project.php" method="post" id="form-project">

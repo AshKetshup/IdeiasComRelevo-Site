@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="card-footer d-flex">
                                     <div class="w-100 d-flex justify-content-end">
-                                        <a type="submit" href="#" class="btn btn-primary">Adicionar</a>
+                                        <a href="#" class="btn btn-primary">Adicionar</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once '../includes/site/head.php'; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/head.php'; ?>
 
 <style>
     *,

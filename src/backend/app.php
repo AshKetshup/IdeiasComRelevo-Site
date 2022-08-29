@@ -1,9 +1,6 @@
 <?php
 
-    session_start();
-
-    if (!$ALLOW_ANNONYMOUS && !$_SESSION["loggedin"])
-        header('Location: /admin/login');
+    session_start();       
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -41,6 +38,17 @@
             $this->ProjectsManagement = new ProjectsManagement();   
             $this->AssociateManagement = new AssociatesManagement();
             $this->FinishesManagement = new FinishesManagement();
+        }
+
+        public static function verify_login() {
+            if (isset($_SESSION['loggedin']) && $_SESSION["loggedin"]) {
+                return array(
+                    "uid" => $_SESSION["uid"],
+                    "email" => $_SESSION["email"],
+                    "name" => $_SESSION["name"]
+                );
+            }
+            return false;
         }
 
     }

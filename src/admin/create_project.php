@@ -50,59 +50,7 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
-                <img src="./dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
-            </a>
-
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                            <a class="nav-item nav-link" href="/admin/projetos">
-                                <i class="nav-icon fas fa-project-diagram"></i>
-                                Projetos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link" href="/admin/tipologia">
-                                <i class="nav-icon fas fa-building"></i>
-                                Tipologia
-                                <!-- TODO: Mudar o nome disto -->
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link" href="/admin/acabamentos">
-                                <i class="nav-icon fas fa-brush"></i>
-                                Acabamentos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link active" href="/admin/contactos">
-                                <i class="nav-icon fas fa-phone"></i>
-                                Contactos
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item nav-link" href="/admin/associados">
-                                <i class="nav-icon fas fa-user"></i>
-                                Associados
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- /.sidebar-menu -->
-            </div>
-            <!-- /.sidebar -->
-        </aside>
+        <?php include_once '../includes/admin/sidebar.php'; ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

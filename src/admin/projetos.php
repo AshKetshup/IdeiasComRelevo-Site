@@ -1,3 +1,11 @@
+<?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
+    $app_instance = new IdeiasComRelevo();
+?>
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -68,7 +76,6 @@
                                     <table class="table table-bordered table-hover shadow">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th>Titulo</th>
                                                 <th>Localização</th>
                                                 <th>Tipo de edificio</th>
@@ -79,7 +86,6 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1.</td>
                                                 <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
                                                 <td>Zona, Concelho, Freguesia</td>
                                                 <td>Moradia Germinada</td>
@@ -90,54 +96,19 @@
                                                     <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>2.</td>
-                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                                                <td>Zona, Concelho, Freguesia</td>
-                                                <td>Moradia Germinada</td>
-                                                <td>Vendido</td>
-                                                <td>24-12-2021</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3.</td>
-                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                                                <td>Zona, Concelho, Freguesia</td>
-                                                <td>Moradia Germinada</td>
-                                                <td>Vendido</td>
-                                                <td>24-12-2021</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4.</td>
-                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                                                <td>Zona, Concelho, Freguesia</td>
-                                                <td>Moradia Germinada</td>
-                                                <td>Vendido</td>
-                                                <td>24-12-2021</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5.</td>
-                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                                                <td>Zona, Concelho, Freguesia</td>
-                                                <td>Moradia Germinada</td>
-                                                <td>Vendido</td>
-                                                <td>24-12-2021</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                </td>
-                                            </tr>
+                                            <?php foreach($app_instance->ProjectsManagement->admin_get_projects() as $project): ?>
+                                                <tr>
+                                                    <td><?= $project->get_title() ?></td>
+                                                    <td><?= $project->get_zone() ?>, <?= $project->get_county() ?>, <?= $project->get_city() ?></td>
+                                                    <td><?= ProjectsManagement::building_type_id_to_string($project->get_building_type()) ?></td>
+                                                    <td>Vendido</td>
+                                                    <td>24-12-2021</td>
+                                                    <td>
+                                                        <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
+                                                        <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>

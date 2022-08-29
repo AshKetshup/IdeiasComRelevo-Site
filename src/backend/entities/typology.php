@@ -1,8 +1,8 @@
 <?php
 
-require_once 'backend/entities/typology.php';
-require_once 'backend/database/dbconnection.php';
-require_once 'backend/helpers/extensions.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/entities/typology.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/database/dbconnection.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/helpers/extensions.php';
 
 class TypologyEntity {
 

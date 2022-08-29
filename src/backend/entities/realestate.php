@@ -1,13 +1,14 @@
 <?php
 
-require_once 'backend/entities/typology.php';
-require_once 'backend/database/dbconnection.php';
-require_once 'backend/helpers/extensions.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/entities/typology.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/database/dbconnection.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/helpers/extensions.php';
 
 class RealEstateEntity {
 
     /** Entity Variables */
     private $id;
+    private $title;
     private $main_photo;
     private $photos;    
     private $zone;
@@ -73,6 +74,7 @@ class RealEstateEntity {
         $this->value = $entry['value'];
         $this->has_elevator = $entry['has_elevator'];
         $this->description = $entry['description'];
+        $this->title = $entry['title'];
     }
 
     /** Database Operations */
@@ -95,9 +97,10 @@ class RealEstateEntity {
             $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
             $escaped_main_photo = $connection->real_escape_string($this->main_photo);
             $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
-            $escaped_description = $connection->real_escape_string($this->$description);
+            $escaped_description = $connection->real_escape_string($this->description);
+            $escaped_title = $connection->real_escape_string($this->title);
 
-            $sql = "INSERT INTO realestate (`description`, id, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator) VALUES ('" . $escaped_description . "', '" . $this->id . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_value  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . $escaped_has_elevator . "')";
+            $sql = "INSERT INTO realestate (`description`, id, title, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator) VALUES ('" . $escaped_description . "', '" . $this->id . "', '" . $escaped_title . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_value  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . $escaped_has_elevator . "')";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -127,9 +130,10 @@ class RealEstateEntity {
             $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
             $escaped_main_photo = $connection->real_escape_string($this->main_photo);
             $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
-            $escaped_description = $connection->real_escape_string($this->$description);
+            $escaped_description = $connection->real_escape_string($this->description);
+            $escaped_title = $connection->real_escape_string($this->title);
 
-            $sql = "UPDATE realestate SET `description`='" . $escaped_description . "' photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', `zone`='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', `state`='" . $escaped_state . "', `value`='" . $escaped_value . "', has_elevator='" . $escaped_has_elevator . " WHERE id='" . $this->id . "'";
+            $sql = "UPDATE realestate SET `description`='" . $escaped_description . "' photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', `zone`='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', `state`='" . $escaped_state . "', `value`='" . $escaped_value . "', has_elevator='" . $escaped_has_elevator . ", title='" . $escaped_title . "' WHERE id='" . $this->id . "'";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -250,6 +254,7 @@ class RealEstateEntity {
             return $this->value;
     }    
     public function get_description() { return $this->description; }
+    public function get_title() { return $this->title; }
 
     /** Setters */        
     public function set_zone($value) { $this->zone = $value; }

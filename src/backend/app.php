@@ -1,28 +1,29 @@
 <?php
 
     $APP_PATHS = array(
-        "entities" => "backend/entities",
-        "database" => "backend/database",
-        "helpers" => "backend/helpers",
-        "modules" => "backend/modules",
+        "entities" => $_SERVER["DOCUMENT_ROOT"] . "/backend/entities",
+        "database" => $_SERVER["DOCUMENT_ROOT"] . "/backend/database",
+        "helpers" => $_SERVER["DOCUMENT_ROOT"] . "/backend/helpers",
+        "modules" => $_SERVER["DOCUMENT_ROOT"] . "/backend/modules",
     );
-
-    require_once $APP_PATHS["modules"] . '/extensions.php';
+    
     require_once $APP_PATHS["entities"] . '/realestate.php';
     require_once $APP_PATHS["entities"] . '/contacts.php';
     require_once $APP_PATHS["entities"] . '/typology.php';
     require_once $APP_PATHS["entities"] . '/user.php';
     require_once $APP_PATHS["helpers"] . '/extensions.php';
+    require_once $APP_PATHS["modules"] . '/user_management.php';
+    require_once $APP_PATHS["modules"] . '/projects_management.php';
 
     class IdeiasComRelevo {
 
         public $UserManagement;
-        public $ProjectsManagement;
+        public $ProjectsManagement;        
         
         /* Initializes the app modules */
         function __construct() { 
-            $UserManagement = new UserManagement();
-            $ProjectsManagement = new ProjectsManagement();
+            $this->UserManagement = new UserManagement();
+            $this->ProjectsManagement = new ProjectsManagement();            
         }
 
     }

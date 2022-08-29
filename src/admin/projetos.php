@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="card-footer d-flex">
                                     <div class="w-100 d-flex justify-content-end">
-                                        <a type="submit" href="#" class="btn btn-primary">Criar</a>
+                                        <a href="/admin/create_project" class="btn btn-primary">Criar</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,10 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
     $app_instance = new IdeiasComRelevo();
+
+    $login = IdeiasComRelevo::verify_login();
+    if(!$login)
+        header("Location: /admin/login");
 ?>
 <!DOCTYPE html>
 <html lang="pt">

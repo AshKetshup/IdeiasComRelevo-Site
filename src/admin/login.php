@@ -1,7 +1,10 @@
 <?php
-    $ALLOW_ANNONYMOUS = true;
     require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
     $app_instance = new IdeiasComRelevo();
+
+    $login = IdeiasComRelevo::verify_login();
+    if($login != false)
+        header("Location: /admin/index");
 ?>
 <!DOCTYPE html>
 <html lang="en">

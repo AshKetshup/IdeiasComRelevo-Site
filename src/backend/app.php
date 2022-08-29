@@ -17,18 +17,21 @@
     require_once $APP_PATHS["modules"] . '/user_management.php';
     require_once $APP_PATHS["modules"] . '/projects_management.php';
     require_once $APP_PATHS["modules"] . '/associates_management.php';
+    require_once $APP_PATHS["modules"] . '/finishes_management.php';
 
     class IdeiasComRelevo {
 
         public $UserManagement;
         public $ProjectsManagement;     
         public $AssociateManagement;   
+        public $FinishesManagement;
         
         /* Initializes the app modules */
         function __construct() { 
             $this->UserManagement = new UserManagement();
             $this->ProjectsManagement = new ProjectsManagement();   
             $this->AssociateManagement = new AssociatesManagement();
+            $this->FinishesManagement = new FinishesManagement();
         }
 
     }

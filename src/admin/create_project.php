@@ -152,6 +152,7 @@
                                                 <select id="inputEstado" class="form-control" type="text"
                                                     placeholder="Selecione o estado" required>
                                                     <option selected value style="display:none">Selecione o estado</option>
+                                                    <option value="0">-</option>
                                                     <option value="1">Vende-se</option>
                                                     <option value="2">Aluga-se</option>
                                                     <option value="3">Vendido</option>

@@ -51,15 +51,16 @@ class UserEntity {
     /** Creates the new instance giving the values from the row */
     protected function fill($entry) {
         $this->id = $entry['id'];
-        $this->name['name'];
+        $this->name = $entry['name'];
         $this->email = $entry['email'];
     }
 
     public static function attempt_login($email, $password) {
         $result = false;
-
-        $connection = $this->db_context->initialize_connection();
-        if ($connection != NULL) {            
+        $db_context = new DbContext();
+        $connection = $db_context->initialize_connection();
+        if ($connection != NULL) {         
+            $escaped_email = $connection->real_escape_string($email);   
             $sql = "SELECT * FROM users WHERE email='" . $email . "'";
             $result = $connection->query($sql);
 
@@ -68,9 +69,12 @@ class UserEntity {
                 return false;
             }
 
-            $row = $result->fetch_assoc()[0];
+            $row = $result->fetch_assoc();
 
-            return password_verify($password, $row['password']);
+            if (password_verify($password, $row['password'])) {
+                return UserEntity::fromRow($row);
+            }
+            return false;
         } else 
             $result = false;
 
@@ -87,6 +91,8 @@ class UserEntity {
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {
             $this->id = guidv4();
+            var_dump($this->name);
+            var_dump($this->email);
             $escaped_name = $connection->real_escape_string($this->name);
             $escaped_email = $connection->real_escape_string($this->email);
 
@@ -94,7 +100,7 @@ class UserEntity {
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
-                $result = false;
+                $result = false;            
         } else 
             $result = false;
 
@@ -108,8 +114,6 @@ class UserEntity {
 
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {
-            $escaped_name = $connection->real_escape_string($this->name);
-            $escaped_email = $connection->real_escape_string($this->email);
 
             $sql = "UPDATE users SET `name`='" . $escaped_name . "', email='" . $escaped_email . "' WHERE id='" . $this->id . "'";
             if ($connection->query($sql) === TRUE)
@@ -147,8 +151,8 @@ class UserEntity {
     public function get_name() { return $this->name; }
     public function get_email() { return $this->email; }
 
-    public function set_name() { return $this->name; }
-    public function set_email() { return $this->email; }
+    public function set_name($value) {  $this->name = $value; }
+    public function set_email($value) { $this->email = $value; }
     
 }
 

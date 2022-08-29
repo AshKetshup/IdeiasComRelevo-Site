@@ -14,7 +14,7 @@
                 <!-- Add icons to the links using the .nav-icon class
         with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a class="nav-item nav-link" href="/admin/projetos">
+                    <a class="nav-item nav-link <?= $PAGE_ID == 'projetos' ? 'active' : '' ?>" href="/admin/projetos">
                         <i class="nav-icon fas fa-project-diagram"></i>
                         Projetos
                     </a>
@@ -26,19 +26,19 @@
                     </a>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-item nav-link active" href="/admin/acabamentos">
+                    <a class="nav-item nav-link <?= $PAGE_ID == 'acabamentos' ? 'active' : '' ?>" href="/admin/acabamentos">
                         <i class="nav-icon fas fa-brush"></i>
                         Acabamentos
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-item nav-link" href="/admin/contactos">
+                    <a class="nav-item nav-link <?= $PAGE_ID == 'contactos' ? 'active' : '' ?>" href="/admin/contactos">
                         <i class="nav-icon fas fa-phone"></i>
                         Contactos
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-item nav-link" href="/admin/associados">
+                    <a class="nav-item nav-link <?= $PAGE_ID == 'associados' ? 'active' : '' ?>" href="/admin/associados">
                         <i class="nav-icon fas fa-user"></i>
                         Associados
                     </a>

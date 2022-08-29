@@ -1,11 +1,3 @@
-<?php 
-    require_once 'backend/entities/contacts.php';
-
-    $office = ContactsEntity::fromType('office');
-    $phone = ContactsEntity::fromType('phone');
-    $email = ContactsEntity::fromType('email');
-?>
-
 <footer class="footer" id="footer" data-background-color="black">
     <div class="container py-5">
         <div class="row">

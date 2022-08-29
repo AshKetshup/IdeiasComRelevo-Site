@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once '../includes/site/head.php'; ?>
+<?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/head.php'; ?>
 
 <style>
     *,
@@ -184,10 +184,10 @@
     </div>
     
     <!-- footer -->
-    <?php include_once '../includes/site/footer.php'; ?>
+    <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/footer.php'; ?>
     
     <!-- scripts -->
-    <?php include_once '../includes/site/scripts.php'; ?>
+    <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/scripts.php'; ?>
 
     <!-- <script>
         $(document).ready(function () {

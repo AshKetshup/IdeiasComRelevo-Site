@@ -37,6 +37,12 @@
                         Associados
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link <?= $PAGE_ID == 'users' ? 'active' : '' ?>" href="/admin/users">
+                        <i class="nav-icon fas fa-users"></i>
+                        Users
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

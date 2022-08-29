@@ -1,8 +1,4 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
     require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
     $app_instance = new IdeiasComRelevo();
 ?>
@@ -98,6 +94,11 @@
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="card-footer d-flex">
+                                    <div class="w-100 d-flex justify-content-end">
+                                        <a type="submit" href="#" class="btn btn-primary">Criar</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

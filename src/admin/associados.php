@@ -1,3 +1,7 @@
+<?php
+    require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
+    $app_instance = new IdeiasComRelevo();
+?>
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -68,7 +72,6 @@
                                     <table class="table table-bordered table-hover shadow">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
                                                 <th style="min-width: min-content;">Imagem</th>
                                                 <th>Nome</th>
                                                 <th>Website</th>
@@ -76,56 +79,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1.</td>
-                                                <td class="d-flex" style="min-width: min-content;"><img src="https://www.ubi.pt/Ficheiros/Sites/75/Noticias/887/vantagens%20aaubi.jpg" alt="" style="max-height:100px"></td>
-                                                <td>Nome da Empresa</td>
-                                                <td>https://www.website.com/</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i
-                                                            class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i
-                                                            class="fa-solid fa-trash-can"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2.</td>
-                                                <td class="d-flex" style="min-width: min-content;"><img src="https://www.ubi.pt/Ficheiros/Sites/75/Noticias/887/vantagens%20aaubi.jpg" alt="" style="max-height:100px"></td>
-                                                <td>Nome da Empresa</td>
-                                                <td>https://www.website.com/</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i
-                                                            class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i
-                                                            class="fa-solid fa-trash-can"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3.</td>
-                                                <td class="d-flex" style="min-width: min-content;"><img src="https://www.ubi.pt/Ficheiros/Sites/75/Noticias/887/vantagens%20aaubi.jpg" alt="" style="max-height:100px"></td>
-                                                <td>Nome da Empresa</td>
-                                                <td>https://www.website.com/</td>
-                                                <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i
-                                                            class="fa-solid fa-pen"></i></a>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i
-                                                            class="fa-solid fa-trash-can"></i></a>
-                                                </td>
-                                            </tr>
+                                            <?php foreach($app_instance->AssociateManagement->admin_get_associates() as $associate): ?>
+                                                <tr>
+                                                    <td class="d-flex" style="min-width: min-content;"><img src="<?= $associate->get_logo() ?>" alt="" style="max-height:100px"></td>
+                                                    <td><?= $associate->get_name() ?></td>
+                                                    <td><?= $associate->get_website() ?></td>
+                                                    <td>
+                                                        <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
+                                                        <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="card-footer d-flex">
-                                    <div class="w-50 d-flex justify-content-lg-start">
-                                        <ul class="pagination pagination-sm m-0 float-right">
-                                            <li class="page-item"><a class="page-link text-muted" href="#">«</a></li>
-                                            <li class="page-item"><a class="page-link text-muted" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link text-muted" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link text-muted" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link text-muted" href="#">»</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="w-50 d-flex justify-content-end">
+                                    <div class="w-100 d-flex justify-content-end">
                                         <a type="submit" href="#" class="btn btn-primary">Adicionar</a>
                                     </div>
                                 </div>

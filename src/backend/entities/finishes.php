@@ -3,12 +3,12 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/database/dbconnection.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/helpers/extensions.php';
 
-class ContactsEntity {
+class FinishesEntity {
 
     /** Entity Variables */
     private $id;
-    private $field;
-    private $value;
+    private $image;
+    private $area;
 
     /** External Modules */
     private $db_context;
@@ -32,13 +32,6 @@ class ContactsEntity {
         return $instance;
     }
 
-    /** Creates a new Instance from a type */
-    public static function fromType($type) {
-        $instance = new self();
-        $instance->loadByType($type);
-        return $instance;
-    }
-
     /** Performs the query to create a new instance with data */
     protected function loadByID($id) {
         $connection = $this->db_context->initialize_connection();
@@ -47,7 +40,7 @@ class ContactsEntity {
             return NULL;
         }
 
-        $sql = "SELECT * FROM contacts WHERE id='" . $id . "'";
+        $sql = "SELECT * FROM finishes WHERE id='" . $id . "'";
         $result = $connection->query($sql);
 
         if ($result->num_rows <= 0) {
@@ -60,31 +53,11 @@ class ContactsEntity {
         $this->fill(current($row));
     }
 
-    /** Performs the query to create a new instance with data */
-    protected function loadByType($type) {
-        $connection = $this->db_context->initialize_connection();
-        if ($connection == NULL) {
-            $connection->close();
-            return NULL;
-        }
-
-        $sql = "SELECT * FROM contacts WHERE field='" . $type . "'";
-        $result = $connection->query($sql);
-
-        if ($result->num_rows <= 0) {
-            $connection->close();
-            return NULL;
-        }
-        
-        $row = $result->fetch_assoc();
-        $this->fill($row);
-    }
-
     /** Creates the new instance giving the values from the row */
     protected function fill($entry) {
         $this->id = $entry['id'];
-        $this->field = $entry['field'];
-        $this->value = $entry['value'];
+        $this->image = $entry['image'];
+        $this->area = $entry['area'];
     }
 
     /** Database Operations */
@@ -98,10 +71,10 @@ class ContactsEntity {
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {
             $this->id = guidv4();            
-            $escaped_field = $connection->real_escape_string($this->field);
-            $escaped_value = $connection->real_escape_string($this->value);
+            $escaped_image = $connection->real_escape_string($this->image);
+            $escaped_area = $connection->real_escape_string($this->area);
 
-            $sql = "INSERT INTO contacts (id, field, `value`) VALUES ('" . $this->id . "','" . $escaped_field  . "', '" . $escaped_value . "')";
+            $sql = "INSERT INTO finishes (id, `image`, `area`) VALUES ('" . $this->id . "','" . $escaped_image  . "', '" . $escaped_area . "')";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -122,10 +95,10 @@ class ContactsEntity {
 
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {
-            $escaped_field = $connection->real_escape_string($this->field);
-            $escaped_value = $connection->real_escape_string($this->value);
+            $escaped_image = $connection->real_escape_string($this->image);
+            $escaped_area = $connection->real_escape_string($this->area);
 
-            $sql = "UPDATE contacts SET field='" . $escaped_field . "', value='" . $escaped_value . "' WHERE id='" . $this->id . "'";
+            $sql = "UPDATE finishes SET `image`='" . $escaped_image . "', area='" . $escaped_area . "' WHERE id='" . $this->id . "'";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -147,7 +120,7 @@ class ContactsEntity {
 
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {            
-            $sql1 = "DELETE FROM contacts WHERE id='" . $this->id . "'";
+            $sql1 = "DELETE FROM finishes WHERE id='" . $this->id . "'";
             if ($connection->query($sql1) === TRUE) {                
                 $result = true;
             } else
@@ -161,12 +134,12 @@ class ContactsEntity {
 
     /** Getters */
     public function get_id() { return $this->id; }
-    public function get_field() { return $this->field; }
-    public function get_value() { return $this->value; }
+    public function get_image() { return $this->image; }
+    public function get_area() { return $this->area; }
 
     /** Setters */        
-    public function set_field($value) { $this->value = $value; }
-    public function set_value($value) { $this->field = $value; }
+    public function set_image($value) { $this->image = $value; }
+    public function set_area($value) { $this->area = $value; }
 
 }
 

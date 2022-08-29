@@ -9,7 +9,7 @@
 
     require_once $APP_PATHS["database"] . '/dbconnection.php';
 
-    class ProjectsManagement {
+    class AssociatesManagement {
 
         private $db_context;
 
@@ -17,7 +17,7 @@
             $this->db_context = new DbContext();
         }
 
-        function admin_get_projects() {
+        function admin_get_associates() {
 
             $connection = $this->db_context->initialize_connection();
             if ($connection == NULL) {
@@ -25,37 +25,17 @@
                 return array();
             }
 
-            $sql = "SELECT * FROM realestate";
+            $sql = "SELECT * FROM associates";
             $result = $connection->query($sql);
 
             $results = array();
 
             while($row = $result->fetch_assoc()) {
-                array_push($results, RealEstateEntity::fromRow($row));
+                array_push($results, AssociatesEntity::fromRow($row));
             }
 
             return $results;
 
-        }
-
-        public static function building_type_id_to_string($id) {
-            $building_types = array(
-                1 => "Prédio",
-                2 => "Moradia Isolada",
-                3 => "Moradia Germinada",
-                4 => "Loja"
-            );
-            return $building_types[$id];
-        }
-
-        public static function building_state_id_to_string($id) {
-            $building_states = array(
-                0 => "-",
-                1 => "Vende-se",
-                2 => "Aluga-se",
-                3 => "Vendido"
-            );
-            return $building_states[$id];
         }
 
     }

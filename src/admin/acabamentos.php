@@ -1,3 +1,7 @@
+<?php
+    require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
+    $app_instance = new IdeiasComRelevo();
+?>
 <!DOCTYPE html>
 <html lang="pt">
 
@@ -100,10 +104,12 @@
                                 </div>
                                 <div class="card-body overflow-hidden w-100 d-block">
                                     <div class="carousel d-block">
-                                        <div class="carousel-item">
-                                            <a class="badge badge-danger position-absolute m-1 p-1"><i class="fa-solid fa-2x fa-trash-can"></i></a>
-                                            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                                        </div>
+                                        <?php foreach($app_instance->FinishesManagement->admin_get_finishes(0) as $finish): ?>
+                                            <div class="carousel-item">
+                                                <a class="badge badge-danger position-absolute m-1 p-1"><i class="fa-solid fa-2x fa-trash-can"></i></a>
+                                                <img src="<?= $finish->get_image() ?>">
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -119,10 +125,12 @@
                                 </div>
                                 <div class="card-body overflow-hidden w-100 d-block">
                                     <div class="carousel d-block">
-                                        <div class="carousel-item">
-                                            <a class="badge badge-danger position-absolute m-1 p-1"><i class="fa-solid fa-2x fa-trash-can"></i></a>
-                                            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                                        </div>
+                                        <?php foreach($app_instance->FinishesManagement->admin_get_finishes(1) as $finish): ?>
+                                            <div class="carousel-item">
+                                                <a class="badge badge-danger position-absolute m-1 p-1"><i class="fa-solid fa-2x fa-trash-can"></i></a>
+                                                <img src="<?= $finish->get_image() ?>">
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -138,10 +146,12 @@
                                 </div>
                                 <div class="card-body overflow-hidden w-100 d-block">
                                     <div class="carousel d-block">
-                                        <div class="carousel-item">
-                                            <a class="badge badge-danger position-absolute m-1 p-1"><i class="fa-solid fa-2x fa-trash-can"></i></a>
-                                            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                                        </div>
+                                        <?php foreach($app_instance->FinishesManagement->admin_get_finishes(2) as $finish): ?>
+                                            <div class="carousel-item">
+                                                <a class="badge badge-danger position-absolute m-1 p-1"><i class="fa-solid fa-2x fa-trash-can"></i></a>
+                                                <img src="<?= $finish->get_image() ?>">
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -157,10 +167,12 @@
                                 </div>
                                 <div class="card-body overflow-hidden w-100 d-block">
                                     <div class="carousel d-block">
-                                        <div class="carousel-item">
-                                            <a class="badge badge-danger position-absolute m-1 p-1"><i class="fa-solid fa-2x fa-trash-can"></i></a>
-                                            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-                                        </div>
+                                        <?php foreach($app_instance->FinishesManagement->admin_get_finishes(3) as $finish): ?>
+                                            <div class="carousel-item">
+                                                <a class="badge badge-danger position-absolute m-1 p-1"><i class="fa-solid fa-2x fa-trash-can"></i></a>
+                                                <img src="<?= $finish->get_image() ?>">
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                                 <div class="card-footer">

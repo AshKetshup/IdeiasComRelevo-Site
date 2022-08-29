@@ -12,7 +12,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
         name="viewport" />
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -26,8 +26,10 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="./assets/demo/demo.css" rel="stylesheet" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js" integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"
+        integrity="sha512-ooSWpxJsiXe6t4+PPjCgYmVfr1NS5QXJACcR/FPpsdm6kqG1FmQ2SVyg2RXeVuCRBLr0lWHnWJP6Zs1Efvxzww=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
 </head>
 
 <style>
@@ -81,136 +83,74 @@
         </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container vh-100 d-flex justify-content-start align-items-center">
-        <form id="searchAccordion" class="w-100 card-collapse" aria-multiselectable="true" action="">
-            <div class="card card-plain shadow bg-primary">
-                <div class="card-header w-100 d-flex flex-row bg-white" role="tab" id="headingOne">
-                    <button type="submit" class="btn btn-link col-1"><i class="fas fa-2x fa-search"></i></button>
-                    <input type="text" class="col-10 form-text border-0" id="searchContent">
-                    <a data-toggle="collapse" data-parent="#searchAccordion" href="#filter" aria-expanded="false"
-                        aria-controls="filter" class="btn btn-link col-1">
-                        <i class="fas fa-2x fa-filter"></i>
-                    </a>
+
+    <div class="container d-flex justify-content-center mb-2 flex-column" style="margin-top: 90px;">
+        <div id="carousel-product" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-product" data-slide-to="0"></li>
+                <li data-target="#carousel-product" data-slide-to="1" class="active"></li>
+                <li data-target="#carousel-product" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item">
+                    <img class="d-block" src="assets/img/Template/bg1.jpg" alt="First slide">
                 </div>
-                <div id="filter" class="collapse" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="card-body m-2 mx-4 text-white">
-                        <h4 class="m-0 mb-4">Filtro Avançado</h4>
-                        <div class="row text-black d-flex">
-                            <div class="col-4">
-                                <div class="card bg-white shadow p-2 form-control">
-                                    <fieldset class="d-flex m-1">
-                                        <ul class="list-unstyled m-0">
-                                            <legend for="vendaInput" class="" style="font-size: 1rem;">Tipo de Venda</legend>
-                                            <li><input type="checkbox" name="TipoVenda" value="0" class="m-1">Aluga-se</li>
-                                            <li><input type="checkbox" name="TipoVenda" value="1" class="m-1">Vende-se</li>
-                                        </ul>
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="card bg-white shadow p-2">asd</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="card bg-white shadow p-2">asd</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="carousel-item active">
+                    <img class="d-block" src="assets/img/Template/bg3.jpg" alt="Second slide">
+
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block" src="assets/img/Template/bg4.jpg" alt="Third slide">
                 </div>
             </div>
-        </form>
+            <a class="carousel-control-prev" href="#carousel-product" role="button" data-slide="prev">
+                <i class="now-ui-icons arrows-1_minimal-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#carousel-product" role="button" data-slide="next">
+                <i class="now-ui-icons arrows-1_minimal-right"></i>
+            </a>
+        </div>
+
+        <h2 class="w-100 m-0 p-0 mt-3" id="product-title"><b>Moradia T3 Vilar dos Cantos</b></h2>
+        <h4 class="w-100 m-0 p-0 mt-1" id="product-location">Freguesia, Concelho, Distrito</h4>
+        <h2 class="w-100 m-0 p-0 mt-3 TEXT" id="product-price">Preço €</h2>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-fill m-0 p-0 mt-3 mb-2" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#descrição" role="tab" aria-controls="descrição"
+                    aria-selected="true">Descrição</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pisos-tab" data-toggle="tab" href="#pisos" role="tab"
+                    aria-controls="pisos" aria-selected="false">Pisos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab"
+                    aria-controls="info" aria-selected="false">Informação</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="descrição" role="tabpanel" aria-labelledby="descrição-tab">...</div>
+            <div class="tab-pane" id="pisos" role="tabpanel" aria-labelledby="pisos-tab">....</div>
+            <div class="tab-pane" id="info" role="tabpanel" aria-labelledby="info-tab">.....</div>
+        </div>
+
+
+        <style>
+            .nav-tabs {
+                border-bottom: solid rgb(249, 99, 50);
+            }
+
+            .nav-link.active {
+                background-color: rgb(249, 99, 50) !important;
+                border-radius: 0 !important;
+            }
+        </style>
     </div>
-    <hr class="container">
-    <div class="container d-flex align-items-start flex-column">
-        <h3>Resultados para ""</h3>
-        <div class="w-100 d-flex row mb-3 shop-item">
-            <div class="col-3 image-head">
-                <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
-            </div>
-            <div class="col-9 body-content">
-                <div class="row">
-                    <h4 class="col text-truncate text-left text m-1">Terreno de 2.000 m2 junto ao Polo Universitário da Ajuda</h4>
-                </div>
-                <div class="row">
-                    <p class="col text-truncate text-left m-1">$(Tipo) para $(Tipo de venda): $(localização)</p>
-                </div>
-                <ul class="row list-inline p-0">
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Area m2)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-right m-1 h2">$(Preço)</li>
-                </ul>
-                <div class="row w-100 col-12 m-0 p-0">
-                    <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                        <i class="fas fa-2x fa-parking text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                    </div>
-                    <div class="col d-flex m-0 p-0 justify-content-end">
-                        <a role="button" href="" class="btn btn-primary">Saber mais</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-100 d-flex row mb-3 shop-item">
-            <div class="col-3 image-head">
-                <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
-            </div>
-            <div class="col-9 body-content">
-                <div class="row">
-                    <h4 class="col text-truncate text-left text m-1">Terreno de 2.000 m2 junto ao Polo Universitário da Ajuda</h4>
-                </div>
-                <div class="row">
-                    <p class="col text-truncate text-left m-1">$(Tipo) para $(Tipo de venda): $(localização)</p>
-                </div>
-                <ul class="row list-inline p-0">
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Area m2)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-right m-1 h2">$(Preço)</li>
-                </ul>
-                <div class="row w-100 col-12 m-0 p-0">
-                    <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                    </div>
-                    <div class="col d-flex m-0 p-0 justify-content-end">
-                        <a role="button" href="" class="btn btn-primary">Saber mais</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-100 d-flex row mb-3 shop-item">
-            <div class="col-3 image-head">
-                <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
-            </div>
-            <div class="col-9 body-content">
-                <div class="row">
-                    <h4 class="col text-truncate text-left text m-1">Terreno de 2.000 m2 junto ao Polo Universitário da Ajuda</h4>
-                </div>
-                <div class="row">
-                    <p class="col text-truncate text-left m-1">$(Tipo) para $(Tipo de venda): $(localização)</p>
-                </div>
-                <ul class="row list-inline p-0">
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Area m2)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-right m-1 h2">$(Preço)</li>
-                </ul>
-                <div class="row w-100 col-12 m-0 p-0">
-                    <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                    </div>
-                    <div class="col d-flex m-0 p-0 justify-content-end">
-                        <a role="button" href="" class="btn btn-primary">Saber mais</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
+
     <!-- Sart Modal -->
     <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">

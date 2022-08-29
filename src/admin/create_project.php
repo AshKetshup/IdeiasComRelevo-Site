@@ -75,7 +75,7 @@
 
                         <!-- /.col-md-12 -->
                         <div class="col-lg-12">
-                            <form class="needs-validation" id="form-project">
+                            <form class="needs-validation" action="/backend/post_scripts/create_project.php" method="post" id="form-project">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="m-0">Formulário projeto</h5>
@@ -276,7 +276,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 d-flex justify-content-end">
-                                        <a  class="btn btn-primary" id="adicionar-btn">Adicionar</a>
+                                        <a class="btn btn-primary" id="adicionar-btn">Adicionar</a>
                                     </div>
                                 </div>
                             </form>

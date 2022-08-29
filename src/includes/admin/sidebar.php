@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index" class="brand-link w-100">
-        <img src="./assets/img/Brand/SVG/Logo.svg" alt="AdminLTE Logo" class="col-2 m-0">
-        <img src="./assets/img/Brand/SVG/Typo_Title_white.svg" class="col-10">
+        <img src="/assets/img/Brand/SVG/Logo.svg" alt="AdminLTE Logo" class="col-2 m-0">
+        <img src="/assets/img/Brand/SVG/Typo_Title_white.svg" class="col-10">
     </a>
 
     <!-- Sidebar -->

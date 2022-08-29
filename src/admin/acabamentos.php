@@ -271,15 +271,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.content-wrapper -->
 
         <!-- Main Footer -->
-        <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                
-            </div>
-            <!-- Default to the left -->
-            <strong>Anything you want</strong> All rights
-            reserved.
-        </footer>
+        <?php include_once '../includes/admin/footer.php'; ?>
     </div>
     <!-- ./wrapper -->
 

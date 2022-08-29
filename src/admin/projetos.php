@@ -87,7 +87,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a class="nav-item nav-link" href="/admin/projetos">
+                            <a class="nav-item nav-link active" href="/admin/projetos">
                                 <i class="nav-icon fas fa-project-diagram"></i>
                                 Projetos
                             </a>
@@ -105,7 +105,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-item nav-link active" href="/admin/contactos">
+                            <a class="nav-item nav-link" href="/admin/contactos">
                                 <i class="nav-icon fas fa-phone"></i>
                                 Contactos
                             </a>
@@ -130,14 +130,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="pb-2">Contactos</h1>
-                            <p class="mb-0">Lista dos contactos disponiveis no site.</p>
+                            <h1 class="pb-2">Projetos</h1>
+                            <p class="mb-0">Lista dos projetos disponiveis no site.</p>
                             <p class="mb-1"></p>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Contactos</li>
+                                <li class="breadcrumb-item active">Projetos</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -153,23 +153,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="m-0">Contactos</h5>
+                                    <h5 class="m-0">Projetos</h5>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered table-hover shadow">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Campo</th>
-                                                <th>Valor</th>
+                                                <th>Titulo</th>
+                                                <th>Localização</th>
+                                                <th>Tipo de edificio</th>
+                                                <th>Estado</th>
+                                                <th>Data</th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1.</td>
-                                                <td>Nº Telemovel</td>
-                                                <td>+3519XXXXXXXX</td>
+                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                                                <td>Zona, Concelho, Freguesia</td>
+                                                <td>Moradia Germinada</td>
+                                                <td>Vendido</td>
+                                                <td>24-12-2021</td>
                                                 <td>
                                                     <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
                                                     <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
@@ -177,8 +183,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </tr>
                                             <tr>
                                                 <td>2.</td>
-                                                <td>Email</td>
-                                                <td>email@email.email</td>
+                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                                                <td>Zona, Concelho, Freguesia</td>
+                                                <td>Moradia Germinada</td>
+                                                <td>Vendido</td>
+                                                <td>24-12-2021</td>
                                                 <td>
                                                     <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
                                                     <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
@@ -186,8 +195,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </tr>
                                             <tr>
                                                 <td>3.</td>
-                                                <td>Sede</td>
-                                                <td>Rua da quinta da glória usada, 2222-001</td>
+                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                                                <td>Zona, Concelho, Freguesia</td>
+                                                <td>Moradia Germinada</td>
+                                                <td>Vendido</td>
+                                                <td>24-12-2021</td>
+                                                <td>
+                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
+                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4.</td>
+                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                                                <td>Zona, Concelho, Freguesia</td>
+                                                <td>Moradia Germinada</td>
+                                                <td>Vendido</td>
+                                                <td>24-12-2021</td>
+                                                <td>
+                                                    <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
+                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5.</td>
+                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                                                <td>Zona, Concelho, Freguesia</td>
+                                                <td>Moradia Germinada</td>
+                                                <td>Vendido</td>
+                                                <td>24-12-2021</td>
                                                 <td>
                                                     <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
                                                     <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
@@ -232,15 +268,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        <footer class="main-footer">
-            <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                
-            </div>
-            <!-- Default to the left -->
-            <strong>Anything you want</strong> All rights
-            reserved.
-        </footer>
+        <?php include_once '../includes/admin/footer.php'; ?>
+        
     </div>
     <!-- ./wrapper -->
 

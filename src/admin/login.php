@@ -14,12 +14,11 @@
     $PAGE_ID = "login";
     include_once '../includes/admin/head.php';
 ?>
-<body class="login-page" style="min-height: 466px;">
+<body class="login-page dark-mode" style="min-height: 466px;">
     <div class="login-box">
-
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <h1><b>Admin</b>LTE</h1>
+                <img src="/assets/" alt="" srcset="">
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>

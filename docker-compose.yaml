@@ -8,4 +8,4 @@ services:
       - 22:22
       - 80:80
     volumes:
-      - "E:\\OneDrive - Universidade da Beira Interior\\IdeiasComRelevo-Site\\src:/www"
+      - "E:\\OneDrive - Universidade da Beira Interior\\IdeiasComRelevo-Site\\src:/"

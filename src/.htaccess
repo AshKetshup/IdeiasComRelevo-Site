@@ -1,6 +1,17 @@
-#Options -Indexes
+Options -Indexes
+
+<filesMatch "\.(html|htm|js|css|php)$">
+  FileETag None
+  <ifModule mod_headers.c>
+     Header unset ETag
+     Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+     Header set Pragma "no-cache"
+     Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+  </ifModule>
+</filesMatch>
 
 RewriteEngine on
+RewriteBase /
 
 <FilesMatch "\.(htaccess|code-workspace)$">
     Order allow,deny
@@ -9,4 +20,4 @@ RewriteEngine on
 
 RewriteRule ^(admin/dist)($|/) - [L]
 RewriteRule ^(admin/plugins)($|/) - [L]
-RewriteRule ^admin/([a-zA-Z-0-9-_]+)(/$|$) /admin/$1.html [L]
+RewriteRule ^admin/([a-zA-Z-0-9-_]+)(/$|$) /admin/$1.php [L]

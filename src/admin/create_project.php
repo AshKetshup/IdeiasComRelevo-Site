@@ -85,7 +85,7 @@
                                             <div class="form-group col-lg-4">
                                                 <label for="inputZona">Zona</label>
                                                 <input id="inputZona" class="form-control" type="text"
-                                                    placeholder="Insira a zona" required>
+                                                    placeholder="Insira a zona" name="zona" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -93,7 +93,7 @@
                                             <div class="form-group col-lg-4">
                                                 <label for="inputConcelho">Concelho</label>
                                                 <input id="inputConcelho" class="form-control" type="text"
-                                                    placeholder="Insira o concelho" required>
+                                                    placeholder="Insira o concelho" name="concelho" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -101,14 +101,14 @@
                                             <div class="form-group col-lg-4">
                                                 <label for="inputFreguesia">Freguesia</label>
                                                 <input id="inputFreguesia" class="form-control" type="text"
-                                                    placeholder="Insira a freguesia" required>
+                                                    placeholder="Insira a freguesia" name="freguesia" required>
                                                 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-3">
                                                 <label for="inputTipoEdificio">Tipo de Edificio</label>
-                                                <select id="inputTipoEdificio" class="form-control" type=""
+                                                <select id="inputTipoEdificio" class="form-control" name="tipoEdifico"
                                                     placeholder="Tipo de Edificio" required>
                                                     <option selected value style="display:none">Escolha o tipo de Edificio</option>
                                                     <option value="1">Prédio</option>
@@ -123,7 +123,7 @@
                                             <div class="form-group col-lg-3">
                                                 <label for="inputNApartamentos">Nº de Apartamentos</label>
                                                 <input id="inputNApartamentos" class="form-control" type="number"
-                                                    min="0" placeholder="Insira o Nº de Apartamentos" required>
+                                                    min="0" placeholder="Insira o Nº de Apartamentos" name="nApartamentos" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -132,7 +132,7 @@
                                                 <label for="inputNApartamentosDisponiveis">Nº de Apartamentos
                                                     Disponiveis</label>
                                                 <input id="inputNApartamentosDisponiveis" class="form-control"
-                                                    type="number" min="0"
+                                                    type="number" min="0" name="nApartamentosDisponiveis"
                                                     placeholder="Insira o Nº de Apartamentos Disponiveis" required>
                                                 
                                                 <div class="valid-feedback">Valido.</div>
@@ -141,7 +141,7 @@
                                             <div class="form-group col-lg-3">
                                                 <label for="inputNPisos">Nº de Pisos</label>
                                                 <input id="inputNPisos" class="form-control" type="number" min="0"
-                                                    placeholder="Insira o Nº de Pisos" required>
+                                                    placeholder="Insira o Nº de Pisos" name="nPisos" required>
                                                 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -149,7 +149,7 @@
                                             <div class="form-group col-lg-12">
                                                 <label for="inputDescricao">Descrição</label>
                                                 <textarea id="inputDescricao" class="form-control" type="text"
-                                                    placeholder="Descreva o projeto"
+                                                    placeholder="Descreva o projeto" name="descricao"
                                                     style="min-height:12rem" required></textarea>
 
                                                 <div class="valid-feedback">Valido.</div>
@@ -158,7 +158,7 @@
                                             <div class="form-group col-lg-5">
                                                 <label for="inputEstado">Estado</label>
                                                 <select id="inputEstado" class="form-control" type="text"
-                                                    placeholder="Selecione o estado" required>
+                                                    placeholder="Selecione o estado" name="estado" required>
                                                     <option selected value style="display:none">Selecione o estado</option>
                                                     <option value="0">-</option>
                                                     <option value="1">Vende-se</option>
@@ -172,7 +172,7 @@
                                             <div class="form-group col-lg-5">
                                                 <label for="inputValor">Valor (€)</label>
                                                 <input id="inputValor" class="form-control" type="number" min="0"
-                                                    step="0.01" placeholder="Insira o Valor (€)" required>
+                                                    step="0.01" placeholder="Insira o Valor (€)" name="valor" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -182,7 +182,7 @@
                                                     title="Inclui Elevador">
                                                     <label for="inputElevador" class="mr-2"><i
                                                             class="fa-solid fa-2x fa-elevator"></i></label>
-                                                    <input id="inputElevador" type="checkbox"
+                                                    <input id="inputElevador" type="checkbox" name="elevador"
                                                         placeholder="Inclui Elevador">
                                                 </div>
                                             </div>

@@ -100,7 +100,7 @@ include_once '../includes/admin/head.php';
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
-                                            <div class="form-group col-lg-3">
+                                            <div class="form-group col-lg-6">
                                                 <label for="inputTipoEdificio">Tipo de Edificio</label>
                                                 <select id="inputTipoEdificio" class="form-control" name="tipoEdifico" placeholder="Tipo de Edificio" required>
                                                     <option selected value style="display:none">Escolha o tipo de Edificio</option>
@@ -113,22 +113,22 @@ include_once '../includes/admin/head.php';
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
-                                            <div class="form-group col-lg-3">
+                                            <!-- <div class="form-group col-lg-3">
                                                 <label for="inputNApartamentos">Nº de Apartamentos</label>
                                                 <input id="inputNApartamentos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Apartamentos" name="nApartamentos" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
+                                            </div> -->
+                                            <!-- <div class="form-group col-lg-3">
                                                 <label for="inputNApartamentosDisponiveis">Nº de Apartamentos
                                                     Disponiveis</label>
                                                 <input id="inputNApartamentosDisponiveis" class="form-control" type="number" min="0" name="nApartamentosDisponiveis" placeholder="Insira o Nº de Apartamentos Disponiveis" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
-                                            </div>
-                                            <div class="form-group col-lg-3">
+                                            </div> -->
+                                            <div class="form-group col-lg-6">
                                                 <label for="inputNPisos">Nº de Pisos</label>
                                                 <input id="inputNPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" name="nPisos" required>
 
@@ -171,7 +171,6 @@ include_once '../includes/admin/head.php';
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 d-flex justify-content-end">
-                                        <button href="#" class="btn btn-default mx-2" id="visualizar-btn">Visualizar</button>
                                         <a type="button" href="#" class="btn btn-primary" id="finalizar-btn">Finalizar</a>
                                     </div>
                                 </div>
@@ -251,8 +250,8 @@ include_once '../includes/admin/head.php';
 
                         <script>
                             let tipoEdificio = document.getElementById("inputTipoEdificio");
-                            let nApartamentos = document.getElementById("inputNApartamentos");
-                            let nApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis");
+                            // let nApartamentos = document.getElementById("inputNApartamentos");
+                            // let nApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis");
 
                             let visualizarBtn = document.getElementById("finalizar-btn");
                             let finalizarBtn = document.getElementById("visualizar-btn");
@@ -270,28 +269,34 @@ include_once '../includes/admin/head.php';
 
                             let management = () => {
                                 let tipoEdificio = document.getElementById("inputTipoEdificio");
-                                let nApart = document.getElementById("inputNApartamentos");
-                                let nApartDisp = document.getElementById("inputNApartamentosDisponiveis");
+                                // let nApart = document.getElementById("inputNApartamentos");
+                                // let nApartDisp = document.getElementById("inputNApartamentosDisponiveis");
                                 let tipologiaForm = document.getElementById("tipologia-form");
                                 let tipologiaTable = document.getElementById("tipologia-table");
 
                                 if (tipoEdificio.value == 1) {
-                                    nApart.disabled = false;
-                                    nApartDisp.disabled = false;
+                                    // nApart.disabled = false;
+                                    // nApartDisp.disabled = false;
 
                                     tipologiaTable.hidden = false;
 
                                     tipologiaForm.classList.remove("col-lg-12");
                                     tipologiaForm.classList.add("col-lg-6");
                                 } else {
-                                    nApart.disabled = true;
-                                    nApartDisp.disabled = true;
+                                    // nApart.value = "";
+                                    // nApartDisp.value = "";
+                                    // nApart.disabled = true;
+                                    // nApartDisp.disabled = true;
 
                                     tipologiaTable.hidden = true;
 
                                     tipologiaForm.classList.remove("col-lg-6");
                                     tipologiaForm.classList.add("col-lg-12");
                                 }
+                            }
+
+                            let predioLimits = () => {
+
                             }
 
                             visualizarBtn.addEventListener("click", wasValidated);
@@ -566,6 +571,9 @@ include_once '../includes/admin/head.php';
 
             let data = JSON.stringify(params);
             xhr.send(data);
+            
+            if (xhr.status === 200)
+                location.replace("/admin/projetos");
         }
 
         function getData() {
@@ -573,8 +581,8 @@ include_once '../includes/admin/head.php';
             const inputConcelho = document.getElementById("inputConcelho").value;
             const inputFreguesia = document.getElementById("inputFreguesia").value;
             const inputTipoEdificio = document.getElementById("inputTipoEdificio").value;
-            const inputNApartamentos = document.getElementById("inputNApartamentos").value;
-            const inputNApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis").value;
+            // const inputNApartamentos = document.getElementById("inputNApartamentos").value;
+            // const inputNApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis").value;
             const inputNPisos = document.getElementById("inputNPisos").value;
             const inputDescricao = document.getElementById("inputDescricao").value;
             const inputEstado = document.getElementById("inputEstado").value;
@@ -586,8 +594,8 @@ include_once '../includes/admin/head.php';
                 concelho: inputConcelho,
                 freguesia: inputFreguesia,
                 tipoEdificio: inputTipoEdificio,
-                nApartamentos: inputNApartamentos,
-                nApartamentosDisponiveis: inputNApartamentosDisponiveis,
+                // nApartamentos: inputNApartamentos,
+                // nApartamentosDisponiveis: inputNApartamentosDisponiveis,
                 nPisos: inputNPisos,
                 descricao: inputDescricao,
                 estado: inputEstado,

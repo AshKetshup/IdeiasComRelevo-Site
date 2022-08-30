@@ -86,14 +86,16 @@ include_once '../includes/admin/head.php';
                                         </thead>
                                         <tbody>
                                             <?php foreach ($app_instance->ProjectsManagement->admin_get_projects() as $project) : ?>
-                                                <tr>
+                                                <tr id="<?= $project->get_id() ?>">
                                                     <td><?= $project->get_title() ?></td>
                                                     <td><?= $project->get_zone() ?>, <?= $project->get_county() ?>, <?= $project->get_city() ?></td>
                                                     <td><?= ProjectsManagement::building_type_id_to_string($project->get_building_type()) ?></td>
                                                     <td><?= ProjectsManagement::building_state_id_to_string($project->get_state()) ?></td>
                                                     <td>
                                                         <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
-                                                        <button class="badge bg-danger p-1 px-2 mr-1 btn-delete" id="<?= $project->get_id() ?>" title="Eliminar" data-toggle="modal" data-target="#confirmElimination"><i class="fa-solid fa-trash-can"></i></button>
+                                                        <button class="badge bg-danger p-1 px-2 mr-1 btn-delete" title="Eliminar" data-toggle="modal" data-target="#confirmElimination">
+                                                            <i class="fa-solid fa-trash-can"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -130,7 +132,7 @@ include_once '../includes/admin/head.php';
                         Ao confirmar irás eliminar o elemento selecionado. Tens a certeza?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <a id="deleteModalBtn" type="button" class="btn btn-danger" href="">Confirmar</a>
                     </div>
                 </div>
@@ -145,10 +147,10 @@ include_once '../includes/admin/head.php';
     <!-- ./wrapper -->
 
     <script>
-        const elements  = document.getElementsByClassName("btn-delete");
+        const elements = document.getElementsByClassName("btn-delete");
         const modalLink = document.getElementById("deleteModalBtn");
         for (const element of elements) {
-            const id = element.getAttribute("id");
+            const id = element.closest("tr").getAttribute("id");
             element.addEventListener("click", () => {
                 modalLink.setAttribute("href", "/backend/post_scripts/delete_project.php?id=" + id);
             });

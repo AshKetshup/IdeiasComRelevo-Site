@@ -591,6 +591,10 @@ include_once '../includes/admin/head.php';
             let inptEstado = document.getElementById("inputEstado");
             let inptValor = document.getElementById("inputValor");
 
+            let inptTipValorVenda = document.getElementById("inputTipValorVenda");
+            let inptTipValorAluguer = document.getElementById("inputTipValorAluguer");
+            let inptTipDescricao = document.getElementById("inputTipDescricao");
+
             tableRows.innerHTML = "";
             rows = [];
 
@@ -600,14 +604,21 @@ include_once '../includes/admin/head.php';
 
                 inptValor.disabled = true; 
 
+                inptTipValorVenda.closest("div").hidden = false;
+                inptTipValorAluguer.closest("div").hidden = false;
+                inptTipDescricao.closest("div").hidden = false;
+
                 tipologiaTable.hidden = false;
                 tipologiaForm.classList.remove("col-lg-12");
                 tipologiaForm.classList.add("col-lg-6");
             } else {
-
                 inptValor.disabled = false;
 
                 inptEstado.value = 1;
+
+                inptTipValorVenda.closest("div").hidden = true;
+                inptTipValorAluguer.closest("div").hidden = true;
+                inptTipDescricao.closest("div").hidden = true;
 
                 tipologiaTable.hidden = true;
                 tipologiaForm.classList.remove("col-lg-6");

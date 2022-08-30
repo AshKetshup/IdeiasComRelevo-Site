@@ -43,6 +43,11 @@
 
         }
 
+
+        function get_project($id) {
+            return RealEstateEntity::fromId($id);
+        }
+
         /**
          * Deletes a project given an id
          * @param String $id the id of the project to delete

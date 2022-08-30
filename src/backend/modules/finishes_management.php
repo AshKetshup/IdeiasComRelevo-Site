@@ -11,12 +11,18 @@
 
     class FinishesManagement {
 
+        /** External Modules */
         private $db_context;
 
+        /** Constructor, initializes the DbContext */
         function __construct() { 
             $this->db_context = new DbContext();
         }
 
+        /**
+         * Gets the finishes from the database
+         * @param $area, the type of finishes that we are fetching works as filter. Defaults to -1 which returns all finishes
+         */
         function admin_get_finishes($area = -1) {
 
             $connection = $this->db_context->initialize_connection();

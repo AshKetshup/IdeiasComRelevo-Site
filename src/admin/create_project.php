@@ -121,21 +121,6 @@ include_once '../includes/admin/head.php';
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
-                                            <!-- <div class="form-group col-lg-3">
-                                                <label for="inputNApartamentos">Nº de Apartamentos</label>
-                                                <input id="inputNApartamentos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Apartamentos" name="nApartamentos" required>
-
-                                                <div class="valid-feedback">Valido.</div>
-                                                <div class="invalid-feedback">Por favor, preencher este campo.</div>
-                                            </div> -->
-                                            <!-- <div class="form-group col-lg-3">
-                                                <label for="inputNApartamentosDisponiveis">Nº de Apartamentos
-                                                    Disponiveis</label>
-                                                <input id="inputNApartamentosDisponiveis" class="form-control" type="number" min="0" name="nApartamentosDisponiveis" placeholder="Insira o Nº de Apartamentos Disponiveis" required>
-
-                                                <div class="valid-feedback">Valido.</div>
-                                                <div class="invalid-feedback">Por favor, preencher este campo.</div>
-                                            </div> -->
                                             <div class="form-group col-lg-6">
                                                 <label for="inputNPisos">Nº de Pisos</label>
                                                 <input id="inputNPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" required>
@@ -544,8 +529,6 @@ include_once '../includes/admin/head.php';
             const inputConcelho = document.getElementById("inputConcelho").value;
             const inputFreguesia = document.getElementById("inputFreguesia").value;
             const inputTipoEdificio = document.getElementById("inputTipoEdificio").value;
-            // const inputNApartamentos = document.getElementById("inputNApartamentos").value;
-            // const inputNApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis").value;
             const inputNPisos = document.getElementById("inputNPisos").value;
             const inputDescricao = document.getElementById("inputDescricao").value;
             const inputEstado = document.getElementById("inputEstado").value;
@@ -559,8 +542,6 @@ include_once '../includes/admin/head.php';
                 concelho: inputConcelho,
                 freguesia: inputFreguesia,
                 tipoEdificio: inputTipoEdificio,
-                // nApartamentos: inputNApartamentos,
-                // nApartamentosDisponiveis: inputNApartamentosDisponiveis,
                 nPisos: inputNPisos,
                 descricao: inputDescricao,
                 estado: inputEstado,
@@ -580,33 +561,20 @@ include_once '../includes/admin/head.php';
                 typologies: LIMIT_TYPO ? [rows[rows.length - 1]] : rows
             };
             
+            <?php if (!isset($_GET['id'])): ?>
             post("/backend/post_scripts/create_project.php", JSONContent, "/admin/projetos");
-            return false;
-        });
-
-        document.getElementById("alterar-btn").addEventListener("submit", () => {
-            console.log(rows)
-
-            const JSONContent = {
-                projeto: getData(),
-                typologies: LIMIT_TYPO ? [rows[rows.length - 1]] : rows
-            };
-
+            <?php else: ?>
             post("/backend/post_scripts/edit_project.php", JSONContent, "/admin/projetos");
+            <?php endif; ?>
+
+            return false;
         });
     </script>
 
     <script>
         let tipoEdificio = document.getElementById("inputTipoEdificio");
-        // let nApartamentos = document.getElementById("inputNApartamentos");
-        // let nApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis");
-
         let finalizarBtn = document.getElementById("finalizar-btn");
-
         let tableRows = document.getElementById("typology-table-body");
-
-        // nApartamentos.disabled = true;
-        // nApartamentosDisponiveis.disabled = true;
 
         let wasValidated = () => {
             let x = document.getElementById("form-project")
@@ -618,31 +586,26 @@ include_once '../includes/admin/head.php';
 
         let management = () => {
             let tipoEdificio = document.getElementById("inputTipoEdificio");
-            // let nApart = document.getElementById("inputNApartamentos");
-            // let nApartDisp = document.getElementById("inputNApartamentosDisponiveis");
             let tipologiaForm = document.getElementById("tipologia-form");
             let tipologiaTable = document.getElementById("tipologia-table");
             let inptEstado = document.getElementById("inputEstado");
+            let inptValor = document.getElementById("inputValor");
 
             tableRows.innerHTML = "";
             rows = [];
 
             LIMIT_TYPO = tipoEdificio.value != 1;
             if (!LIMIT_TYPO) {
-
-                // nApart.disabled = false;
-                // nApartDisp.disabled = false;
-
                 inptEstado.value = 0;
+
+                inptValor.disabled = true; 
 
                 tipologiaTable.hidden = false;
                 tipologiaForm.classList.remove("col-lg-12");
                 tipologiaForm.classList.add("col-lg-6");
             } else {
-                // nApart.value = "";
-                // nApartDisp.value = "";
-                // nApart.disabled = true;
-                // nApartDisp.disabled = true;
+
+                inptValor.disabled = false;
 
                 inptEstado.value = 1;
 

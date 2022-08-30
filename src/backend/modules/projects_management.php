@@ -74,7 +74,7 @@
             $projectEntity->set_title($project->titulo);
 
             // this should change
-            $projectEntity->set_photos(NULL);
+            $projectEntity->set_photos(array());
 
             $projectEntity->insert();
 
@@ -95,7 +95,7 @@
                 $typologyEntity->set_building($projectEntity);
 
                 // this should change
-                $typologyEntity->set_photos(NULL);
+                $typologyEntity->set_photos(array());
 
                 $typologyEntity->insert();
 

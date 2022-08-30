@@ -133,7 +133,7 @@ include_once '../includes/admin/head.php';
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <a id="deleteModalBtn" type="button" class="btn btn-danger" href="">Confirmar</a>
+                        <a id="deleteModalBtn" class="btn btn-danger" href="">Confirmar</a>
                     </div>
                 </div>
             </div>

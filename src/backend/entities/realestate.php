@@ -268,6 +268,22 @@ class RealEstateEntity {
     public function get_title() { return $this->title; }
     public function get_floor_count() { return $this->floor_count; }
 
+    public function get_sale_type() {
+        $this->reload_appartments();
+        $id = -1;
+        foreach($this->appts as $appt) {
+            if ($id == -1 && $appt->get_state() != 4)
+                $id = $appt->get_state();
+            if ($id == 1 && $appt->get_state() == 2)
+                $id = 3;
+            if ($id == 2 && $appt->get_state() == 1)
+                $id = 3;
+            if ($appt->get_state() == 4)
+                continue;
+        }
+        return $id;
+    }
+
     /** Setters */        
     public function set_zone($value) { $this->zone = $value; }
     public function set_county($value) { $this->county = $value; }

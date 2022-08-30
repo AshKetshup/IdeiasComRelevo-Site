@@ -17,7 +17,8 @@
 
 <body class="index-page sidebar-collapse">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="200">
+    <!-- .navbar-transparent color-on-scroll="200" -->
+    <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="200">
         <div class="container">
             <div class="navbar-translate m-0 p-0 col-3">
                 <a class="navbar-brand w-100 h-100" href="index" rel="tooltip" data-placement="bottom">

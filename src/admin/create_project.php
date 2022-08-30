@@ -72,7 +72,7 @@ include_once '../includes/admin/head.php';
                     <div class="row">
                         <!-- /.col-md-12 -->
                         <div class="col-lg-12">
-                            <form class="needs-validation" action="" method="post" id="form-project">
+                            <form class="needs-validation" id="form-project">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="m-0">Formulário projeto</h5>
@@ -171,7 +171,7 @@ include_once '../includes/admin/head.php';
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 d-flex justify-content-end">
-                                        <a type="button" href="#" class="btn btn-primary" id="finalizar-btn">Finalizar</a>
+                                        <button type="submit" class="btn btn-primary" id="finalizar-btn">Finalizar</button>
                                     </div>
                                 </div>
                             </form>
@@ -256,8 +256,10 @@ include_once '../includes/admin/head.php';
                             let visualizarBtn = document.getElementById("finalizar-btn");
                             let finalizarBtn = document.getElementById("visualizar-btn");
 
-                            nApartamentos.disabled = true;
-                            nApartamentosDisponiveis.disabled = true;
+                            let LIMIT_TYPO = true;
+
+                            // nApartamentos.disabled = true;
+                            // nApartamentosDisponiveis.disabled = true;
 
                             let wasValidated = () => {
                                 let x = document.getElementById("form-project")
@@ -279,6 +281,7 @@ include_once '../includes/admin/head.php';
                                     // nApartDisp.disabled = false;
 
                                     tipologiaTable.hidden = false;
+
 
                                     tipologiaForm.classList.remove("col-lg-12");
                                     tipologiaForm.classList.add("col-lg-6");
@@ -329,7 +332,7 @@ include_once '../includes/admin/head.php';
                                                     <th>Ações</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="tipology-table-body">
+                                            <tbody id="typology-table-body">
                                             </tbody>
                                         </table>
 
@@ -603,14 +606,14 @@ include_once '../includes/admin/head.php';
             }
         }
 
-        document.getElementById("finalizar-btn").addEventListener("click", () => {
+        document.getElementById("finalizar-btn").addEventListener("submit", () => {
             let JSONArray = [];
 
             console.log(rows)
 
             const JSONContent = {
                 projeto: getData(),
-                tipologies: rows
+                typologies: rows
             };
 
             console.log(JSONContent);

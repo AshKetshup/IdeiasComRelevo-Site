@@ -64,6 +64,13 @@ class UserEntity {
         $this->email = $entry['email'];
     }
 
+    /**
+     * Attempts to login a user
+     * @param String $email the email for witch to attempt the login
+     * @param String $password the password to check against
+     * 
+     * @return UserEntity|bool if the login is successfull it returns the UserEntity corresponding to the user otherwise returns false
+     */
     public static function attempt_login($email, $password) {
         $result = false;
         $db_context = new DbContext();
@@ -92,6 +99,12 @@ class UserEntity {
         return false;
     }
 
+    /**
+     * Creates a new user with the given password
+     * @param String $password the password to set for the new user
+     * 
+     * @return bool wether the user was created or not
+     */
     public function insert($password) {
         $result = false;
 
@@ -117,7 +130,10 @@ class UserEntity {
         return $result;
     }
     
-    /** Does not update password */
+    /** 
+     * Updates the user with the exception of the password
+     * @return bool wether the user was updated or not
+     */
     public function update_changes() {
         $result = false;
 
@@ -136,6 +152,12 @@ class UserEntity {
         return $result;
     }
 
+    /**
+     * Only updates the password of the user
+     * @param String $password the new password to set to the user
+     * 
+     * @return bool wether the password was updated successfully or not
+     */
     public function update_password($password) {
         $result = false;
 
@@ -156,10 +178,12 @@ class UserEntity {
         return $result;
     }
 
+    /* GETTERS */
     public function get_id() { return $this->id; }
     public function get_name() { return $this->name; }
     public function get_email() { return $this->email; }
 
+    /* SETTERS */
     public function set_name($value) {  $this->name = $value; }
     public function set_email($value) { $this->email = $value; }
     

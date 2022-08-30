@@ -168,7 +168,6 @@ class TypologyEntity {
 
     /** 
      * Deletes the entry from the database,
-     * If entry has associated typology entities those will also be deleted
      * If there's a error initializing the connection or deleting the record an error returns false, otherwise returns true
      */
     public function delete_entry() {
@@ -188,6 +187,7 @@ class TypologyEntity {
         return $result;
     }
 
+    /* GETTERS */
     public function get_id() { return $this->id; }
     public function get_area() { return $this->area; }
     public function get_energy_category() { return $this->energy_category; }
@@ -226,6 +226,7 @@ class TypologyEntity {
         return $result;
     }
 
+    /* SETTERS */
     public function set_area($value) { $this->area = $value; }
     public function set_energy_category($value) { $this->energy_category = $value; }
     public function set_typology($value) { $this->typology = $value; }
@@ -244,6 +245,9 @@ class TypologyEntity {
         $this->realestate = $value;
     }
 
+    /**
+     * Reloads the building data for this typology
+     */
     public function reload_building() {
         $result = NULL;
 

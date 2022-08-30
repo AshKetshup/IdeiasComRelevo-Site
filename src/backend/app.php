@@ -1,12 +1,15 @@
 <?php
 
+    // starts the php session
     session_start();       
 
+    // configures the error log
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+    // helper for the different backend paths
     $APP_PATHS = array(
         "entities" => $_SERVER["DOCUMENT_ROOT"] . "/backend/entities",
         "database" => $_SERVER["DOCUMENT_ROOT"] . "/backend/database",
@@ -14,6 +17,7 @@
         "modules" => $_SERVER["DOCUMENT_ROOT"] . "/backend/modules",
     );
     
+    // imports for all the necessary classes
     require_once $APP_PATHS["entities"] . '/realestate.php';
     require_once $APP_PATHS["entities"] . '/contacts.php';
     require_once $APP_PATHS["entities"] . '/typology.php';
@@ -29,6 +33,7 @@
 
     class IdeiasComRelevo {
 
+        /* App modules */
         public $UserManagement;
         public $ProjectsManagement;     
         public $AssociateManagement;   

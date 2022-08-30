@@ -2,8 +2,15 @@
 
     class ContactManagement {
 
+        /** Constructor, nothing else to initialize */
         function __construct() { }
 
+        /**
+         * Updates the contacts, there are only 3 types of contacts, office, phone and email
+         * @param $phone the phone number as a string
+         * @param $email the email as a string
+         * @param $office the office address as a string
+         */
         public function update_contacts($phone, $email, $office) {            
             $_office = ContactsEntity::fromType('office');
             $_phone = ContactsEntity::fromType('phone');
@@ -18,6 +25,9 @@
             $_email->update_changes();
         }
 
+        /**
+         * Gets all the contacts from the database
+         */
         public function get_contacts() {            
             $office = ContactsEntity::fromType('office')->get_value();
             $phone = ContactsEntity::fromType('phone')->get_value();

@@ -1,8 +1,15 @@
 <?php
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/entities/typology.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/database/dbconnection.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/helpers/extensions.php';
+$APP_PATHS = array(
+    "entities" => $_SERVER["DOCUMENT_ROOT"] . "/backend/entities",
+    "database" => $_SERVER["DOCUMENT_ROOT"] . "/backend/database",
+    "helpers" => $_SERVER["DOCUMENT_ROOT"] . "/backend/helpers",
+    "modules" => $_SERVER["DOCUMENT_ROOT"] . "/backend/modules",
+);
+
+require_once $APP_PATHS["entities"] . '/typology.php';
+require_once $APP_PATHS["database"] . '/dbconnection.php';
+require_once $APP_PATHS["helpers"] . '/extensions.php';
 
 class RealEstateEntity {
 
@@ -14,11 +21,12 @@ class RealEstateEntity {
     private $zone;
     private $county;
     private $city;
-    private $building_type; // 0 = appt buiding 
+    private $building_type;
     private $state;
     private $value;
     private $has_elevator;
     private $description;
+    private $floor_clount;
 
     /** Refs */
     private $appts;
@@ -29,7 +37,7 @@ class RealEstateEntity {
     /** External Modules */
     private $db_context;
     
-    /** Constructor covnerts database entry to Entity */
+    /** Constructor converts database entry to Entity */
     function __construct() {
         $this->db_context = new DbContext();        
     }
@@ -69,12 +77,12 @@ class RealEstateEntity {
         $this->county = $entry['county'];
         $this->city = $entry['city'];
         $this->building_type = $entry['building_type'];
-        $this->appartment_count = $entry['appartment_count'];
         $this->state = $entry['state'];
         $this->value = $entry['value'];
-        $this->has_elevator = $entry['has_elevator'];
+        $this->has_elevator = $entry['has_elevator'] == 1;
         $this->description = $entry['description'];
         $this->title = $entry['title'];
+        $this->floor_count = $entry["floor_count"];
     }
 
     /** Database Operations */
@@ -94,13 +102,15 @@ class RealEstateEntity {
             $escaped_building_type = $connection->real_escape_string($this->building_type);            
             $escaped_state = $connection->real_escape_string($this->state);
             $escaped_value = $connection->real_escape_string($this->value);
-            $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
             $escaped_main_photo = $connection->real_escape_string($this->main_photo);
-            $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
+            $escaped_photos = "";
+            if ($this->photos != NULL)
+                $connection->real_escape_string(join(",", $this->photos));
             $escaped_description = $connection->real_escape_string($this->description);
             $escaped_title = $connection->real_escape_string($this->title);
+            $escaped_floor_count = $connection->real_escape_string($this->floor_count);
 
-            $sql = "INSERT INTO realestate (`description`, id, title, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator) VALUES ('" . $escaped_description . "', '" . $this->id . "', '" . $escaped_title . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_value  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . $escaped_has_elevator . "')";
+            $sql = "INSERT INTO realestate (`description`, id, title, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator, floor_count) VALUES ('" . $escaped_description . "', '" . $this->id . "', '" . $escaped_title . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_value  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . ($this->has_elevator == true ? 1 : 0)  . "', '" . $escaped_floor_count . "')";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -132,8 +142,9 @@ class RealEstateEntity {
             $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
             $escaped_description = $connection->real_escape_string($this->description);
             $escaped_title = $connection->real_escape_string($this->title);
+            $escaped_floor_count = $connection->real_escape_string($this->floor_count);
 
-            $sql = "UPDATE realestate SET `description`='" . $escaped_description . "' photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', `zone`='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', `state`='" . $escaped_state . "', `value`='" . $escaped_value . "', has_elevator='" . $escaped_has_elevator . ", title='" . $escaped_title . "' WHERE id='" . $this->id . "'";
+            $sql = "UPDATE realestate SET `description`='" . $escaped_description . "' photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', `zone`='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', `state`='" . $escaped_state . "', `value`='" . $escaped_value . "', has_elevator='" . $escaped_has_elevator . ", title='" . $escaped_title . "', floor_count='" . $escaped_floor_count . "' WHERE id='" . $this->id . "'";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -156,7 +167,7 @@ class RealEstateEntity {
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {            
             $sql1 = "DELETE FROM realestate WHERE id='" . $this->id . "'";
-            $sql2 = "DELETE FROM typology WHERE realstateid='" . $this->id . "'";
+            $sql2 = "DELETE FROM typology WHERE rid='" . $this->id . "'";
             if ($connection->query($sql1) === TRUE) {
                 if ($connection->query($sql2) === TRUE)
                     $result = true;
@@ -255,6 +266,7 @@ class RealEstateEntity {
     }    
     public function get_description() { return $this->description; }
     public function get_title() { return $this->title; }
+    public function get_floor_count() { return $this->floor_count; }
 
     /** Setters */        
     public function set_zone($value) { $this->zone = $value; }
@@ -267,6 +279,8 @@ class RealEstateEntity {
     public function set_photos($value) { $this->photos = $value; } // string array with photos names (these names will be uuid's to ensure photo names are unique)
     public function set_main_photo($value) { $this->main_photo = $value; }
     public function set_description($value) { $this->description = $value; }
+    public function set_floor_count($value) { $this->floor_count = $value; }
+    public function set_title($value) { $this->title = $value; }
 
     /** Refresh References */
     public function reload_appartments() {

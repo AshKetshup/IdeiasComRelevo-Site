@@ -1,7 +1,14 @@
 <?php
 
-require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/database/dbconnection.php';
-require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/helpers/extensions.php';
+$APP_PATHS = array(
+    "entities" => $_SERVER["DOCUMENT_ROOT"] . "/backend/entities",
+    "database" => $_SERVER["DOCUMENT_ROOT"] . "/backend/database",
+    "helpers" => $_SERVER["DOCUMENT_ROOT"] . "/backend/helpers",
+    "modules" => $_SERVER["DOCUMENT_ROOT"] . "/backend/modules",
+);
+
+require_once $APP_PATHS["database"] . '/dbconnection.php';
+require_once $APP_PATHS["helpers"] . '/extensions.php';
 
 class ContactsEntity {
 

@@ -38,9 +38,7 @@ class DbContext {
         return $result;
     }
 
-    public function close_connection() {
-
-    }
+    public function close_connection() { }
 }
 
 ?>

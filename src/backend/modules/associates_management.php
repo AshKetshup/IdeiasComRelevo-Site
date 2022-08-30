@@ -11,12 +11,17 @@
 
     class AssociatesManagement {
 
+        /** External Modules */
         private $db_context;
 
+        /** Constructor, initialized the DbContext */
         function __construct() { 
             $this->db_context = new DbContext();
         }
 
+        /** 
+         * Gets all associates 
+         */
         function admin_get_associates() {
 
             $connection = $this->db_context->initialize_connection();

@@ -82,35 +82,35 @@ include_once '../includes/admin/head.php';
                                         <div class="w-100 d-flex flex-wrap">
                                             <div class="form-group col-lg-12">
                                                 <label for="inputTitle">Title</label>
-                                                <input id="inputTitle" class="form-control" type="text" placeholder="Insira o titulo" name="titulo" required>
+                                                <input id="inputTitle" class="form-control" type="text" placeholder="Insira o titulo"required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputZona">Zona</label>
-                                                <input id="inputZona" class="form-control" type="text" placeholder="Insira a zona" name="zona" required>
+                                                <input id="inputZona" class="form-control" type="text" placeholder="Insira a zona" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputConcelho">Concelho</label>
-                                                <input id="inputConcelho" class="form-control" type="text" placeholder="Insira o concelho" name="concelho" required>
+                                                <input id="inputConcelho" class="form-control" type="text" placeholder="Insira o concelho" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputFreguesia">Freguesia</label>
-                                                <input id="inputFreguesia" class="form-control" type="text" placeholder="Insira a freguesia" name="freguesia" required>
+                                                <input id="inputFreguesia" class="form-control" type="text" placeholder="Insira a freguesia" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label for="inputTipoEdificio">Tipo de Edificio</label>
-                                                <select id="inputTipoEdificio" class="form-control" name="tipoEdifico" placeholder="Tipo de Edificio" required>
+                                                <select id="inputTipoEdificio" class="form-control" placeholder="Tipo de Edificio" required>
                                                     <option selected value style="display:none">Escolha o tipo de Edificio</option>
                                                     <option value="1">Prédio</option>
                                                     <option value="2">Moradia Isolada</option>
@@ -138,21 +138,21 @@ include_once '../includes/admin/head.php';
                                             </div> -->
                                             <div class="form-group col-lg-6">
                                                 <label for="inputNPisos">Nº de Pisos</label>
-                                                <input id="inputNPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" name="nPisos" required>
+                                                <input id="inputNPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label for="inputDescricao">Descrição</label>
-                                                <textarea id="inputDescricao" class="form-control" type="text" placeholder="Descreva o projeto" name="descricao" style="min-height:12rem" required></textarea>
+                                                <textarea id="inputDescricao" class="form-control" type="text" placeholder="Descreva o projeto" style="min-height:12rem" required></textarea>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-5">
                                                 <label for="inputEstado">Estado</label>
-                                                <select id="inputEstado" class="form-control" type="text" placeholder="Selecione o estado" name="estado" required>
+                                                <select id="inputEstado" class="form-control" type="text" placeholder="Selecione o estado" required>
                                                     <option selected value style="display:none">Selecione o estado</option>
                                                     <option value="0">-</option>
                                                     <option value="1">Vende-se</option>
@@ -165,7 +165,7 @@ include_once '../includes/admin/head.php';
                                             </div>
                                             <div class="form-group col-lg-5">
                                                 <label for="inputValor">Valor (€)</label>
-                                                <input id="inputValor" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)" name="valor" required>
+                                                <input id="inputValor" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -181,7 +181,9 @@ include_once '../includes/admin/head.php';
                                     <div class="card-footer w-100 d-flex justify-content-end">
                                         <?php if (!isset($_GET['id'])): ?>
                                             <button type="submit" class="btn btn-primary" id="finalizar-btn">Criar</button>
+                                            <button type="button" class="btn btn-primary" hidden="true" id="alterar-btn">Alterar</button>
                                         <?php else: ?>
+                                            <button type="button" class="btn btn-primary" hidden="true" id="finalizar-btn">Criar</button>
                                             <button type="submit" class="btn btn-primary" id="alterar-btn">Alterar</button>
                                         <?php endif; ?>
                                     </div>
@@ -523,15 +525,17 @@ include_once '../includes/admin/head.php';
             xhr.open(method, path, true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200)
-                    if (redirect !== '')
+                console.log(xhr.status);
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    if (redirect !== '') {
                         location.replace(redirect);
+                    }
+                }
             }
 
             let data = JSON.stringify(params);
+            console.log(data);
             xhr.send(data);
-
-            return xhr.status;
         }
 
         function getData() {
@@ -549,7 +553,7 @@ include_once '../includes/admin/head.php';
             const inputElevador = document.getElementById("inputElevador").checked;
 
             return {
-                <?= isset($_GET['id']) ? "id: ".$_GET['id']."," : "" ?>
+                <?= isset($_GET['id']) ? "id: '".$_GET['id']."'," : "" ?>
                 titulo: inputTitle,
                 zona: inputZona,
                 concelho: inputConcelho,
@@ -565,9 +569,10 @@ include_once '../includes/admin/head.php';
             }
         }
 
-        document.getElementById("finalizar-btn").addEventListener("submit", () => {
-            let JSONArray = [];
 
+
+        document.getElementById("form-project").addEventListener("submit", () => {
+            event.preventDefault();
             console.log(rows)
 
             const JSONContent = {
@@ -576,11 +581,10 @@ include_once '../includes/admin/head.php';
             };
             
             post("/backend/post_scripts/create_project.php", JSONContent, "/admin/projetos");
+            return false;
         });
 
         document.getElementById("alterar-btn").addEventListener("submit", () => {
-            let JSONArray = [];
-
             console.log(rows)
 
             const JSONContent = {

@@ -38,6 +38,11 @@
 
         }
 
+        function delete_project($id) {
+            $project = RealEstateEntity::fromId($id);
+            $project->delete_entry();
+        }
+
         public static function building_type_id_to_string($id) {
             $building_types = array(
                 1 => "Prédio",

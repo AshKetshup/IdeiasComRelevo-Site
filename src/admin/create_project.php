@@ -559,21 +559,20 @@ include_once '../includes/admin/head.php';
             rows.push(tip.toObj());
         });
 
-        function post(path, params, method = 'post') {
+        function post(path, params, redirect = '', method = 'post') {
             let xhr = new XMLHttpRequest();
             xhr.open(method, path, true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log(xhr.responseText);
-                }
+                if (xhr.readyState === 4 && xhr.status === 200)
+                    if (redirect !== '')
+                        location.replace(redirect);
             }
 
             let data = JSON.stringify(params);
             xhr.send(data);
             
-            if (xhr.status === 200)
-                location.replace("/admin/projetos");
+            return xhr.status;
         }
 
         function getData() {
@@ -616,7 +615,7 @@ include_once '../includes/admin/head.php';
 
             console.log(JSONContent);
 
-            post("/backend/post_scripts/create_project.php", JSONContent);
+            post("/backend/post_scripts/create_project.php", JSONContent, "/admin/projetos");
         });
 
     </script>

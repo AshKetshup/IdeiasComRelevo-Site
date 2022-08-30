@@ -36,9 +36,9 @@
             <div class="col-2">
                 <h5>Navigation</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2 w-100"><a href="/front/">Home</a></li>
-                    <li class="mb-2 w-100"><a href="/front/imoveis">Imoveis</a></li>
-                    <li class="mb-2 w-100"><a href="/front/portfolio">Portfolio</a></li>
+                    <li class="mb-2 w-100"><a href="/">Home</a></li>
+                    <li class="mb-2 w-100"><a href="/imoveis">Imoveis</a></li>
+                    <li class="mb-2 w-100"><a href="/portfolio">Portfolio</a></li>
                     <li class="mb-2 w-100"><a href="#footer">Contactos</a></li>
                 </ul>
             </div>

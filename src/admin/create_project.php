@@ -79,6 +79,13 @@ include_once '../includes/admin/head.php';
                                     </div>
                                     <div class="card-body">
                                         <div class="w-100 d-flex flex-wrap">
+                                            <div class="form-group col-lg-12">
+                                                <label for="inputTitle">Title</label>
+                                                <input id="inputTitle" class="form-control" type="text" placeholder="Insira o titulo" name="titulo" required>
+
+                                                <div class="valid-feedback">Valido.</div>
+                                                <div class="invalid-feedback">Por favor, preencher este campo.</div>
+                                            </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputZona">Zona</label>
                                                 <input id="inputZona" class="form-control" type="text" placeholder="Insira a zona" name="zona" required>
@@ -248,64 +255,7 @@ include_once '../includes/admin/head.php';
                             </form>
                         </div>
 
-                        <script>
-                            let tipoEdificio = document.getElementById("inputTipoEdificio");
-                            // let nApartamentos = document.getElementById("inputNApartamentos");
-                            // let nApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis");
 
-                            let visualizarBtn = document.getElementById("finalizar-btn");
-                            let finalizarBtn = document.getElementById("visualizar-btn");
-
-                            let LIMIT_TYPO = true;
-
-                            // nApartamentos.disabled = true;
-                            // nApartamentosDisponiveis.disabled = true;
-
-                            let wasValidated = () => {
-                                let x = document.getElementById("form-project")
-                                if (x.classList.contains("needs-validation")) {
-                                    x.classList.remove("needs-validation");
-                                    x.classList.add("was-validated");
-                                }
-                            }
-
-                            let management = () => {
-                                let tipoEdificio = document.getElementById("inputTipoEdificio");
-                                // let nApart = document.getElementById("inputNApartamentos");
-                                // let nApartDisp = document.getElementById("inputNApartamentosDisponiveis");
-                                let tipologiaForm = document.getElementById("tipologia-form");
-                                let tipologiaTable = document.getElementById("tipologia-table");
-
-                                if (tipoEdificio.value == 1) {
-                                    // nApart.disabled = false;
-                                    // nApartDisp.disabled = false;
-
-                                    tipologiaTable.hidden = false;
-
-
-                                    tipologiaForm.classList.remove("col-lg-12");
-                                    tipologiaForm.classList.add("col-lg-6");
-                                } else {
-                                    // nApart.value = "";
-                                    // nApartDisp.value = "";
-                                    // nApart.disabled = true;
-                                    // nApartDisp.disabled = true;
-
-                                    tipologiaTable.hidden = true;
-
-                                    tipologiaForm.classList.remove("col-lg-6");
-                                    tipologiaForm.classList.add("col-lg-12");
-                                }
-                            }
-
-                            let predioLimits = () => {
-
-                            }
-
-                            visualizarBtn.addEventListener("click", wasValidated);
-                            finalizarBtn.addEventListener("click", wasValidated);
-                            tipoEdificio.addEventListener("change", management);
-                        </script>
                         <!-- /.col-md-6 -->
                         <!-- /.col-md-12 -->
                         <div class="col-lg-6" id="tipologia-table">
@@ -332,12 +282,11 @@ include_once '../includes/admin/head.php';
                                                     <th>Ações</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="typology-table-body">
-                                            </tbody>
+                                            <tbody id="typology-table-body"></tbody>
                                         </table>
 
                                         <script>
-                                            
+
                                         </script>
                                     </div>
                                 </div>
@@ -362,6 +311,8 @@ include_once '../includes/admin/head.php';
     <?php include_once '../includes/admin/scripts.php'; ?>
 
     <script>
+        let LIMIT_TYPO = true;
+
         class Tipologia {
             #area = 0;
             #categoriaEnergetica = "";
@@ -515,7 +466,7 @@ include_once '../includes/admin/head.php';
             let venda = document.getElementById("inputTipValorVenda");
             let aluguer = document.getElementById("inputTipValorAluguer");
 
-            let tableBody = document.getElementById("tipology-table-body");
+            let tableBody = document.getElementById("typology-table-body");
 
             // Insert a row at the end of table
             var newRow = tableBody.insertRow();
@@ -566,7 +517,7 @@ include_once '../includes/admin/head.php';
             let xhr = new XMLHttpRequest();
             xhr.open(method, path, true);
             xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
+            xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200)
                     if (redirect !== '')
                         location.replace(redirect);
@@ -574,11 +525,12 @@ include_once '../includes/admin/head.php';
 
             let data = JSON.stringify(params);
             xhr.send(data);
-            
+
             return xhr.status;
         }
 
         function getData() {
+            const inputTitle = document.getElementById("inputTitle").value;
             const inputZona = document.getElementById("inputZona").value;
             const inputConcelho = document.getElementById("inputConcelho").value;
             const inputFreguesia = document.getElementById("inputFreguesia").value;
@@ -592,6 +544,7 @@ include_once '../includes/admin/head.php';
             const inputElevador = document.getElementById("inputElevador").checked;
 
             return {
+                title: inputTitle,
                 zona: inputZona,
                 concelho: inputConcelho,
                 freguesia: inputFreguesia,
@@ -613,14 +566,73 @@ include_once '../includes/admin/head.php';
 
             const JSONContent = {
                 projeto: getData(),
-                typologies: rows
+                typologies: LIMIT_TYPO ? [rows[rows.length - 1]] : rows
             };
 
             console.log(JSONContent);
 
             post("/backend/post_scripts/create_project.php", JSONContent, "/admin/projetos");
         });
+    </script>
 
+    <script>
+        let tipoEdificio = document.getElementById("inputTipoEdificio");
+        // let nApartamentos = document.getElementById("inputNApartamentos");
+        // let nApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis");
+
+        let finalizarBtn = document.getElementById("finalizar-btn");
+
+        let tableRows = document.getElementById("typology-table-body");
+
+        // nApartamentos.disabled = true;
+        // nApartamentosDisponiveis.disabled = true;
+
+        let wasValidated = () => {
+            let x = document.getElementById("form-project")
+            if (x.classList.contains("needs-validation")) {
+                x.classList.remove("needs-validation");
+                x.classList.add("was-validated");
+            }
+        }
+
+        let management = () => {
+            let tipoEdificio = document.getElementById("inputTipoEdificio");
+            // let nApart = document.getElementById("inputNApartamentos");
+            // let nApartDisp = document.getElementById("inputNApartamentosDisponiveis");
+            let tipologiaForm = document.getElementById("tipologia-form");
+            let tipologiaTable = document.getElementById("tipologia-table");
+            let inptEstado = document.getElementById("inputEstado");
+
+            tableRows.innerHTML = "";
+            rows = [];
+
+            LIMIT_TYPO = tipoEdificio.value != 1;
+            if (!LIMIT_TYPO) {
+
+                // nApart.disabled = false;
+                // nApartDisp.disabled = false;
+
+                inptEstado.value = 0;
+
+                tipologiaTable.hidden = false;
+                tipologiaForm.classList.remove("col-lg-12");
+                tipologiaForm.classList.add("col-lg-6");
+            } else {
+                // nApart.value = "";
+                // nApartDisp.value = "";
+                // nApart.disabled = true;
+                // nApartDisp.disabled = true;
+
+                inptEstado.value = 1;
+
+                tipologiaTable.hidden = true;
+                tipologiaForm.classList.remove("col-lg-6");
+                tipologiaForm.classList.add("col-lg-12");
+            }
+        }
+
+        finalizarBtn.addEventListener("click", wasValidated);
+        tipoEdificio.addEventListener("change", management);
     </script>
 </body>
 

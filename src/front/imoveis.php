@@ -23,12 +23,13 @@
     ?>
 
     <!-- End Navbar -->
-    <div class="container vh-100 d-flex justify-content-start align-items-center">
-        <form id="searchAccordion" class="w-100 card-collapse" aria-multiselectable="true" action="">
-            <div class="card card-plain shadow bg-primary">
+    <hr class="container" style="margin-top: 90px;">
+    <div class="container d-flex justify-content-start">
+        <form id="searchAccordion" class="w-100 card-collapse pb-0" aria-multiselectable="true" action="imoveis.php" method="post">
+            <div class="card card-plain shadow-lg bg-primary" style="margin-top: 30px;">
                 <div class="card-header w-100 d-flex flex-row bg-white" role="tab" id="headingOne">
                     <button type="submit" class="btn btn-link col-1"><i class="fas fa-2x fa-search"></i></button>
-                    <input type="text" class="col-10 form-text border-0" id="searchContent">
+                    <input type="text" name="searchField" class="col-10 form-text border-0" id="searchContent">
                     <a data-toggle="collapse" data-parent="#searchAccordion" href="#filter" aria-expanded="false"
                         aria-controls="filter" class="btn btn-link col-1">
                         <i class="fas fa-2x fa-filter"></i>

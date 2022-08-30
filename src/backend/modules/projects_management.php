@@ -59,7 +59,7 @@
 
         function create_project($json) {            
             $project = $json->projeto;
-            $typologies = $json->tipologies;
+            $typologies = $json->typologies;
             $projectEntity = new RealEstateEntity();
 
             $projectEntity->set_zone($project->zona);
@@ -92,7 +92,12 @@
                 $typologyEntity->set_description($typology->descricao);
                 $typologyEntity->set_sell_price($typology->venda);
                 $typologyEntity->set_rent_price($typology->aluguer);
-                $typologyEntity->set_building($projectEntity);
+                if ($typology->piso != "")
+                    $typologyEntity->set_floor($typology->piso);
+                else
+                    $typologyEntity->set_floor(0);
+                    
+                $typologyEntity->set_building($projectEntity);                
 
                 // this should change
                 $typologyEntity->set_photos(array());

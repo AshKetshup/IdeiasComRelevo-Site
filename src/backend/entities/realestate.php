@@ -110,7 +110,7 @@ class RealEstateEntity {
             $escaped_title = $connection->real_escape_string($this->title);
             $escaped_floor_count = $connection->real_escape_string($this->floor_count);
 
-            $sql = "INSERT INTO realestate (`description`, id, title, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator, floor_count) VALUES ('" . $escaped_description . "', '" . $this->id . "', '" . $escaped_title . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_value  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . ($this->has_elevator == true ? 1 : 0)  . "', '" . $escaped_floor_count . "')";
+            $sql = "INSERT INTO realestate (`description`, id, title, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator, floor_count) VALUES ('" . $escaped_description . "', '" . $this->id . "', '" . $escaped_title . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_zone  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . ($this->has_elevator == true ? 1 : 0)  . "', '" . $escaped_floor_count . "')";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else

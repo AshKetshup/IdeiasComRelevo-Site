@@ -5,18 +5,42 @@
                 <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="index.html">
                     <span class="h5 m-0">Ideias com Relevo</span>
                 </a>
-                <ul class="list-unstyled small text-muted">
-                    <li class="mb-2"></li>
-                    <!-- <li class="mb-2">Code licensed <a href="https://github.com/AshKetshup/Correio-Privado/blob/TheMainTimeline/LICENSE" target="_blank" rel="license noopener">GPL-3.0</a>.</li> -->
+                <ul class="m-0 ml-3 list-unstyled text-muted d-flex flex-column">
+                    <li class="mb-2 row w-100 d-flex" id="phone">
+                        <div class="col-1 p-0">
+                            <i class="fas fa-phone"></i> 
+                        </div>
+                        <div class="col-11 p-0 ">
+                            +351 922 222 235
+                        </div>
+                    </li>
+                    <li class="mb-2 row w-100 d-flex" id="email">
+                        <div class="col-1 p-0">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="col-11 p-0">
+                            e@email.com
+                        </div>
+                    </li>
+                    <li class="mb-2 row w-100 d-flex" id="office">
+                        <div class="col-1 p-0">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="col-11 p-0">
+                            Estrada da santa cona do assobio<br>
+                            Nº 69<br>
+                            ueueueue
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="col-2">
                 <h5>Navigation</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2 w-100"><a href="index.html">Home</a></li>
-                    <li class="mb-2 w-100"><a href="#">Filter News</a></li>
-                    <li class="mb-2 w-100"><a href="#">Recent News</a></li>
-                    <li class="mb-2 w-100"><a href="about-us.html">About Us</a></li>
+                    <li class="mb-2 w-100"><a href="/front/">Home</a></li>
+                    <li class="mb-2 w-100"><a href="/front/imoveis">Imoveis</a></li>
+                    <li class="mb-2 w-100"><a href="/front/portfolio">Portfolio</a></li>
+                    <li class="mb-2 w-100"><a href="#footer">Contactos</a></li>
                 </ul>
             </div>
             <div class="col-7">
@@ -27,9 +51,7 @@
             </div>
         </div>
         <div class="pt-5 row w-100 small ">
-            <p class="col-12 text-center text-muted">Designed and built by <a
-                    class="p-1 link-dark text-decoration-none" href="index.html#devs">Diogo Simões</a> and <a
-                    class="p-1 link-dark text-decoration-none" href="index.html#devs">Pedro Cavaleiro</a></p>
+            <p class="col-12 text-center text-muted">Designed and built by <a class="p-1 link-dark text-decoration-none" href="index.html#devs">Diogo Simões</a> and <a class="p-1 link-dark text-decoration-none" href="index.html#devs">Pedro Cavaleiro</a></p>
         </div>
     </div>
 </footer>

@@ -18,7 +18,7 @@
             <div class="navbar-translate m-0 p-0 col-3">
                 <a class="navbar-brand w-100 h-100" href="index" rel="tooltip" data-placement="bottom">
                     <!-- Ideias Com Relevo -->
-                    <img src="./assets/img/Brand/white_logotype.png" alt="logo_brand">
+                    <img src="/assets/img/Brand/white_logotype.png" alt="logo_brand">
                 </a>
                 <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navigation" aria-controls="navigation-index" aria-expanded="false"
@@ -29,7 +29,7 @@
                 </button>
             </div>
             <div class="col-9 collapse navbar-collapse justify-content-end m-0 p-0" id="navigation"
-                data-nav-image="./assets/img/blurred-image-1.jpg">
+                data-nav-image="/assets/img/blurred-image-1.jpg">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="imoveis">

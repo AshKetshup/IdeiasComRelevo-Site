@@ -471,28 +471,19 @@ include_once '../includes/admin/head.php';
             }
 
             toObj() {
-                let map = new Map();
-
-                map.set("area", this.#area);
-                map.set("categoriaEnergetica", this.#categoriaEnergetica);
-                map.set("tipologia", this.#tipologia);
-                map.set("estado", this.#estado);
-                map.set("wcs", this.#wcs);
-                map.set("piso", this.#piso);
-                map.set("hasGaragem", this.#hasGaragem);
-                map.set("hasParking", this.#hasParking);
-                map.set("descricao", this.#descricao);
-                map.set("venda", this.#venda);
-                map.set("aluguer", this.#aluguer);
-
-                const simpleMapOfA = Object.fromEntries( //convert map to plain object
-                    Array.from(
-                        map.entries(), //transform the map
-                        ([key, value]) => [key, value] //convert map values to plain objects
-                    )
-                );
-
-                return simpleMapOfA;
+                return {
+                    area: this.#area,
+                    categoriaEnergetica: this.#categoriaEnergetica,
+                    tipologia: this.#tipologia,
+                    estado: this.#estado,
+                    wcs: this.#wcs,
+                    piso: this.#piso,
+                    hasGaragem: this.#hasGaragem,
+                    hasParking: this.#hasParking,
+                    descricao: this.#descricao,
+                    venda: this.#venda,
+                    aluguer: this.#aluguer
+                };
             }
 
             serialise() {
@@ -501,6 +492,7 @@ include_once '../includes/admin/head.php';
         }
 
         let adicionarBtn = document.getElementById("adicionar-btn");
+        let rows = [];
 
         adicionarBtn.addEventListener("click", () => {
             let area = document.getElementById("inputTipArea");
@@ -559,33 +551,21 @@ include_once '../includes/admin/head.php';
 
             newRow.insertCell().appendChild(elim);
 
-            const JSONTip = tip.serialise();
-            console.log(JSONTip);
-            newRow.setAttribute("jsonContent", JSONTip);
+            rows.push(tip.toObj());
         });
 
-        const rows = document.querySelectorAll("#tipology-table-body tr");
-
         function post(path, params, method = 'post') {
-            // The rest of this code assumes you are not using a library.
-            // It can be made less verbose if you use one.
-            const form = document.createElement('form');
-            form.method = method;
-            form.action = path;
-
-            for (const key in params) {
-                if (params.hasOwnProperty(key)) {
-                    const hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = key;
-                    hiddenField.value = params[key];
-
-                    form.appendChild(hiddenField);
+            let xhr = new XMLHttpRequest();
+            xhr.open(method, path, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.responseText);
                 }
             }
 
-            document.body.appendChild(form);
-            form.submit();
+            let data = JSON.stringify(params);
+            xhr.send(data);
         }
 
         function getData() {
@@ -602,17 +582,17 @@ include_once '../includes/admin/head.php';
             const inputElevador = document.getElementById("inputElevador").checked;
 
             return {
-                Zona: inputZona,
-                Concelho: inputConcelho,
-                Freguesia: inputFreguesia,
-                TipoEdificio: inputTipoEdificio,
-                NApartamentos: inputNApartamentos,
-                NApartamentosDisponiveis: inputNApartamentosDisponiveis,
-                NPisos: inputNPisos,
-                Descricao: inputDescricao,
-                Estado: inputEstado,
-                Valor: inputValor,
-                Elevador: inputElevador
+                zona: inputZona,
+                concelho: inputConcelho,
+                freguesia: inputFreguesia,
+                tipoEdificio: inputTipoEdificio,
+                nApartamentos: inputNApartamentos,
+                nApartamentosDisponiveis: inputNApartamentosDisponiveis,
+                nPisos: inputNPisos,
+                descricao: inputDescricao,
+                estado: inputEstado,
+                valor: inputValor,
+                elevador: inputElevador
             }
         }
 
@@ -621,14 +601,11 @@ include_once '../includes/admin/head.php';
 
             console.log(rows)
 
-            for (const row of rows) {
-                JSONArray.push(row.getAttribute("jsoncontent"));
-            }
-
             const JSONContent = {
                 projeto: getData(),
-                tipologies: JSONArray
+                tipologies: rows
             };
+
             console.log(JSONContent);
 
             post("/backend/post_scripts/create_project.php", JSONContent);

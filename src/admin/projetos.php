@@ -1,10 +1,10 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
-    $app_instance = new IdeiasComRelevo();
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
+$app_instance = new IdeiasComRelevo();
 
-    $login = IdeiasComRelevo::verify_login();
-    if(!$login)
-        header("Location: /admin/login");
+$login = IdeiasComRelevo::verify_login();
+if (!$login)
+    header("Location: /admin/login");
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -13,10 +13,10 @@
     This contains the head part of the file.
     To set the page name change the $PAGE_NAME variable
 -->
-<?php 
-    $PAGE_NAME = "Projetos";
-    $PAGE_ID = "projetos";
-    include_once '../includes/admin/head.php'; 
+<?php
+$PAGE_NAME = "Projetos";
+$PAGE_ID = "projetos";
+include_once '../includes/admin/head.php';
 ?>
 
 <style>
@@ -25,11 +25,12 @@
         -webkit-appearance: none;
         margin: 0;
     }
-    
+
     input[type=number] {
         -moz-appearance: textfield;
     }
 </style>
+
 <body class="hold-transition sidebar-mini dark-mode">
     <div class="wrapper">
 
@@ -84,7 +85,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach($app_instance->ProjectsManagement->admin_get_projects() as $project): ?>
+                                            <?php foreach ($app_instance->ProjectsManagement->admin_get_projects() as $project) : ?>
                                                 <tr>
                                                     <td><?= $project->get_title() ?></td>
                                                     <td><?= $project->get_zone() ?>, <?= $project->get_county() ?>, <?= $project->get_city() ?></td>
@@ -92,7 +93,7 @@
                                                     <td><?= ProjectsManagement::building_state_id_to_string($project->get_state()) ?></td>
                                                     <td>
                                                         <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href=""><i class="fa-solid fa-pen"></i></a>
-                                                        <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
+                                                        <button class="badge bg-danger p-1 px-2 mr-1 btn-delete" id="<?= $project->get_id() ?>" title="Eliminar" data-toggle="modal" data-target="#confirmElimination"><i class="fa-solid fa-trash-can"></i></button>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -115,21 +116,44 @@
         </div>
         <!-- /.content-wrapper -->
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
+        <!-- Modal -->
+        <div class="modal fade" id="confirmElimination" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="confirmEliminationLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmEliminationLabel">Confirmação</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Ao confirmar irás eliminar o elemento selecionado. Tens a certeza?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <a id="deleteModalBtn" type="button" class="btn btn-danger" href="">Confirmar</a>
+                    </div>
+                </div>
             </div>
-        </aside>
-        <!-- /.control-sidebar -->
+        </div>
+
 
         <!-- Main Footer -->
         <?php include_once '../includes/admin/footer.php'; ?>
 
     </div>
     <!-- ./wrapper -->
+
+    <script>
+        const elements  = document.getElementsByClassName("btn-delete");
+        const modalLink = document.getElementById("deleteModalBtn");
+        for (const element of elements) {
+            const id = element.getAttribute("id");
+            element.addEventListener("click", () => {
+                modalLink.setAttribute("href", "/backend/post_scripts/delete_project.php?id=" + id);
+            });
+        }
+    </script>
 
     <!-- REQUIRED SCRIPTS -->
     <?php include_once '../includes/admin/scripts.php'; ?>

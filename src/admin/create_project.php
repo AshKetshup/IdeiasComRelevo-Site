@@ -5,6 +5,7 @@ $app_instance = new IdeiasComRelevo();
 $login = IdeiasComRelevo::verify_login();
 if (!$login)
     header("Location: /admin/login");
+
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -178,7 +179,11 @@ include_once '../includes/admin/head.php';
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary" id="finalizar-btn">Finalizar</button>
+                                        <?php if (!isset($_GET['id'])): ?>
+                                            <button type="submit" class="btn btn-primary" id="finalizar-btn">Criar</button>
+                                        <?php else: ?>
+                                            <button type="submit" class="btn btn-primary" id="alterar-btn">Alterar</button>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </form>
@@ -544,7 +549,8 @@ include_once '../includes/admin/head.php';
             const inputElevador = document.getElementById("inputElevador").checked;
 
             return {
-                title: inputTitle,
+                <?= isset($_GET['id']) ? "id: ".$_GET['id']."," : "" ?>
+                titulo: inputTitle,
                 zona: inputZona,
                 concelho: inputConcelho,
                 freguesia: inputFreguesia,
@@ -568,10 +574,21 @@ include_once '../includes/admin/head.php';
                 projeto: getData(),
                 typologies: LIMIT_TYPO ? [rows[rows.length - 1]] : rows
             };
-
-            console.log(JSONContent);
-
+            
             post("/backend/post_scripts/create_project.php", JSONContent, "/admin/projetos");
+        });
+
+        document.getElementById("alterar-btn").addEventListener("submit", () => {
+            let JSONArray = [];
+
+            console.log(rows)
+
+            const JSONContent = {
+                projeto: getData(),
+                typologies: LIMIT_TYPO ? [rows[rows.length - 1]] : rows
+            };
+
+            post("/backend/post_scripts/edit_project.php", JSONContent, "/admin/projetos");
         });
     </script>
 

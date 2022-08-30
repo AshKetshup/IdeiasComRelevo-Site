@@ -93,7 +93,7 @@ include_once '../includes/admin/head.php';
                                             </tr>
                                             <tr>
                                                 <td>Sede</td>
-                                                <td><?= $contacts["office"] ?></td>
+                                                <td><?= str_replace("\n", "<br />", $contacts["office"]) ?></td>
                                             </tr>
                                         </tbody>
                                     </table>

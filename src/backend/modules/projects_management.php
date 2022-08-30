@@ -43,6 +43,11 @@
 
         }
 
+
+        function get_project($id) {
+            return RealEstateEntity::fromId($id);
+        }
+
         /**
          * Deletes a project given an id
          * @param String $id the id of the project to delete
@@ -69,7 +74,7 @@
             $projectEntity->set_title($project->titulo);
 
             // this should change
-            $projectEntity->set_photos(NULL);
+            $projectEntity->set_photos(array());
 
             $projectEntity->insert();
 
@@ -90,7 +95,7 @@
                 $typologyEntity->set_building($projectEntity);
 
                 // this should change
-                $typologyEntity->set_photos(NULL);
+                $typologyEntity->set_photos(array());
 
                 $typologyEntity->insert();
 

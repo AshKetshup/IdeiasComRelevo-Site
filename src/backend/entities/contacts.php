@@ -8,7 +8,7 @@ class ContactsEntity {
     /** Entity Variables */
     private $id;
     private $field;
-    private $value;
+    private $data;
 
     /** External Modules */
     private $db_context;
@@ -84,7 +84,7 @@ class ContactsEntity {
     protected function fill($entry) {
         $this->id = $entry['id'];
         $this->field = $entry['field'];
-        $this->value = $entry['value'];
+        $this->data = $entry['value'];
     }
 
     /** Database Operations */
@@ -99,7 +99,7 @@ class ContactsEntity {
         if ($connection != NULL) {
             $this->id = guidv4();            
             $escaped_field = $connection->real_escape_string($this->field);
-            $escaped_value = $connection->real_escape_string($this->value);
+            $escaped_value = $connection->real_escape_string($this->data);
 
             $sql = "INSERT INTO contacts (id, field, `value`) VALUES ('" . $this->id . "','" . $escaped_field  . "', '" . $escaped_value . "')";
             if ($connection->query($sql) === TRUE)
@@ -123,7 +123,7 @@ class ContactsEntity {
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {
             $escaped_field = $connection->real_escape_string($this->field);
-            $escaped_value = $connection->real_escape_string($this->value);
+            $escaped_value = $connection->real_escape_string($this->data);
 
             $sql = "UPDATE contacts SET field='" . $escaped_field . "', value='" . $escaped_value . "' WHERE id='" . $this->id . "'";
             if ($connection->query($sql) === TRUE)
@@ -162,11 +162,11 @@ class ContactsEntity {
     /** Getters */
     public function get_id() { return $this->id; }
     public function get_field() { return $this->field; }
-    public function get_value() { return $this->value; }
+    public function get_value() { return $this->data; }
 
     /** Setters */        
-    public function set_field($value) { $this->value = $value; }
-    public function set_value($value) { $this->field = $value; }
+    public function set_field($value) { $this->field = $value; }
+    public function set_value($value) { $this->data = $value; }
 
 }
 

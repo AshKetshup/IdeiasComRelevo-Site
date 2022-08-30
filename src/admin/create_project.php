@@ -620,6 +620,8 @@
             elim.appendChild(icon);
 
             newRow.insertCell().appendChild(elim);
+
+            
         });
     </script>
 </body>

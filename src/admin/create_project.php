@@ -1,10 +1,10 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
-    $app_instance = new IdeiasComRelevo();
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
+$app_instance = new IdeiasComRelevo();
 
-    $login = IdeiasComRelevo::verify_login();
-    if(!$login)
-        header("Location: /admin/login");
+$login = IdeiasComRelevo::verify_login();
+if (!$login)
+    header("Location: /admin/login");
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -13,10 +13,10 @@
     This contains the head part of the file.
     To set the page name change the $PAGE_NAME variable
 -->
-<?php 
-    $PAGE_NAME = "Criar Projeto";
-    $PAGE_ID = "criar_projeto";
-    include_once '../includes/admin/head.php'; 
+<?php
+$PAGE_NAME = "Criar Projeto";
+$PAGE_ID = "criar_projeto";
+include_once '../includes/admin/head.php';
 ?>
 <style>
     input::-webkit-outer-spin-button,
@@ -50,8 +50,7 @@
                             <h1 class="pb-2">Criar Projeto</h1>
                             <p class="mb-0">Aqui podem preencher o seguinte formulario para criar um projeto.</p>
                             <p class="mb-1">No campo <a href="#inputDescricao">descrição</a> tem a capacidade de
-                                interpretar markdown. Seguindo estas <a
-                                    href="https://www.markdownguide.org/basic-syntax/">regras</a>.</p>
+                                interpretar markdown. Seguindo estas <a href="https://www.markdownguide.org/basic-syntax/">regras</a>.</p>
                             <p class="mb-0">Para pré-visualizar pode usar o botão <b>Visualizar</b>.</p>
                             <p class="mb-0">Assim que estiver feliz com o resultado poderá <b>Finalizar</b> para enviar
                                 para o site.</p>
@@ -73,7 +72,7 @@
                     <div class="row">
                         <!-- /.col-md-12 -->
                         <div class="col-lg-12">
-                            <form class="needs-validation" action="/backend/post_scripts/create_project.php" method="post" id="form-project">
+                            <form class="needs-validation" action="" method="post" id="form-project">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="m-0">Formulário projeto</h5>
@@ -82,32 +81,28 @@
                                         <div class="w-100 d-flex flex-wrap">
                                             <div class="form-group col-lg-4">
                                                 <label for="inputZona">Zona</label>
-                                                <input id="inputZona" class="form-control" type="text"
-                                                    placeholder="Insira a zona" name="zona" required>
+                                                <input id="inputZona" class="form-control" type="text" placeholder="Insira a zona" name="zona" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputConcelho">Concelho</label>
-                                                <input id="inputConcelho" class="form-control" type="text"
-                                                    placeholder="Insira o concelho" name="concelho" required>
+                                                <input id="inputConcelho" class="form-control" type="text" placeholder="Insira o concelho" name="concelho" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputFreguesia">Freguesia</label>
-                                                <input id="inputFreguesia" class="form-control" type="text"
-                                                    placeholder="Insira a freguesia" name="freguesia" required>
-                                                
+                                                <input id="inputFreguesia" class="form-control" type="text" placeholder="Insira a freguesia" name="freguesia" required>
+
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-3">
                                                 <label for="inputTipoEdificio">Tipo de Edificio</label>
-                                                <select id="inputTipoEdificio" class="form-control" name="tipoEdifico"
-                                                    placeholder="Tipo de Edificio" required>
+                                                <select id="inputTipoEdificio" class="form-control" name="tipoEdifico" placeholder="Tipo de Edificio" required>
                                                     <option selected value style="display:none">Escolha o tipo de Edificio</option>
                                                     <option value="1">Prédio</option>
                                                     <option value="2">Moradia Isolada</option>
@@ -120,8 +115,7 @@
                                             </div>
                                             <div class="form-group col-lg-3">
                                                 <label for="inputNApartamentos">Nº de Apartamentos</label>
-                                                <input id="inputNApartamentos" class="form-control" type="number"
-                                                    min="0" placeholder="Insira o Nº de Apartamentos" name="nApartamentos" required>
+                                                <input id="inputNApartamentos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Apartamentos" name="nApartamentos" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -129,34 +123,28 @@
                                             <div class="form-group col-lg-3">
                                                 <label for="inputNApartamentosDisponiveis">Nº de Apartamentos
                                                     Disponiveis</label>
-                                                <input id="inputNApartamentosDisponiveis" class="form-control"
-                                                    type="number" min="0" name="nApartamentosDisponiveis"
-                                                    placeholder="Insira o Nº de Apartamentos Disponiveis" required>
-                                                
+                                                <input id="inputNApartamentosDisponiveis" class="form-control" type="number" min="0" name="nApartamentosDisponiveis" placeholder="Insira o Nº de Apartamentos Disponiveis" required>
+
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-3">
                                                 <label for="inputNPisos">Nº de Pisos</label>
-                                                <input id="inputNPisos" class="form-control" type="number" min="0"
-                                                    placeholder="Insira o Nº de Pisos" name="nPisos" required>
-                                                
+                                                <input id="inputNPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" name="nPisos" required>
+
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label for="inputDescricao">Descrição</label>
-                                                <textarea id="inputDescricao" class="form-control" type="text"
-                                                    placeholder="Descreva o projeto" name="descricao"
-                                                    style="min-height:12rem" required></textarea>
+                                                <textarea id="inputDescricao" class="form-control" type="text" placeholder="Descreva o projeto" name="descricao" style="min-height:12rem" required></textarea>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-5">
                                                 <label for="inputEstado">Estado</label>
-                                                <select id="inputEstado" class="form-control" type="text"
-                                                    placeholder="Selecione o estado" name="estado" required>
+                                                <select id="inputEstado" class="form-control" type="text" placeholder="Selecione o estado" name="estado" required>
                                                     <option selected value style="display:none">Selecione o estado</option>
                                                     <option value="0">-</option>
                                                     <option value="1">Vende-se</option>
@@ -169,26 +157,22 @@
                                             </div>
                                             <div class="form-group col-lg-5">
                                                 <label for="inputValor">Valor (€)</label>
-                                                <input id="inputValor" class="form-control" type="number" min="0"
-                                                    step="0.01" placeholder="Insira o Valor (€)" name="valor" required>
+                                                <input id="inputValor" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)" name="valor" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class=" col-lg-2 d-flex flex-row justify-content-center">
-                                                <div class="form-check d-flex align-self-center justify-content-center"
-                                                    title="Inclui Elevador">
-                                                    <label for="inputElevador" class="mr-2"><i
-                                                            class="fa-solid fa-2x fa-elevator"></i></label>
-                                                    <input id="inputElevador" type="checkbox" name="elevador"
-                                                        placeholder="Inclui Elevador">
+                                                <div class="form-check d-flex align-self-center justify-content-center" title="Inclui Elevador">
+                                                    <label for="inputElevador" class="mr-2"><i class="fa-solid fa-2x fa-elevator"></i></label>
+                                                    <input id="inputElevador" type="checkbox" name="elevador" placeholder="Inclui Elevador">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 d-flex justify-content-end">
                                         <button href="#" class="btn btn-default mx-2" id="visualizar-btn">Visualizar</button>
-                                        <button type="submit" href="#" class="btn btn-primary" id="finalizar-btn">Finalizar</button>
+                                        <a type="button" href="#" class="btn btn-primary" id="finalizar-btn">Finalizar</a>
                                     </div>
                                 </div>
                             </form>
@@ -205,23 +189,19 @@
                                     <div class="card-body row">
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipArea">Area (m<sup>2</sup>)</label>
-                                            <input id="inputTipArea" class="form-control" type="number"
-                                                placeholder="Insira a Area">
+                                            <input id="inputTipArea" class="form-control" type="number" placeholder="Insira a Area">
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipCategEnergia">Categoria Energética</label>
-                                            <input id="inputTipCategEnergia" class="form-control" type="text"
-                                                placeholder="Insira a Categoria">
+                                            <input id="inputTipCategEnergia" class="form-control" type="text" placeholder="Insira a Categoria">
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipTipologia">Tipologia</label>
-                                            <input id="inputTipTipologia" class="form-control" type="text"
-                                                placeholder="Insira a Tipologia">
+                                            <input id="inputTipTipologia" class="form-control" type="text" placeholder="Insira a Tipologia">
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipEstado">Estado</label>
-                                            <select id="inputTipEstado" class="form-control"
-                                                placeholder="Selecione o estado">
+                                            <select id="inputTipEstado" class="form-control" placeholder="Selecione o estado">
                                                 <option selected>Selecione o estado</option>
                                                 <option value="1">Vende-se</option>
                                                 <option value="2">Aluga-se</option>
@@ -231,46 +211,35 @@
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="inputTipWCQuantidade">WCs</label>
-                                            <input id="inputTipWCQuantidade" class="form-control" type="number"
-                                                placeholder="Insira quantas WCs">
+                                            <input id="inputTipWCQuantidade" class="form-control" type="number" placeholder="Insira quantas WCs">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="inputTipPiso">Piso</label>
-                                            <input id="inputTipPiso" class="form-control" type="number"
-                                                placeholder="Insira o Piso">
+                                            <input id="inputTipPiso" class="form-control" type="number" placeholder="Insira o Piso">
                                         </div>
                                         <div class="col-md-2 d-flex flex-row justify-content-start">
-                                            <div class="form-check d-flex align-self-center justify-content-center"
-                                                title="Inclui Garagem">
-                                                <label for="inputTipGaragem" class="mr-2"><i
-                                                        class="fa-solid fa-2x fa-warehouse"></i></label>
-                                                <input id="inputTipGaragem" type="checkbox"
-                                                    placeholder="Inclui Garagem">
+                                            <div class="form-check d-flex align-self-center justify-content-center" title="Inclui Garagem">
+                                                <label for="inputTipGaragem" class="mr-2"><i class="fa-solid fa-2x fa-warehouse"></i></label>
+                                                <input id="inputTipGaragem" type="checkbox" placeholder="Inclui Garagem">
                                             </div>
                                         </div>
                                         <div class="col-md-2 d-flex flex-row justify-content-start">
-                                            <div class="form-check d-flex align-self-center justify-content-center"
-                                                title="Inclui Estacionamento">
-                                                <label for="inputTipEstacionamento" class="mr-2"><i
-                                                        class="fa-solid fa-2x fa-square-parking"></i></label>
-                                                <input id="inputTipEstacionamento" type="checkbox"
-                                                    placeholder="Inclui Estacionamento">
+                                            <div class="form-check d-flex align-self-center justify-content-center" title="Inclui Estacionamento">
+                                                <label for="inputTipEstacionamento" class="mr-2"><i class="fa-solid fa-2x fa-square-parking"></i></label>
+                                                <input id="inputTipEstacionamento" type="checkbox" placeholder="Inclui Estacionamento">
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-12">
                                             <label for="inputTipDescricao">Descrição</label>
-                                            <textarea id="inputTipDescricao" class="form-control" type="text"
-                                                placeholder="Descreva o projeto" style="min-height:12rem"></textarea>
+                                            <textarea id="inputTipDescricao" class="form-control" type="text" placeholder="Descreva o projeto" style="min-height:12rem"></textarea>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="inputTipValorVenda">Valor Venda (€)</label>
-                                            <input id="inputTipValorVenda" class="form-control" type="number" min="0"
-                                                step="0.01" placeholder="Insira o Valor (€)">
+                                            <input id="inputTipValorVenda" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)">
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="inputTipValorAluguer">Valor Aluguer (€/mês)</label>
-                                            <input id="inputTipValorAluguer" class="form-control" type="number" min="0"
-                                                step="0.01" placeholder="Insira o Valor (€/mês)">
+                                            <input id="inputTipValorAluguer" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€/mês)">
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 d-flex justify-content-end">
@@ -281,12 +250,12 @@
                         </div>
 
                         <script>
-                            let tipoEdificio             = document.getElementById("inputTipoEdificio");
-                            let nApartamentos            = document.getElementById("inputNApartamentos");
+                            let tipoEdificio = document.getElementById("inputTipoEdificio");
+                            let nApartamentos = document.getElementById("inputNApartamentos");
                             let nApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis");
-                            
+
                             let visualizarBtn = document.getElementById("finalizar-btn");
-                            let finalizarBtn  = document.getElementById("visualizar-btn");
+                            let finalizarBtn = document.getElementById("visualizar-btn");
 
                             nApartamentos.disabled = true;
                             nApartamentosDisponiveis.disabled = true;
@@ -300,10 +269,10 @@
                             }
 
                             let management = () => {
-                                let tipoEdificio   = document.getElementById("inputTipoEdificio");
-                                let nApart         = document.getElementById("inputNApartamentos");
-                                let nApartDisp     = document.getElementById("inputNApartamentosDisponiveis");
-                                let tipologiaForm  = document.getElementById("tipologia-form");
+                                let tipoEdificio = document.getElementById("inputTipoEdificio");
+                                let nApart = document.getElementById("inputNApartamentos");
+                                let nApartDisp = document.getElementById("inputNApartamentosDisponiveis");
+                                let tipologiaForm = document.getElementById("tipologia-form");
                                 let tipologiaTable = document.getElementById("tipologia-table");
 
                                 if (tipoEdificio.value == 1) {
@@ -324,7 +293,7 @@
                                     tipologiaForm.classList.add("col-lg-12");
                                 }
                             }
-                            
+
                             visualizarBtn.addEventListener("click", wasValidated);
                             finalizarBtn.addEventListener("click", wasValidated);
                             tipoEdificio.addEventListener("change", management);
@@ -356,72 +325,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tipology-table-body">
-                                                <tr>
-                                                    <td>22</td>
-                                                    <td>A++</td>
-                                                    <td>T1</td>
-                                                    <td><span class="badge badge-success">Vende-se</span></td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td><i class="fa-solid text-success fa-check"></i></td>
-                                                    <td><i class="fa-solid text-success fa-check"></i></td>
-                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur sapiente sequi accusantium corrupti rem, </td>
-                                                    <td>23.000€</td>
-                                                    <td>300€</td>
-                                                    <td>
-                                                        <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>22</td>
-                                                    <td>A++</td>
-                                                    <td>T1</td>
-                                                    <td><span class="badge badge-warning">Aluga-se</span></td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td><i class="fa-solid text-success fa-check"></i></td>
-                                                    <td><i class="fa-solid text-danger fa-close"></i></td>
-                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur sapiente sequi accusantium corrupti rem, </td>
-                                                    <td>23.000€</td>
-                                                    <td>300€</td>
-                                                    <td>
-                                                        <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>22</td>
-                                                    <td>A++</td>
-                                                    <td>T1</td>
-                                                    <td><span class="badge badge-info">Vende-se e Aluga-se</span></td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td><i class="fa-solid text-danger fa-close"></i></td>
-                                                    <td><i class="fa-solid text-success fa-check"></i></td>
-                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur sapiente sequi accusantium corrupti rem, </td>
-                                                    <td>23.000€</td>
-                                                    <td>300€</td>
-                                                    <td>
-                                                        <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>22</td>
-                                                    <td>A++</td>
-                                                    <td>T1</td>
-                                                    <td><span class="badge badge-danger">Vendido</span></td>
-                                                    <td>2</td>
-                                                    <td>3</td>
-                                                    <td><i class="fa-solid text-danger fa-close"></i></td>
-                                                    <td><i class="fa-solid text-danger fa-close"></i></td>
-                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur sapiente sequi accusantium corrupti rem, </td>
-                                                    <td>23.000€</td>
-                                                    <td>300€</td>
-                                                    <td>
-                                                        <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" href=""><i class="fa-solid fa-trash-can"></i></a>
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
+
+                                        <script>
+                                            
+                                        </script>
                                     </div>
                                 </div>
                             </form>
@@ -443,7 +352,7 @@
 
     <!-- REQUIRED SCRIPTS -->
     <?php include_once '../includes/admin/scripts.php'; ?>
-    
+
     <script>
         class Tipologia {
             #area = 0;
@@ -493,7 +402,7 @@
                         return_value.appendChild(document.createTextNode("Vende-se"));
                         return_value.classList.add("badge-success");
                         break;
-                
+
                     case "2":
                         return_value.appendChild(document.createTextNode("Aluga-se"));
                         return_value.classList.add("badge-warning");
@@ -528,7 +437,7 @@
                 var return_value = document.createElement("i");
                 return_value.classList.add("fa-solid");
 
-                if (this.#hasGaragem) 
+                if (this.#hasGaragem)
                     return_value.classList.add("text-success", "fa-check");
                 else
                     return_value.classList.add("text-danger", "fa-close");
@@ -542,10 +451,10 @@
 
                 console.log(this.#hasParking);
 
-                this.#hasParking
-                    ? return_value.classList.add("text-success", "fa-check") 
-                    : return_value.classList.add("text-danger", "fa-close")
-            
+                this.#hasParking ?
+                    return_value.classList.add("text-success", "fa-check") :
+                    return_value.classList.add("text-danger", "fa-close")
+
                 return return_value;
             }
 
@@ -560,22 +469,51 @@
             aluguer() {
                 return document.createTextNode(this.#aluguer);
             }
+
+            toObj() {
+                let map = new Map();
+
+                map.set("area", this.#area);
+                map.set("categoriaEnergetica", this.#categoriaEnergetica);
+                map.set("tipologia", this.#tipologia);
+                map.set("estado", this.#estado);
+                map.set("wcs", this.#wcs);
+                map.set("piso", this.#piso);
+                map.set("hasGaragem", this.#hasGaragem);
+                map.set("hasParking", this.#hasParking);
+                map.set("descricao", this.#descricao);
+                map.set("venda", this.#venda);
+                map.set("aluguer", this.#aluguer);
+
+                const simpleMapOfA = Object.fromEntries( //convert map to plain object
+                    Array.from(
+                        map.entries(), //transform the map
+                        ([key, value]) => [key, value] //convert map values to plain objects
+                    )
+                );
+
+                return simpleMapOfA;
+            }
+
+            serialise() {
+                return JSON.stringify(this.toObj());
+            }
         }
 
         let adicionarBtn = document.getElementById("adicionar-btn");
 
         adicionarBtn.addEventListener("click", () => {
-            let area      = document.getElementById("inputTipArea");
-            let categ     = document.getElementById("inputTipCategEnergia");
+            let area = document.getElementById("inputTipArea");
+            let categ = document.getElementById("inputTipCategEnergia");
             let tipologia = document.getElementById("inputTipTipologia");
-            let estado    = document.getElementById("inputTipEstado");
-            let wcs       = document.getElementById("inputTipWCQuantidade");
-            let piso      = document.getElementById("inputTipPiso");
-            let garagem   = document.getElementById("inputTipGaragem");
-            let parking   = document.getElementById("inputTipEstacionamento");
+            let estado = document.getElementById("inputTipEstado");
+            let wcs = document.getElementById("inputTipWCQuantidade");
+            let piso = document.getElementById("inputTipPiso");
+            let garagem = document.getElementById("inputTipGaragem");
+            let parking = document.getElementById("inputTipEstacionamento");
             let descricao = document.getElementById("inputTipDescricao");
-            let venda     = document.getElementById("inputTipValorVenda");
-            let aluguer   = document.getElementById("inputTipValorAluguer");
+            let venda = document.getElementById("inputTipValorVenda");
+            let aluguer = document.getElementById("inputTipValorAluguer");
 
             let tableBody = document.getElementById("tipology-table-body");
 
@@ -607,7 +545,7 @@
             newRow.insertCell().appendChild(tip.descricao());
             newRow.insertCell().appendChild(tip.venda());
             newRow.insertCell().appendChild(tip.aluguer());
-            
+
             let elim = document.createElement("a");
             elim.classList.add("badge", "bg-danger", "p-1", "px-2", "mr-1");
             elim.title = "Eliminar";
@@ -621,8 +559,81 @@
 
             newRow.insertCell().appendChild(elim);
 
-            
+            const JSONTip = tip.serialise();
+            console.log(JSONTip);
+            newRow.setAttribute("jsonContent", JSONTip);
         });
+
+        const rows = document.querySelectorAll("#tipology-table-body tr");
+
+        function post(path, params, method = 'post') {
+            // The rest of this code assumes you are not using a library.
+            // It can be made less verbose if you use one.
+            const form = document.createElement('form');
+            form.method = method;
+            form.action = path;
+
+            for (const key in params) {
+                if (params.hasOwnProperty(key)) {
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = key;
+                    hiddenField.value = params[key];
+
+                    form.appendChild(hiddenField);
+                }
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        function getData() {
+            const inputZona = document.getElementById("inputZona").value;
+            const inputConcelho = document.getElementById("inputConcelho").value;
+            const inputFreguesia = document.getElementById("inputFreguesia").value;
+            const inputTipoEdificio = document.getElementById("inputTipoEdificio").value;
+            const inputNApartamentos = document.getElementById("inputNApartamentos").value;
+            const inputNApartamentosDisponiveis = document.getElementById("inputNApartamentosDisponiveis").value;
+            const inputNPisos = document.getElementById("inputNPisos").value;
+            const inputDescricao = document.getElementById("inputDescricao").value;
+            const inputEstado = document.getElementById("inputEstado").value;
+            const inputValor = document.getElementById("inputValor").value;
+            const inputElevador = document.getElementById("inputElevador").checked;
+
+            return {
+                Zona: inputZona,
+                Concelho: inputConcelho,
+                Freguesia: inputFreguesia,
+                TipoEdificio: inputTipoEdificio,
+                NApartamentos: inputNApartamentos,
+                NApartamentosDisponiveis: inputNApartamentosDisponiveis,
+                NPisos: inputNPisos,
+                Descricao: inputDescricao,
+                Estado: inputEstado,
+                Valor: inputValor,
+                Elevador: inputElevador
+            }
+        }
+
+        document.getElementById("finalizar-btn").addEventListener("click", () => {
+            let JSONArray = [];
+
+            console.log(rows)
+
+            for (const row of rows) {
+                JSONArray.push(row.getAttribute("jsoncontent"));
+            }
+
+            const JSONContent = {
+                projeto: getData(),
+                tipologies: JSONArray
+            };
+            console.log(JSONContent);
+
+            post("/backend/post_scripts/create_project.php", JSONContent);
+        });
+
     </script>
 </body>
 

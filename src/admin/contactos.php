@@ -6,7 +6,7 @@
     if(!$login)
         header("Location: /admin/login");
 
-        $contacts = $app_instance->ContactsManagement->get_contacts();
+    $contacts = $app_instance->ContactsManagement->get_contacts();
 ?>
 <!DOCTYPE html>
 <html lang="pt">

@@ -1,3 +1,6 @@
+<?php
+    $contacts = $app_instance->ContactsManagement->get_contacts();
+?>
 <footer class="footer" id="footer" data-background-color="black">
     <div class="container py-5">
         <div class="row">
@@ -11,7 +14,7 @@
                             <i class="fas fa-phone"></i> 
                         </div>
                         <div class="col-11 p-0 ">
-                            +351 922 222 235
+                            <?= $contacts["phone"] ?>
                         </div>
                     </li>
                     <li class="mb-2 row w-100 d-flex" id="email">
@@ -19,18 +22,14 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="col-11 p-0">
-                            e@email.com
+                            <?= $contacts["email"] ?>
                         </div>
                     </li>
                     <li class="mb-2 row w-100 d-flex" id="office">
                         <div class="col-1 p-0">
                             <i class="fas fa-briefcase"></i>
                         </div>
-                        <div class="col-11 p-0">
-                            Estrada da santa cona do assobio<br>
-                            Nº 69<br>
-                            ueueueue
-                        </div>
+                        <div class="col-11 p-0"><?= str_replace("\n", "<br />", $contacts["office"]) ?></div>
                     </li>
                 </ul>
             </div>

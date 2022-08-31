@@ -85,7 +85,7 @@
                                         <tbody>
                                             <?php foreach($app_instance->AssociateManagement->admin_get_associates() as $associate): ?>
                                                 <tr>
-                                                    <td class="d-flex" style="min-width: min-content;"><img src="<?= $associate->get_logo() ?>" alt="" style="max-height:100px"></td>
+                                                    <td class="d-flex" style="min-width: min-content;"><img src="/uploads/<?= $associate->get_logo() ?>" alt="" style="max-height:100px"></td>
                                                     <td><?= $associate->get_name() ?></td>
                                                     <td><?= $associate->get_website() ?></td>
                                                     <td>

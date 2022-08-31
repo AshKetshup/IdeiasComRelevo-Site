@@ -5,7 +5,7 @@
      * @subpackage entities
      * 
      * This file contains the Associates entity class which maps the table to a PHP class
-     * Version: 1.0.1
+     * Version: 1.0.3
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022
@@ -150,6 +150,7 @@
                 $sql1 = "DELETE FROM associates WHERE id='" . $this->id . "'";
                 if ($connection->query($sql1) === TRUE) {                
                     $result = true;
+                    unlink($_SERVER["DOCUMENT_ROOT"] . "/uploads/" . $this->logo);
                 } else
                     $result = false;
             } else 

@@ -5,11 +5,11 @@
      * @subpackage modules
      * 
      * Contains all the methods to handle the Associates entities
-     * Version: 1.0.1
+     * Version: 1.1.0
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 18, 2022
-     * @lastedit Aug 30, 2022
+     * @lastedit Aug 31, 2022
      * 
      * @issues no issues linked to this file
      * @todo no tasks pending
@@ -57,6 +57,21 @@
 
             return $results;
 
+        }
+
+        function add_associate($image, $name, $website) {
+
+            $associateEntity = new AssociatesEntity();
+            $associateEntity->set_logo($image);
+            $associateEntity->set_name($name);
+            $associateEntity->set_website($website);
+            $associateEntity->insert();
+
+        }
+
+        function delete_associate($id) {
+            $associateEntity = AssociatesEntity::fromId($id);
+            $associateEntity->delete_entry();
         }
 
     }

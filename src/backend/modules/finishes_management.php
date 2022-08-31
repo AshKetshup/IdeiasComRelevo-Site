@@ -5,7 +5,7 @@
      * @subpackage modules
      * 
      * Contains all the methods to handle the Finishes entities
-     * Version: 1.1.0
+     * Version: 1.2.0
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022

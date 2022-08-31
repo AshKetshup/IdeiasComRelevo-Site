@@ -4,7 +4,7 @@
      * @package IdeiasComRelevo
      * @subpackage post_scripts
      * 
-     * Handles a post sent from the frontend to add a finish
+     * Handles a post sent from the frontend to create a associate
      * Version: 1.0.0
      * 
      * @developer Pedro Cavaleiro
@@ -16,11 +16,12 @@
      * 
      */
 
+    // only to prevent the page from reloading
+    // http_response_code(404);
+
     // starts the app
     require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
     $app_instance = new IdeiasComRelevo();
-
-    $category = FinishesManagement::catshort_to_id($_GET['categoria']);
 
     $target_dir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
 
@@ -52,14 +53,14 @@
 
     // checks if the upload is valid
     if ($uploaded == 0) {
-        header("Location: /admin/acabamentos?err=true");
+        header("Location: /admin/associados?err=true");
     } else {
         // saves the file in the correct directory 
         if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $full_path)) {
-            $app_instance->FinishesManagement->add_finish($filename, $category);
-            header("Location: /admin/acabamentos?err=false");
+            $app_instance->AssociateManagement->add_associate($filename, $_POST['nome'], isset($_POST['website']) ? $_POST['website'] : '');
+            header("Location: /admin/associados?err=false");
         } else {
-            header("Location: /admin/acabamentos?err=true");
+            header("Location: /admin/associados?err=true");
         }
     }
 

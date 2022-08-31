@@ -5,7 +5,7 @@
      * @subpackage entities
      * 
      * This file contains the Contacts entity class which maps the table to a PHP class
-     * Version: 1.0.4
+     * Version: 1.0.5
      * 
      * @developer Pedro Cavaleiro
      * @created Feb 18, 2022

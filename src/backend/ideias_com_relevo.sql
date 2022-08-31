@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 31, 2022 at 11:43 AM
+-- Generation Time: Aug 31, 2022 at 06:25 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -41,7 +41,7 @@ CREATE TABLE `associates` (
 --
 
 INSERT INTO `associates` (`id`, `logo`, `name`, `website`) VALUES
-('a8b3a664-27be-11ed-b953-aafcf0bbdb18', 'https://www.ubi.pt/Ficheiros/Sites/75/Noticias/887/vantagens%20aaubi.jpg', 'Some Company', 'https://somecompany.com');
+('da4c7351-e282-4b06-9561-23a79a8cd7e7', '354ff668-9e3b-4633-b7a3-676397465c50.png', 'Moogle Inc', 'moogle.pcdev.pt');
 
 -- --------------------------------------------------------
 
@@ -81,10 +81,8 @@ CREATE TABLE `finishes` (
 --
 
 INSERT INTO `finishes` (`id`, `image`, `area`) VALUES
-('36e0f61e-27c2-11ed-b953-aafcf0bbdb18', 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 3),
-('d45fb7dc-27c1-11ed-b953-aafcf0bbdb18', 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 0),
-('d45fb7dc-27c1-11ed-b953-aafcf0bbdb19', 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 2),
-('d45fc06a-27c1-11ed-b953-aafcf0bbdb18', 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 1);
+('877ce98e-20eb-4998-9cda-cb38dcd2d5ae', '316d26c1-3279-4534-9ca7-8048dbbba2c7.jpg', 1),
+('f053648e-6e92-4089-8a69-5daf3bcb219c', '0e612904-59fc-405c-a7f7-de8467815ecc.jpg', 0);
 
 -- --------------------------------------------------------
 

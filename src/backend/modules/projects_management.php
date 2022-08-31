@@ -1,5 +1,21 @@
 <?php
 
+    /**
+     * @package IdeiasComRelevo
+     * @subpackage modules
+     * 
+     * Contains all the methods to handle the Projects entities
+     * Version: 1.6.0
+     * 
+     * @developer Pedro Cavaleiro
+     * @created Aug 29, 2022
+     * @lastedit Aug 31, 2022
+     * 
+     * @issues no issues linked to this file
+     * @todo no tasks pending
+     * 
+     */
+
     $APP_PATHS = array(
         "entities" => $_SERVER["DOCUMENT_ROOT"] . "/backend/entities",
         "database" => $_SERVER["DOCUMENT_ROOT"] . "/backend/database",

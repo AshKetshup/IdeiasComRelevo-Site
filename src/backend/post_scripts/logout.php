@@ -1,5 +1,21 @@
 <?php
 
+    /**
+     * @package IdeiasComRelevo
+     * @subpackage post_scripts
+     * 
+     * Handles a post sent from the frontend to logout
+     * Version: 1.0.0
+     * 
+     * @developer Pedro Cavaleiro
+     * @created Aug 29, 2022
+     * @lastedit Aug 29, 2022
+     * 
+     * @issues no issues linked to this file
+     * @todo no tasks pending
+     * 
+     */
+
     // starts the php session
     session_start();
 

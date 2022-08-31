@@ -1,5 +1,20 @@
 <?php
 
+    /**
+     * @package IdeiasComRelevo
+     * 
+     * The main app containing access to all the submodules
+     * Version: 1.5.1
+     * 
+     * @developer Pedro Cavaleiro
+     * @created Aug 29, 2022
+     * @lastedit Aug 30, 2022
+     * 
+     * @issues no issues linked to this file
+     * @todo no tasks pending
+     * 
+     */
+
     // starts the php session
     session_start();       
 

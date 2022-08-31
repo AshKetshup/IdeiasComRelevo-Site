@@ -1,5 +1,21 @@
 <?php
 
+    /**
+     * @package IdeiasComRelevo
+     * @subpackage post_scripts
+     * 
+     * Handles a post sent from the frontend to create a project
+     * Version: 1.0.0
+     * 
+     * @developer Pedro Cavaleiro
+     * @created Aug 29, 2022
+     * @lastedit Aug 31, 2022
+     * 
+     * @issues no issues linked to this file
+     * @todo no tasks pending
+     * 
+     */
+
     // only to prevent the page from reloading
     // http_response_code(404);
 

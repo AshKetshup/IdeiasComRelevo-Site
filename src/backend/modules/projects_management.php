@@ -1,5 +1,21 @@
 <?php
 
+    /**
+     * @package IdeiasComRelevo
+     * @subpackage modules
+     * 
+     * Contains all the methods to handle the Projects entities
+     * Version: 1.6.0
+     * 
+     * @developer Pedro Cavaleiro
+     * @created Aug 29, 2022
+     * @lastedit Aug 31, 2022
+     * 
+     * @issues no issues linked to this file
+     * @todo no tasks pending
+     * 
+     */
+
     $APP_PATHS = array(
         "entities" => $_SERVER["DOCUMENT_ROOT"] . "/backend/entities",
         "database" => $_SERVER["DOCUMENT_ROOT"] . "/backend/database",
@@ -77,6 +93,59 @@
             $projectEntity->set_photos(array());
 
             $projectEntity->insert();
+
+
+            foreach($typologies as $typology) {
+                $typologyEntity = new TypologyEntity();
+
+                $typologyEntity->set_area($typology->area);
+                $typologyEntity->set_energy_category($typology->categoriaEnergetica);
+                $typologyEntity->set_typology($typology->tipologia);
+                $typologyEntity->set_state($typology->estado);
+                $typologyEntity->set_wc_count($typology->wcs);
+                $typologyEntity->set_has_garage($typology->hasGaragem);
+                $typologyEntity->set_has_parking($typology->hasParking);
+                $typologyEntity->set_description($typology->descricao);
+                $typologyEntity->set_sell_price($typology->venda);
+                $typologyEntity->set_rent_price($typology->aluguer);
+                if ($typology->piso != "")
+                    $typologyEntity->set_floor($typology->piso);
+                else
+                    $typologyEntity->set_floor(0);
+                    
+                $typologyEntity->set_building($projectEntity);                
+
+                // this should change
+                $typologyEntity->set_photos(array());
+
+                $typologyEntity->insert();
+
+            }
+            
+        }
+
+        function edit_project($json) {            
+            $project = $json->projeto;
+            $typologies = $json->typologies;
+            $projectEntity = RealEstateEntity::fromId($json->id);
+
+            $projectEntity->set_zone($project->zona);
+            $projectEntity->set_county($project->concelho);
+            $projectEntity->set_city($project->freguesia);
+            $projectEntity->set_building_type($project->tipoEdificio);
+            $projectEntity->set_floor_count($project->nPisos);
+            $projectEntity->set_description($project->descricao);
+            $projectEntity->set_state($project->estado);
+            $projectEntity->set_value($project->valor);
+            $projectEntity->set_has_elevator($project->elevador);
+            $projectEntity->set_title($project->titulo);
+
+            // this should change
+            $projectEntity->set_photos(array());
+
+            $projectEntity->update_changes();
+
+            $projectEntity->clear_typologies();
 
 
             foreach($typologies as $typology) {

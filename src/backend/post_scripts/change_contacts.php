@@ -1,5 +1,21 @@
 <?php
 
+    /**
+     * @package IdeiasComRelevo
+     * @subpackage post_scripts
+     * 
+     * Handles a post sent from the frontend to change the contacts
+     * Version: 1.0.0
+     * 
+     * @developer Pedro Cavaleiro
+     * @created Aug 29, 2022
+     * @lastedit Aug 30, 2022
+     * 
+     * @issues no issues linked to this file
+     * @todo no tasks pending
+     * 
+     */
+
     // starts the app
     require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
     $app_instance = new IdeiasComRelevo();

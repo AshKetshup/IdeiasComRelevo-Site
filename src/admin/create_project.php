@@ -6,6 +6,9 @@ $login = IdeiasComRelevo::verify_login();
 if (!$login)
     header("Location: /admin/login");
 
+if (isset($_GET['id']))
+    $projeto = $app_instance->ProjectsManagement->get_project($_GET['id']);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -86,28 +89,28 @@ include_once '../includes/admin/head.php';
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label for="inputTitle">Title</label>
-                                                <input id="inputTitle" class="form-control" type="text" placeholder="Insira o titulo" required>
+                                                <input id="inputTitle" class="form-control" type="text" placeholder="Insira o titulo"required <?= isset($_GET['id']) ? 'value="' . $projeto->get_title() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputZona">Zona</label>
-                                                <input id="inputZona" class="form-control" type="text" placeholder="Insira a zona" required>
+                                                <input id="inputZona" class="form-control" type="text" placeholder="Insira a zona" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_zone() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputConcelho">Concelho</label>
-                                                <input id="inputConcelho" class="form-control" type="text" placeholder="Insira o concelho" required>
+                                                <input id="inputConcelho" class="form-control" type="text" placeholder="Insira o concelho" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_county() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputFreguesia">Freguesia</label>
-                                                <input id="inputFreguesia" class="form-control" type="text" placeholder="Insira a freguesia" required>
+                                                <input id="inputFreguesia" class="form-control" type="text" placeholder="Insira a freguesia" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_city() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -115,11 +118,11 @@ include_once '../includes/admin/head.php';
                                             <div class="form-group col-lg-6">
                                                 <label for="inputTipoEdificio">Tipo de Edificio</label>
                                                 <select id="inputTipoEdificio" class="form-control" placeholder="Tipo de Edificio" required>
-                                                    <option selected value style="display:none">Escolha o tipo de Edificio</option>
-                                                    <option value="1">Prédio</option>
-                                                    <option value="2">Moradia Isolada</option>
-                                                    <option value="3">Moradia Germinada</option>
-                                                    <option value="4">Loja</option>
+                                                    <option <?= isset($_GET['id']) ? '' : 'selected' ?> value style="display:none">Escolha o tipo de Edificio</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 1 ? 'selected' : '') : 'selected' ?> value="1">Prédio</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 2 ? 'selected' : '') : 'selected' ?> value="2">Moradia Isolada</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 3 ? 'selected' : '') : 'selected' ?> value="3">Moradia Germinada</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 4 ? 'selected' : '') : 'selected' ?> value="4">Loja</option>
                                                 </select>
 
                                                 <div class="valid-feedback">Valido.</div>
@@ -127,14 +130,14 @@ include_once '../includes/admin/head.php';
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label for="inputNPisos">Nº de Pisos</label>
-                                                <input id="inputNPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" required>
+                                                <input id="inputNPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_floor_count() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label for="inputDescricao">Descrição</label>
-                                                <textarea id="inputDescricao" class="form-control" type="text" placeholder="Descreva o projeto" style="min-height:12rem" required></textarea>
+                                                <textarea id="inputDescricao" class="form-control" type="text" placeholder="Descreva o projeto" style="min-height:12rem" required><?= isset($_GET['id']) ? $projeto->get_description() : '' ?></textarea>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -142,11 +145,11 @@ include_once '../includes/admin/head.php';
                                             <div class="form-group col-lg-5">
                                                 <label for="inputEstado">Estado</label>
                                                 <select id="inputEstado" class="form-control" type="text" placeholder="Selecione o estado" required>
-                                                    <option selected value style="display:none">Selecione o estado</option>
-                                                    <option value="0">-</option>
-                                                    <option value="1">Vende-se</option>
-                                                    <option value="2">Aluga-se</option>
-                                                    <option value="3">Vendido</option>
+                                                    <option <?= isset($_GET['id']) ? '' : 'selected' ?> value style="display:none">Selecione o estado</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 0 ? 'selected' : '') : 'selected' ?> value="0">-</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 1 ? 'selected' : '') : 'selected' ?> value="1">Vende-se</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 2 ? 'selected' : '') : 'selected' ?> value="2">Aluga-se</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 3 ? 'selected' : '') : 'selected' ?> value="3">Vendido</option>
                                                 </select>
 
                                                 <div class="valid-feedback">Valido.</div>
@@ -154,7 +157,7 @@ include_once '../includes/admin/head.php';
                                             </div>
                                             <div class="form-group col-lg-5">
                                                 <label for="inputValor">Valor (€)</label>
-                                                <input id="inputValor" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)" required>
+                                                <input id="inputValor" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_value() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -162,7 +165,7 @@ include_once '../includes/admin/head.php';
                                             <div class=" col-lg-2 d-flex flex-row justify-content-center">
                                                 <div class="form-check d-flex align-self-center justify-content-center" title="Inclui Elevador">
                                                     <label for="inputElevador" class="mr-2"><i class="fa-solid fa-2x fa-elevator"></i></label>
-                                                    <input id="inputElevador" type="checkbox" name="elevador" placeholder="Inclui Elevador">
+                                                    <input <?= isset($_GET['id']) ? ($projeto->get_has_elevator() ? 'checked' : '') : '' ?> id="inputElevador" type="checkbox" name="elevador" placeholder="Inclui Elevador">
                                                 </div>
                                             </div>
                                         </div>

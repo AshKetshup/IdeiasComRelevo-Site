@@ -1,5 +1,21 @@
 <?php
 
+    /**
+     * @package IdeiasComRelevo
+     * @subpackage modules
+     * 
+     * Contains all the methods to handle the Contacts entities
+     * Version: 1.0.1
+     * 
+     * @developer Pedro Cavaleiro
+     * @created Aug 29, 2022
+     * @lastedit Aug 30, 2022
+     * 
+     * @issues no issues linked to this file
+     * @todo no tasks pending
+     * 
+     */
+
     class ContactManagement {
 
         /** Constructor, nothing else to initialize */

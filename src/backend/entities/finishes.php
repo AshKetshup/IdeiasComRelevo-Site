@@ -74,7 +74,7 @@
 
             $row = $result->fetch_assoc();
 
-            $this->fill(current($row));
+            $this->fill($row);
         }
 
         /** Creates the new instance giving the values from the row */
@@ -147,7 +147,7 @@
                 $sql1 = "DELETE FROM finishes WHERE id='" . $this->id . "'";
                 if ($connection->query($sql1) === TRUE) {                
                     $result = true;
-                    unlink($APP_PATHS['uploads'] . $this->image);
+                    unlink($_SERVER["DOCUMENT_ROOT"] . "/uploads/" . $this->image);
                 } else
                     $result = false;
             } else 

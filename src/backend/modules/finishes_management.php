@@ -66,7 +66,29 @@
         }
 
         function delete_finsh($id) {
-            FinishesEntity::fromId($id)->delete_entry();
+            $finishEntity = FinishesEntity::fromId($id);
+            $finishEntity->delete_entry();
+        }
+
+        function add_finish($image, $area) {
+            $finishEntity = new FinishesEntity();
+            $finishEntity->set_image($image);
+            $finishEntity->set_area($area);
+            $finishEntity->insert();
+        }
+
+        /**
+         * Converts the typology state id (int) to the matching string
+         * @param $id the typology state as string
+         */
+        public static function catshort_to_id($id) {
+            $cat = array(
+                "WC" => 0,
+                "CS" => 1,
+                "AS" => 2,
+                "OP" => 3
+            );
+            return $cat[$id];
         }
 
     }

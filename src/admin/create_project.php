@@ -6,8 +6,11 @@ $login = IdeiasComRelevo::verify_login();
 if (!$login)
     header("Location: /admin/login");
 
-if (isset($_GET['id']))
+if (isset($_GET['id'])) {
     $projeto = $app_instance->ProjectsManagement->get_project($_GET['id']);
+    $projeto->reload_appartments();
+}
+    
 
 ?>
 <!DOCTYPE html>
@@ -283,10 +286,6 @@ include_once '../includes/admin/head.php';
                                             </thead>
                                             <tbody id="typology-table-body"></tbody>
                                         </table>
-
-                                        <script>
-
-                                        </script>
                                     </div>
                                 </div>
                             </form>
@@ -451,6 +450,29 @@ include_once '../includes/admin/head.php';
 
         let adicionarBtn = document.getElementById("adicionar-btn");
         let rows = [];
+        let auxArr = [];
+
+        <?php if(isset($_GET['id'])): ?>
+
+            <?php foreach($projeto->get_appartments() as $appartment): ?>
+                
+                auxArr.push((new Tipologia(
+                    <?= $appartment->get_area() ?>,
+                    '<?= $appartment->get_energy_category() ?>',
+                    '<?= $appartment->get_typology() ?>',
+                    <?= $appartment->get_state() ?>,
+                    <?= $appartment->get_wc_count() ?>,
+                    <?= $appartment->get_floor() ?>,
+                    <?= $appartment->get_has_garage() ? 'true' : 'false' ?>,
+                    <?= $appartment->get_has_parking() ? 'true' : 'false' ?>,
+                    '<?= $appartment->get_description() ?>',
+                    <?= $appartment->get_sell_price() ?>,
+                    <?= $appartment->get_rent_price() ?>
+                )).toObj());
+
+            <?php endforeach; ?>
+
+        <?php endif; ?>
 
         adicionarBtn.addEventListener("click", () => {
             let area = document.getElementById("inputTipArea");

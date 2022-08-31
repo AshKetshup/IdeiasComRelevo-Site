@@ -148,7 +148,7 @@
                     </div>
                     <div class="form-group col">
                         <label for="inputSite">Website</label>
-                        <input class="form-control" type="text" name="nome" id="inputName" placeholder="Insira um URL">
+                        <input class="form-control" type="text" name="website" id="inputSite" placeholder="Insira um URL">
                     </div>
                 </div>
                 <div class="card-footer modal-footer d-flex">

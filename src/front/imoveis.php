@@ -5,7 +5,7 @@
     $projects = $app_instance->ProjectsManagement->admin_get_projects();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <?php include_once '../includes/site/head.php'; ?>
 

@@ -5,11 +5,11 @@
      * @subpackage modules
      * 
      * Contains all the methods to handle the Finishes entities
-     * Version: 1.0.1
+     * Version: 1.1.0
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022
-     * @lastedit Aug 30, 2022
+     * @lastedit Aug 31, 2022
      * 
      * @issues no issues linked to this file
      * @todo no tasks pending
@@ -63,6 +63,10 @@
 
             return $results;
 
+        }
+
+        function delete_finsh($id) {
+            FinishesEntity::fromId($id)->delete_entry();
         }
 
     }

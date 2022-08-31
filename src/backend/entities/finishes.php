@@ -21,6 +21,7 @@
         "database" => $_SERVER["DOCUMENT_ROOT"] . "/backend/database",
         "helpers" => $_SERVER["DOCUMENT_ROOT"] . "/backend/helpers",
         "modules" => $_SERVER["DOCUMENT_ROOT"] . "/backend/modules",
+        "uploads" => $_SERVER["DOCUMENT_ROOT"] . "/uploads"
     );
 
     require_once $APP_PATHS["database"] . '/dbconnection.php';
@@ -146,6 +147,7 @@
                 $sql1 = "DELETE FROM finishes WHERE id='" . $this->id . "'";
                 if ($connection->query($sql1) === TRUE) {                
                     $result = true;
+                    unlink($APP_PATHS['uploads'] . $this->image);
                 } else
                     $result = false;
             } else 

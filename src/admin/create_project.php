@@ -678,7 +678,39 @@ include_once '../includes/admin/head.php';
 
         finalizarBtn.addEventListener("click", wasValidated);
         tipoEdificio.addEventListener("change", management);
-        document.addEventListener("DOMContentLoaded", management);
+        document.addEventListener("DOMContentLoaded", () => {
+            let tipoEdificio = document.getElementById("inputTipoEdificio");
+
+            let area = document.getElementById("inputTipArea");
+            let categ = document.getElementById("inputTipCategEnergia");
+            let tipologia = document.getElementById("inputTipTipologia");
+            let estado = document.getElementById("inputTipEstado");
+            let wcs = document.getElementById("inputTipWCQuantidade");
+            let piso = document.getElementById("inputTipPiso");
+            let garagem = document.getElementById("inputTipGaragem");
+            let parking = document.getElementById("inputTipEstacionamento");
+            let descricao = document.getElementById("inputTipDescricao");
+            let venda = document.getElementById("inputTipValorVenda");
+            let aluguer = document.getElementById("inputTipValorAluguer");
+
+            if (rows.length !== 0 && tipoEdificio.value !== 1) {
+                let tip = auxArr[rows.length - 1].toObj();
+                
+                area.value = tip.area;
+                categ.value = tip.categoriaEnergetica;
+                tipologia.value = tip.tipologia;
+                estado.value = tip.estado;
+                wcs.value = tip.wcs;
+                piso.value = tip.piso;
+                garagem.checked = tip.hasGaragem;
+                parking.checked = tip.hasParking;
+                descricao.value = tip.descricao;;
+                venda.value = tip.venda;
+                aluguer.value = tip.aluguer;
+            }
+
+            management();
+        });
     </script>
 </body>
 

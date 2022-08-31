@@ -74,7 +74,7 @@
 
             $row = $result->fetch_assoc();
 
-            $this->fill(current($row));
+            $this->fill($row);
         }
 
         /** Creates the new instance giving the values from the row */

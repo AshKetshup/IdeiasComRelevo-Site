@@ -80,7 +80,7 @@
 
             $row = $result->fetch_assoc();
 
-            $this->fill(current($row));
+            $this->fill($row);
         }
 
         /** Performs the query to create a new instance with data */

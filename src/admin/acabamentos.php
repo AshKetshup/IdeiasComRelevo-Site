@@ -111,7 +111,7 @@
                                         <?php foreach($app_instance->FinishesManagement->admin_get_finishes(0) as $finish): ?>
                                             <div class="carousel-item">
                                                 <a class="badge badge-danger position-absolute m-1 p-1" href="/backend/post_scripts/delete_finish.php?id=<?= $finish->get_id() ?>"><i class="fa-solid fa-2x fa-trash-can"></i></a>
-                                                <img src="<?= $finish->get_image() ?>">
+                                                <img src="/uploads/<?= $finish->get_image() ?>">
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
@@ -134,7 +134,7 @@
                                         <?php foreach($app_instance->FinishesManagement->admin_get_finishes(1) as $finish): ?>
                                             <div class="carousel-item">
                                                 <a class="badge badge-danger position-absolute m-1 p-1" href="/backend/post_scripts/delete_finish.php?id=<?= $finish->get_id() ?>"><i class="fa-solid fa-2x fa-trash-can"></i></a>
-                                                <img src="<?= $finish->get_image() ?>">
+                                                <img src="/uploads/<?= $finish->get_image() ?>">
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
@@ -156,7 +156,7 @@
                                         <?php foreach($app_instance->FinishesManagement->admin_get_finishes(2) as $finish): ?>
                                             <div class="carousel-item">
                                                 <a class="badge badge-danger position-absolute m-1 p-1" href="/backend/post_scripts/delete_finish.php?id=<?= $finish->get_id() ?>"><i class="fa-solid fa-2x fa-trash-can"></i></a>
-                                                <img src="<?= $finish->get_image() ?>">
+                                                <img src="/uploads/<?= $finish->get_image() ?>">
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
@@ -178,7 +178,7 @@
                                         <?php foreach($app_instance->FinishesManagement->admin_get_finishes(3) as $finish): ?>
                                             <div class="carousel-item">
                                                 <a class="badge badge-danger position-absolute m-1 p-1" href="/backend/post_scripts/delete_finish.php?id=<?= $finish->get_id() ?>"><i class="fa-solid fa-2x fa-trash-can"></i></a>
-                                                <img src="<?= $finish->get_image() ?>">
+                                                <img src="/uploads/<?= $finish->get_image() ?>">
                                             </div>
                                         <?php endforeach; ?>
                                     </div>

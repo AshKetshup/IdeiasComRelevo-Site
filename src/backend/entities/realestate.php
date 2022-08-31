@@ -217,7 +217,7 @@ class RealEstateEntity {
         if ($this->loaded_appts)
             return $this->appts;
 
-        $result = array();
+        $rtn = array();
 
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {            
@@ -230,15 +230,15 @@ class RealEstateEntity {
             }
 
             while($row = $result->fetch_assoc()) {
-                array_push($result, TypologyEntity::fromRow($row));
+                array_push($rtn, TypologyEntity::fromRow($row));
             }
-            $this->appts = $result;
+            $this->appts = $rtn;
             $this->loaded_appts = true;
         } else 
-            $result = false;
+            $rtn = false;
 
         $connection->close();
-        return $result;
+        return $rtn;
     }
     public function get_value() {
         if ($this->building_type == 1) {
@@ -300,7 +300,7 @@ class RealEstateEntity {
 
     /** Refresh References */
     public function reload_appartments() {
-        $result = array();
+        $rtn = array();
 
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {            
@@ -313,15 +313,15 @@ class RealEstateEntity {
             }
 
             while($row = $result->fetch_assoc()) {
-                array_push($result, TypologyEntity::fromRow($row));
+                array_push($rtn, TypologyEntity::fromRow($row));
             }
-            $this->appts = $result;
+            $this->appts = $rtn;
             $this->loaded_appts = true;
         } else 
-            $result = false;
+            $rtn = false;
 
         $connection->close();
-        return $result;
+        return $rtn;
     }
 
 }

@@ -1,6 +1,8 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
     $app_instance = new IdeiasComRelevo();
+    
+    $projects = $app_instance->ProjectsManagement->admin_get_projects();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,35 +67,40 @@
     <hr class="container">
     <div class="container d-flex align-items-start flex-column">
         <h3>Resultados para ""</h3>
-        <div class="w-100 d-flex row mb-3 shop-item">
-            <div class="col-3 image-head">
-                <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
-            </div>
-            <div class="col-9 body-content">
-                <div class="row">
-                    <h4 class="col text-truncate text-left text m-1">Terreno de 2.000 m2 junto ao Polo Universitário da Ajuda</h4>
+        <?php foreach($projects as $project): ?>
+            <?php $project->reload_appartments(); ?>
+            <div class="w-100 d-flex row mb-3 shop-item">
+                <div class="col-3 image-head">
+                    <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
                 </div>
-                <div class="row">
-                    <p class="col text-truncate text-left m-1">$(Tipo) para $(Tipo de venda): $(localização)</p>
-                </div>
-                <ul class="row list-inline p-0">
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Area m2)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-right m-1 h2">$(Preço)</li>
-                </ul>
-                <div class="row w-100 col-12 m-0 p-0">
-                    <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                        <i class="fas fa-2x fa-parking text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
+                <div class="col-9 body-content">
+                    <div class="row">
+                        <h4 class="col text-truncate text-left text m-1"><?= $project->get_title() ?></h4>
                     </div>
-                    <div class="col d-flex m-0 p-0 justify-content-end">
-                        <a role="button" href="" class="btn btn-primary">Saber mais</a>
+                    <div class="row">
+                        <p class="col text-truncate text-left m-1"><?php if($project->get_building_type() == 1) { echo ProjectsManagement::building_state_id_to_string($project->get_sale_type()); } else { echo ProjectsManagement::building_state_id_to_string($project->get_state()); } ?> <?= ProjectsManagement::building_type_id_to_string($project->get_building_type()) ?>: <?= $project->get_zone() ?>, <?= $project->get_county() ?>, <?= $project->get_city() ?></p>
+                    </div>
+                    <ul class="row list-inline p-0">
+                        <li class="col text-left text-muted m-1 h3"><?php if($project->get_building_type() == 1) { echo "N/A"; } else { echo $project->get_appartments()[0]->get_typology(); } ?></li>
+                        <li class="col text-left text-muted m-1 h3"><?php if($project->get_building_type() == 1) { echo "N/A"; } else { echo $project->get_appartments()[0]->get_area(); } ?>m2</li>
+                        <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
+                        <li class="col text-right m-1 h2"><?= $project->get_value() ?>€</li>
+                    </ul>
+                    <div class="row w-100 col-12 m-0 p-0">
+                        <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
+                            <?php if($project->get_building_type() != 1 && $project->get_appartments()[0]->get_has_parking()): ?>
+                                <i class="fas fa-2x fa-parking text-muted"></i>                            
+                            <?php endif; ?>
+                            <i class="fas fa-2x fa-warehouse text-muted"></i>
+                        </div>
+                        <div class="col d-flex m-0 p-0 justify-content-end">
+                            <a role="button" href="" class="btn btn-primary">Saber mais</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endforeach; ?>
+        
         <div class="w-100 d-flex row mb-3 shop-item">
             <div class="col-3 image-head">
                 <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">

@@ -59,7 +59,7 @@
 
         function create_project($json) {            
             $project = $json->projeto;
-            $typologies = $json->tipologies;
+            $typologies = $json->typologies;
             $projectEntity = new RealEstateEntity();
 
             $projectEntity->set_zone($project->zona);
@@ -92,7 +92,12 @@
                 $typologyEntity->set_description($typology->descricao);
                 $typologyEntity->set_sell_price($typology->venda);
                 $typologyEntity->set_rent_price($typology->aluguer);
-                $typologyEntity->set_building($projectEntity);
+                if ($typology->piso != "")
+                    $typologyEntity->set_floor($typology->piso);
+                else
+                    $typologyEntity->set_floor(0);
+                    
+                $typologyEntity->set_building($projectEntity);                
 
                 // this should change
                 $typologyEntity->set_photos(array());
@@ -127,6 +132,21 @@
                 1 => "Vende-se",
                 2 => "Aluga-se",
                 3 => "Vendido"
+            );
+            return $building_states[$id];
+        }
+
+        /**
+         * Converts the typology state id (int) to the matching string
+         * @param $id the typology state as string
+         */
+        public static function typology_state_id_to_string($id) {
+            $building_states = array(
+                0 => "-",
+                1 => "Vende-se",
+                2 => "Aluga-se",
+                3 => "Vende-se e Aluga-se",
+                4 => "Vendido"
             );
             return $building_states[$id];
         }

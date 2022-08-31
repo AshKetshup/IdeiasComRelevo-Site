@@ -110,7 +110,7 @@ class RealEstateEntity {
             $escaped_title = $connection->real_escape_string($this->title);
             $escaped_floor_count = $connection->real_escape_string($this->floor_count);
 
-            $sql = "INSERT INTO realestate (`description`, id, title, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator, floor_count) VALUES ('" . $escaped_description . "', '" . $this->id . "', '" . $escaped_title . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_value  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . ($this->has_elevator == true ? 1 : 0)  . "', '" . $escaped_floor_count . "')";
+            $sql = "INSERT INTO realestate (`description`, id, title, photos, main_photo, `zone`, county, city, building_type, `state`, `value`, has_elevator, floor_count) VALUES ('" . $escaped_description . "', '" . $this->id . "', '" . $escaped_title . "','" . $escaped_photos  . "', '" . $escaped_main_photo  . "', '" . $escaped_zone  . "', '" . $escaped_county  . "', '" . $escaped_city . "', '" . $escaped_building_type  . "', '" . $escaped_state . "', '" . $escaped_value . "', '" . ($this->has_elevator == true ? 1 : 0)  . "', '" . $escaped_floor_count . "')";
             if ($connection->query($sql) === TRUE)
                 $result = true;
             else
@@ -217,7 +217,7 @@ class RealEstateEntity {
         if ($this->loaded_appts)
             return $this->appts;
 
-        $result = array();
+        $rtn = array();
 
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {            
@@ -230,15 +230,15 @@ class RealEstateEntity {
             }
 
             while($row = $result->fetch_assoc()) {
-                array_push($result, TypologyEntity::fromRow($row));
+                array_push($rtn, TypologyEntity::fromRow($row));
             }
-            $this->appts = $result;
+            $this->appts = $rtn;
             $this->loaded_appts = true;
         } else 
-            $result = false;
+            $rtn = false;
 
         $connection->close();
-        return $result;
+        return $rtn;
     }
     public function get_value() {
         if ($this->building_type == 1) {
@@ -268,6 +268,22 @@ class RealEstateEntity {
     public function get_title() { return $this->title; }
     public function get_floor_count() { return $this->floor_count; }
 
+    public function get_sale_type() {
+        $this->reload_appartments();
+        $id = -1;
+        foreach($this->appts as $appt) {
+            if ($id == -1 && $appt->get_state() != 4)
+                $id = $appt->get_state();
+            if ($id == 1 && $appt->get_state() == 2)
+                $id = 3;
+            if ($id == 2 && $appt->get_state() == 1)
+                $id = 3;
+            if ($appt->get_state() == 4)
+                continue;
+        }
+        return $id;
+    }
+
     /** Setters */        
     public function set_zone($value) { $this->zone = $value; }
     public function set_county($value) { $this->county = $value; }
@@ -284,7 +300,7 @@ class RealEstateEntity {
 
     /** Refresh References */
     public function reload_appartments() {
-        $result = array();
+        $rtn = array();
 
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {            
@@ -297,15 +313,15 @@ class RealEstateEntity {
             }
 
             while($row = $result->fetch_assoc()) {
-                array_push($result, TypologyEntity::fromRow($row));
+                array_push($rtn, TypologyEntity::fromRow($row));
             }
-            $this->appts = $result;
+            $this->appts = $rtn;
             $this->loaded_appts = true;
         } else 
-            $result = false;
+            $rtn = false;
 
         $connection->close();
-        return $result;
+        return $rtn;
     }
 
 }

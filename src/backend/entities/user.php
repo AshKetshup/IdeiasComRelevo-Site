@@ -5,7 +5,7 @@
      * @subpackage entities
      * 
      * This file contains the User entity class which maps the table to a PHP class
-     * Version: 1.0.5
+     * Version: 1.1.0
      * 
      * @developer Pedro Cavaleiro
      * @created Jan 12, 2022
@@ -186,6 +186,28 @@
                 if ($connection->query($sql) === TRUE)
                     $result = true;
                 else
+                    $result = false;
+            } else 
+                $result = false;
+
+            $connection->close();
+            return $result;
+        }
+
+        /** 
+         * Deletes the entry from the database,
+         * If entry has associated typology entities those will also be deleted
+         * If there's a error initializing the connection or deleting the record an error returns false, otherwise returns true
+         */
+        public function delete_entry() {
+            $result = false;
+
+            $connection = $this->db_context->initialize_connection();
+            if ($connection != NULL) {            
+                $sql1 = "DELETE FROM users WHERE id='" . $this->id . "'";
+                if ($connection->query($sql1) === TRUE) {                
+                    $result = true;
+                } else
                     $result = false;
             } else 
                 $result = false;

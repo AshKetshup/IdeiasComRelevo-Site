@@ -5,11 +5,11 @@
      * @subpackage modules
      * 
      * Contains all the methods to handle the User entities
-     * Version: 1.1.2
+     * Version: 1.2.0
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022
-     * @lastedit Aug 30, 2022
+     * @lastedit Aug 31, 2022
      * 
      * @issues no issues linked to this file
      * @todo no tasks pending
@@ -54,6 +54,11 @@
             $userEntity->set_name($name);
             $userEntity->set_email($email);
             return $userEntity->insert($password);
+        }
+
+        public function delete_user($id) {
+            $user = UserEntity::fromId($id);
+            $user->delete_entry();
         }
 
     }

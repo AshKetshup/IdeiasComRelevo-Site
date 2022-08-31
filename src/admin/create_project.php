@@ -119,10 +119,10 @@ include_once '../includes/admin/head.php';
                                                 <label for="inputTipoEdificio">Tipo de Edificio</label>
                                                 <select id="inputTipoEdificio" class="form-control" placeholder="Tipo de Edificio" required>
                                                     <option <?= isset($_GET['id']) ? '' : 'selected' ?> value style="display:none">Escolha o tipo de Edificio</option>
-                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 1 ? 'selected' : '') : 'selected' ?> value="1">Prédio</option>
-                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 2 ? 'selected' : '') : 'selected' ?> value="2">Moradia Isolada</option>
-                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 3 ? 'selected' : '') : 'selected' ?> value="3">Moradia Germinada</option>
-                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 4 ? 'selected' : '') : 'selected' ?> value="4">Loja</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 1 ? 'selected' : '') : '' ?> value="1">Prédio</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 2 ? 'selected' : '') : '' ?> value="2">Moradia Isolada</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 3 ? 'selected' : '') : '' ?> value="3">Moradia Germinada</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 4 ? 'selected' : '') : '' ?> value="4">Loja</option>
                                                 </select>
 
                                                 <div class="valid-feedback">Valido.</div>
@@ -146,10 +146,10 @@ include_once '../includes/admin/head.php';
                                                 <label for="inputEstado">Estado</label>
                                                 <select id="inputEstado" class="form-control" type="text" placeholder="Selecione o estado" required>
                                                     <option <?= isset($_GET['id']) ? '' : 'selected' ?> value style="display:none">Selecione o estado</option>
-                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 0 ? 'selected' : '') : 'selected' ?> value="0">-</option>
-                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 1 ? 'selected' : '') : 'selected' ?> value="1">Vende-se</option>
-                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 2 ? 'selected' : '') : 'selected' ?> value="2">Aluga-se</option>
-                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 3 ? 'selected' : '') : 'selected' ?> value="3">Vendido</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 0 ? 'selected' : '') : '' ?> value="0">-</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 1 ? 'selected' : '') : '' ?> value="1">Vende-se</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 2 ? 'selected' : '') : '' ?> value="2">Aluga-se</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 3 ? 'selected' : '') : '' ?> value="3">Vendido</option>
                                                 </select>
 
                                                 <div class="valid-feedback">Valido.</div>

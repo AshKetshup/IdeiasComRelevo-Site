@@ -89,9 +89,6 @@
                                                     <td><?= $associate->get_name() ?></td>
                                                     <td><?= $associate->get_website() ?></td>
                                                     <td>
-                                                        <button class="badge bg-warning p-1 px-2 mr-1 editBtn" title="Editar" href="">
-                                                            <i class="fa-solid fa-pen"></i>
-                                                        </button>
                                                         <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" 
                                                             href="/backend/post_scripts/delete_associate.php?id=<?= $associate->get_id() ?>">
                                                             <i class="fa-solid fa-trash-can"></i>

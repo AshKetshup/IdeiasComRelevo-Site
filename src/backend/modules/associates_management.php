@@ -69,6 +69,11 @@
 
         }
 
+        function delete_associate($id) {
+            $associateEntity = AssociatesEntity::fromId($id);
+            $associateEntity->delete_entry();
+        }
+
     }
 
 ?>

@@ -5,7 +5,7 @@
      * @subpackage post_scripts
      * 
      * Handles a post sent from the frontend to edit a project
-     * Version: 1.0.0
+     * Version: 1.0.1
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 30, 2022
@@ -28,7 +28,7 @@
     // decodes the json to a PHP object
     $data = json_decode($json);
     // creates the project
-    $app_instance->ProjectsManagement->create_project($data);        
+    $app_instance->ProjectsManagement->edit_project($data);        
 
     // just says that it's ok
     echo "OK";

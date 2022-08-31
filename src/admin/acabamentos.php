@@ -118,7 +118,9 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="w-100 d-flex justify-content-end">
-                                        <a href="#" class="btn btn-primary">Adicionar</a>
+                                        <button id="btnAddWC" class="btn btn-primary" data-toggle="modal" 
+                                            data-target="#modalSendImage">Adicionar</button>
+                                        <!-- TODO: ACTIVATE MODAL TO FORM TO IMAGE -->
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +141,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="w-100 d-flex justify-content-end">
-                                        <a href="#" class="btn btn-primary">Adicionar</a>
+                                        <button id="btnAddCS" class="btn btn-primary" data-toggle="modal" 
+                                            data-target="#modalSendImage">Adicionar</button>
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +163,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="w-100 d-flex justify-content-end">
-                                        <a href="#" class="btn btn-primary">Adicionar</a>
+                                        <button id="btnAddAS" class="btn btn-primary" data-toggle="modal" 
+                                            data-target="#modalSendImage">Adicionar</button>
                                     </div>
                                 </div>
                             </div>
@@ -181,7 +185,8 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="w-100 d-flex justify-content-end">
-                                        <a href="#" class="btn btn-primary">Adicionar</a>
+                                        <button id="btnAddOP" class="btn btn-primary" data-toggle="modal" 
+                                            data-target="#modalSendImage">Adicionar</button>
                                     </div>
                                 </div>
                             </div>
@@ -201,6 +206,63 @@
     </div>
     <!-- ./wrapper -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="modalSendImage" tabindex="-1" role="dialog" 
+        aria-labelledby="modalSendImage" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+            <form id="formModal" class="w-100 card modal-content" action="" method="post" enctype="multipart/form-data">
+                <div class="card-header modal-header">
+                    <h5 class="m-0">Add Image</h5>
+                </div>
+                <div class="card-body modal-body">
+                    <div class="form-group">
+                        <label for="inputImage">Selecione uma Imagem</label>
+                        <input class="form-control" type="file" name="imagem" id="inputImage" accept="image/*">
+                    </div>
+                </div>
+                <div class="card-footer modal-footer d-flex">
+                    <div class="w-100 d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary ml-1">Confirmar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        let actionLink = "/backend/post_scripts/add_finish.php";
+        let formModal = document.getElementById("formModal");
+
+        document.getElementById("btnAddWC").addEventListener("click", () => {
+            let category = "WC";
+
+            // CHANGE MODAL ACTION PATH
+            formModal.action = actionLink + "?categoria=" + category;
+        });
+
+        document.getElementById("btnAddCS").addEventListener("click", () => {
+            let category = "CS";
+
+            // CHANGE MODAL ACTION PATH
+            formModal.action = actionLink + "?categoria=" + category;
+        });
+
+        document.getElementById("btnAddAS").addEventListener("click", () => {
+            let category = "AS";
+
+            // CHANGE MODAL ACTION PATH
+            formModal.action = actionLink + "?categoria=" + category;
+        });
+
+        document.getElementById("btnAddOP").addEventListener("click", () => {
+            let category = "OP";
+
+            // CHANGE MODAL ACTION PATH
+            formModal.action = actionLink + "?categoria=" + category;
+        });
+    </script>
     <!-- REQUIRED SCRIPTS -->
     <?php include_once '../includes/admin/scripts.php'; ?>
     

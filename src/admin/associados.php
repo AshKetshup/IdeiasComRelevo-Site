@@ -99,7 +99,10 @@
                                 </div>
                                 <div class="card-footer d-flex">
                                     <div class="w-100 d-flex justify-content-end">
-                                        <a href="#" class="btn btn-primary">Adicionar</a>
+                                        <button class="btn btn-primary" data-toggle="modal" 
+                                            data-target="#modalCreateAssociado">
+                                            Adicionar
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -118,6 +121,40 @@
 
     </div>
     <!-- ./wrapper -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalCreateAssociado" tabindex="-1" role="dialog" 
+        aria-labelledby="modalCreateAssociado" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+            <form id="formModal" class="w-100 card modal-content" action="/backend/post_scripts/create_associates.php" 
+                method="post" enctype="multipart/form-data">
+                <div class="card-header modal-header">
+                    <h5 class="m-0">Adicionar um Associado</h5>
+                </div>
+                <div class="card-body modal-body">
+                    <div class="form-group col-12">
+                        <label for="inputImage">Selecione uma Imagem (*)</label>
+                        <input class="form-control" type="file" name="imagem" id="inputImage" accept="image/*" required>
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputName">Nome (*)</label>
+                        <input class="form-control" type="text" name="nome" id="inputName" placeholder="Insira um nome" 
+                            required>
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputSite">Website</label>
+                        <input class="form-control" type="text" name="nome" id="inputName" placeholder="Insira um URL">
+                    </div>
+                </div>
+                <div class="card-footer modal-footer d-flex">
+                    <div class="w-100 d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary ml-1">Confirmar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- REQUIRED SCRIPTS -->
     <?php include_once '../includes/admin/scripts.php'; ?>

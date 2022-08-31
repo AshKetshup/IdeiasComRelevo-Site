@@ -5,14 +5,14 @@
      * @subpackage post_scripts
      * 
      * Handles a post sent from the frontend to add a finish
-     * Version: N/A
+     * Version: 1.0.0
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 31, 2022
      * @lastedit Aug 31, 2022
      * 
-     * @issues #29 #33
-     * @todo implement the proper way to store and return the path for the uploaded image
+     * @issues no issues linked to this file
+     * @todo no tasks pending
      * 
      */
 

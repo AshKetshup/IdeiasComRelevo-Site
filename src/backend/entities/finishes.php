@@ -5,7 +5,7 @@
      * @subpackage entities
      * 
      * This file contains the Finishes entity class which maps the table to a PHP class
-     * Version: 1.0.1
+     * Version: 1.0.2
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022

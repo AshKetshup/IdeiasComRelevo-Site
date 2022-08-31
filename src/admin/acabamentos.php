@@ -120,7 +120,6 @@
                                     <div class="w-100 d-flex justify-content-end">
                                         <button id="btnAddWC" class="btn btn-primary" data-toggle="modal" 
                                             data-target="#modalSendImage">Adicionar</button>
-                                        <!-- TODO: ACTIVATE MODAL TO FORM TO IMAGE -->
                                     </div>
                                 </div>
                             </div>

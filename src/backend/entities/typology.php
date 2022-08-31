@@ -175,7 +175,7 @@ class TypologyEntity {
 
         $connection = $this->db_context->initialize_connection();
         if ($connection != NULL) {
-            $sql = "DELETE FROM typology WHERE realstateid='" . $this->id . "'";
+            $sql = "DELETE FROM typology WHERE id='" . $this->id . "'";
             if ($connection->query($sql) === TRUE)
                 $result = true;                
             else

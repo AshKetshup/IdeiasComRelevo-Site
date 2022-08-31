@@ -182,6 +182,27 @@ class RealEstateEntity {
         return $result;
     }
 
+    public function clear_typologies() {
+        $result = false;
+
+        $connection = $this->db_context->initialize_connection();
+        if ($connection != NULL) {
+            $sql = "DELETE FROM typology WHERE rid='" . $this->id . "'";
+            if ($connection->query($sql) === TRUE)
+                $result = true;                
+            else
+                $result = false;
+        } else 
+            $result = false;
+
+        $connection->close();
+
+        if ($this->loaded_appts)
+            $this->reload_appartments();
+
+        return $result;
+    }
+
     /** Getters */
     public function get_id() { return $this->id; }
     public function get_zone() { return $this->zone; }

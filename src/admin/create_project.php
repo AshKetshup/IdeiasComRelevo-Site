@@ -81,8 +81,12 @@ include_once '../includes/admin/head.php';
                                     <div class="card-body">
                                         <div class="w-100 d-flex flex-wrap">
                                             <div class="form-group col-lg-12">
+                                                <label for="inputImages">Images</label>
+                                                <input type="file" class="form-control" id="inputImages" accept="image/png, image/jpeg" multiple required>
+                                            </div>
+                                            <div class="form-group col-lg-12">
                                                 <label for="inputTitle">Title</label>
-                                                <input id="inputTitle" class="form-control" type="text" placeholder="Insira o titulo"required>
+                                                <input id="inputTitle" class="form-control" type="text" placeholder="Insira o titulo" required>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -524,6 +528,7 @@ include_once '../includes/admin/head.php';
         }
 
         function getData() {
+            const inputImages = document.getElementById("inputImages").value;
             const inputTitle = document.getElementById("inputTitle").value;
             const inputZona = document.getElementById("inputZona").value;
             const inputConcelho = document.getElementById("inputConcelho").value;
@@ -537,6 +542,7 @@ include_once '../includes/admin/head.php';
 
             return {
                 <?= isset($_GET['id']) ? "id: '".$_GET['id']."'," : "" ?>
+                // imagens: inputImages,
                 titulo: inputTitle,
                 zona: inputZona,
                 concelho: inputConcelho,
@@ -554,6 +560,9 @@ include_once '../includes/admin/head.php';
 
         document.getElementById("form-project").addEventListener("submit", () => {
             event.preventDefault();
+            if (rows.length === 0)
+                return false;
+
             console.log(rows)
 
             const JSONContent = {

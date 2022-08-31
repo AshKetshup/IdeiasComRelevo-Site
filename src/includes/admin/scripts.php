@@ -5,3 +5,4 @@
 <!-- AdminLTE App -->
 <script src="./dist/js/adminlte.min.js"></script>
 <script src="https://kit.fontawesome.com/539eca1b92.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>

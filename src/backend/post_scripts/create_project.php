@@ -19,6 +19,9 @@
     // only to prevent the page from reloading
     // http_response_code(404);
 
+    var_dump($_POST);
+    die();
+
     // starts the app
     require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
     $app_instance = new IdeiasComRelevo();

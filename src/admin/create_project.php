@@ -88,39 +88,39 @@ include_once '../includes/admin/head.php';
                                         <div class="w-100 d-flex flex-wrap">
                                             <div class="form-group col-lg-12">
                                                 <label for="inputImages">Images</label>
-                                                <input type="file" class="form-control" id="inputImages" accept="image/png, image/jpeg" multiple required>
+                                                <input type="file" name="imagens" class="form-control" id="inputImages" accept="image/png, image/jpeg" multiple required>
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label for="inputTitle">Title</label>
-                                                <input id="inputTitle" class="form-control" type="text" placeholder="Insira o titulo"required <?= isset($_GET['id']) ? 'value="' . $projeto->get_title() . '"' : '' ?>>
+                                                <input id="inputTitle" name="titulo" class="form-control" type="text" placeholder="Insira o titulo"required <?= isset($_GET['id']) ? 'value="' . $projeto->get_title() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputZona">Zona</label>
-                                                <input id="inputZona" class="form-control" type="text" placeholder="Insira a zona" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_zone() . '"' : '' ?>>
+                                                <input id="inputZona" name="zona" class="form-control" type="text" placeholder="Insira a zona" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_zone() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputConcelho">Concelho</label>
-                                                <input id="inputConcelho" class="form-control" type="text" placeholder="Insira o concelho" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_county() . '"' : '' ?>>
+                                                <input id="inputConcelho" name="concelho" class="form-control" type="text" placeholder="Insira o concelho" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_county() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
                                                 <label for="inputFreguesia">Freguesia</label>
-                                                <input id="inputFreguesia" class="form-control" type="text" placeholder="Insira a freguesia" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_city() . '"' : '' ?>>
+                                                <input id="inputFreguesia" name="freguesia" class="form-control" type="text" placeholder="Insira a freguesia" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_city() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label for="inputTipoEdificio">Tipo de Edificio</label>
-                                                <select id="inputTipoEdificio" class="form-control" placeholder="Tipo de Edificio" required>
+                                                <select id="inputTipoEdificio" name="tipoEdificio" class="form-control" placeholder="Tipo de Edificio" required>
                                                     <option <?= isset($_GET['id']) ? '' : 'selected' ?> value style="display:none">Escolha o tipo de Edificio</option>
                                                     <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 1 ? 'selected' : '') : '' ?> value="1">Prédio</option>
                                                     <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 2 ? 'selected' : '') : '' ?> value="2">Moradia Isolada</option>
@@ -133,21 +133,21 @@ include_once '../includes/admin/head.php';
                                             </div>
                                             <div class="form-group col-lg-6">
                                                 <label for="inputNPisos">Nº de Pisos</label>
-                                                <input id="inputNPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_floor_count() . '"' : '' ?>>
+                                                <input id="inputNPisos" name="nPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_floor_count() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label for="inputDescricao">Descrição</label>
-                                                <textarea id="inputDescricao" class="form-control" type="text" placeholder="Descreva o projeto" style="min-height:12rem" required><?= isset($_GET['id']) ? $projeto->get_description() : '' ?></textarea>
+                                                <textarea id="inputDescricao" name="descricao" class="form-control" type="text" placeholder="Descreva o projeto" style="min-height:12rem" required><?= isset($_GET['id']) ? $projeto->get_description() : '' ?></textarea>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-5">
                                                 <label for="inputEstado">Estado</label>
-                                                <select id="inputEstado" class="form-control" type="text" placeholder="Selecione o estado" required>
+                                                <select id="inputEstado" name="estado" class="form-control" type="text" placeholder="Selecione o estado" required>
                                                     <option <?= isset($_GET['id']) ? '' : 'selected' ?> value style="display:none">Selecione o estado</option>
                                                     <option <?= isset($_GET['id']) ? ($projeto->get_state() == 0 ? 'selected' : '') : '' ?> value="0">-</option>
                                                     <option <?= isset($_GET['id']) ? ($projeto->get_state() == 1 ? 'selected' : '') : '' ?> value="1">Vende-se</option>
@@ -160,7 +160,7 @@ include_once '../includes/admin/head.php';
                                             </div>
                                             <div class="form-group col-lg-5">
                                                 <label for="inputValor">Valor (€)</label>
-                                                <input id="inputValor" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)" required <?= isset($_GET['id']) ? ($projeto->get_building_type() == 1 ? '' : 'value="' . $projeto->get_value() . '"') : '' ?>>
+                                                <input id="inputValor" class="form-control" name="valor" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)" required <?= isset($_GET['id']) ? ($projeto->get_building_type() == 1 ? '' : 'value="' . $projeto->get_value() . '"') : '' ?>>
                                                 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
@@ -170,6 +170,9 @@ include_once '../includes/admin/head.php';
                                                     <label for="inputElevador" class="mr-2"><i class="fa-solid fa-2x fa-elevator"></i></label>
                                                     <input <?= isset($_GET['id']) ? ($projeto->get_has_elevator() ? 'checked' : '') : '' ?> id="inputElevador" type="checkbox" name="elevador" placeholder="Inclui Elevador">
                                                 </div>
+                                            </div>
+                                            <div class="hidden" id="hiddenInputs">
+
                                             </div>
                                         </div>
                                     </div>
@@ -602,27 +605,82 @@ include_once '../includes/admin/head.php';
             }
         }
 
+        // return {
+        //     area: this.#area,
+        //     categoriaEnergetica: this.#categoriaEnergetica,
+        //     tipologia: this.#tipologia,
+        //     estado: this.#estado,
+        //     wcs: this.#wcs,
+        //     piso: this.#piso,
+        //     hasGaragem: this.#hasGaragem,
+        //     hasParking: this.#hasParking,
+        //     descricao: this.#descricao,
+        //     venda: this.#venda,
+        //     aluguer: this.#aluguer
+        // };
 
+        function addContentToForm(rowList) {
+            function createHInput(data, index) {
+                let inputs = [];
 
-        document.getElementById("form-project").addEventListener("submit", () => {
-            event.preventDefault();
+                for (const key of Object.keys(data)) {
+                    let hInput   = document.createElement("input");
+
+                    hInput.type  = "hidden";
+                    hInput.name  = "tipologia[" + index + "]" + "[" + key +"]";
+                    hInput.value = data[key];
+
+                    inputs.push(hInput);
+                }
+
+                return inputs;
+            }
+
+            let hInputs = [];
+            
+            for (let index = 0; index < rowList.length; index++) {
+                const row = rowList[index];
+                
+                hInputs = hInputs.concat(
+                    createHInput(row, index)
+                );
+            }
+
+            const hiddenInputs = document.getElementById("hiddenInputs");
+
+            hInputs.forEach(el => {
+                hiddenInputs.appendChild(el);
+            });
+        }
+        
+        let formProject = document.getElementById("form-project")
+        formProject.addEventListener("submit", () => {
+            // event.preventDefault();
             if (rows.length === 0)
                 return false;
 
-            console.log(rows)
+            // console.log(rows)
 
-            const JSONContent = {
-                projeto: getData(),
-                typologies: LIMIT_TYPO ? [rows[rows.length - 1]] : rows
-            };
+            // const JSONContent = {
+            //     projeto: getData(),
+            //     typologies: LIMIT_TYPO ? [rows[rows.length - 1]] : rows
+            // };
             
+            addContentToForm(LIMIT_TYPO ? [rows[rows.length - 1]] : rows);
+
+            // post("/backend/post_scripts/create_project.php", JSONContent, "/admin/projetos");
+            // post("/backend/post_scripts/edit_project.php", JSONContent, "/admin/projetos");
             <?php if (!isset($_GET['id'])): ?>
-            post("/backend/post_scripts/create_project.php", JSONContent, "/admin/projetos");
+            formProject.setAttribute("action", "/backend/post_scripts/create_project.php");
             <?php else: ?>
-            post("/backend/post_scripts/edit_project.php", JSONContent, "/admin/projetos");
+            formProject.setAttribute("action", "/backend/post_scripts/edit_project.php");
             <?php endif; ?>
 
-            return false;
+            formProject.setAttribute("method", "post");
+            formProject.setAttribute("enctype", "multipart/form-data");
+            // formProject.setAttribute("enctype", "application/json");
+
+            return true;
         });
     </script>
 

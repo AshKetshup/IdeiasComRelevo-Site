@@ -86,9 +86,6 @@
                                                 <td>Nome do Utilizador</td>
                                                 <td>utilizador@email.com</td>
                                                 <td>
-                                                    <a class="badge bg-warning p-1 px-2 mr-1 editBtn" title="Editar">
-                                                        <i class="fa-solid fa-pencil"></i>
-                                                    </a>
                                                     <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" 
                                                         href="/backend/post_scripts/delete_user.php?id=someid">
                                                         <i class="fa-solid fa-trash-can"></i>

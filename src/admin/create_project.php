@@ -88,7 +88,7 @@ include_once '../includes/admin/head.php';
                                         <div class="w-100 d-flex flex-wrap">
                                             <div class="form-group col-lg-12">
                                                 <label for="inputImages">Images</label>
-                                                <input type="file" name="imagens" class="form-control" id="inputImages" accept="image/png, image/jpeg" multiple required>
+                                                <input type="file" name="imagens[]" class="form-control" id="inputImages" accept="image/png, image/jpeg" multiple required>
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label for="inputTitle">Title</label>

@@ -5,11 +5,11 @@
      * @subpackage entities
      * 
      * This file contains the Realestate entity class which maps the table to a PHP class
-     * Version: 1.3.0
+     * Version: 1.3.1
      * 
      * @developer Pedro Cavaleiro
      * @created Jan 11, 2022
-     * @lastedit Aug 31, 2022
+     * @lastedit Sep 1, 2022
      * 
      * @issues no issues linked to this file
      * @todo no tasks pending
@@ -121,7 +121,7 @@
                 $escaped_main_photo = $connection->real_escape_string($this->main_photo);
                 $escaped_photos = "";
                 if ($this->photos != NULL)
-                    $connection->real_escape_string(join(",", $this->photos));
+                    $escaped_photos = $connection->real_escape_string(join(",", $this->photos));
                 $escaped_description = $connection->real_escape_string($this->description);
                 $escaped_title = $connection->real_escape_string($this->title);
                 $escaped_floor_count = $connection->real_escape_string($this->floor_count);

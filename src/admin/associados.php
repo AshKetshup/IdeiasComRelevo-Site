@@ -85,12 +85,16 @@
                                         <tbody>
                                             <?php foreach($app_instance->AssociateManagement->admin_get_associates() as $associate): ?>
                                                 <tr>
-                                                    <td class="d-flex" style="min-width: min-content;"><img src="/uploads/<?= $associate->get_logo() ?>" alt="" style="max-height:100px"></td>
+                                                    <td class="d-flex" style="min-width: min-content;">
+                                                        <img src="/uploads/<?= $associate->get_logo() ?>" alt="" 
+                                                            style="max-height:100px">
+                                                    </td>
                                                     <td><?= $associate->get_name() ?></td>
                                                     <td><?= $associate->get_website() ?></td>
                                                     <td>
-                                                        <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" 
-                                                            href="/backend/post_scripts/delete_associate.php?id=<?= $associate->get_id() ?>">
+                                                        <a class="badge bg-danger p-1 px-2 mr-1 deleteBtn" title="Eliminar" 
+                                                            linkdel="/backend/post_scripts/delete_associate.php?id=<?= $associate->get_id() ?>"
+                                                            data-toggle="modal" data-target="#confirmElimination">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </a>
                                                     </td>
@@ -125,6 +129,28 @@
     <!-- ./wrapper -->
 
     <!-- Modal -->
+    <div class="modal fade" id="confirmElimination" data-backdrop="static" data-keyboard="false" tabindex="-1" 
+        aria-labelledby="confirmEliminationLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmEliminationLabel">Confirmação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Ao confirmar irás eliminar o elemento selecionado. Tens a certeza?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a id="deleteModalBtn" class="btn btn-danger" href="">Confirmar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
     <div class="modal fade" id="modalCreateAssociado" tabindex="-1" role="dialog" 
         aria-labelledby="modalCreateAssociado" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered " role="document">
@@ -157,6 +183,18 @@
             </form>
         </div>
     </div>
+
+    <script>
+        const delBtns = document.getElementsByClassName("deleteBtn");
+
+        for (const del of delBtns) {
+            del.addEventListener("click", () => {
+                const linkDel = del.getAttribute("linkdel");
+
+                document.getElementById("deleteModalBtn").setAttribute("href", linkDel);
+            });
+        }
+    </script>
 
     <!-- REQUIRED SCRIPTS -->
     <?php include_once '../includes/admin/scripts.php'; ?>

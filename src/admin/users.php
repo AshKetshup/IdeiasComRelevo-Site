@@ -5,6 +5,8 @@
     $login = IdeiasComRelevo::verify_login();
     if(!$login)
         header("Location: /admin/login");
+
+    $users = $app_instance->UserManagement->get_users();
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -82,16 +84,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Nome do Utilizador</td>
-                                                <td>utilizador@email.com</td>
-                                                <td>
-                                                    <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" 
-                                                        href="/backend/post_scripts/delete_user.php?id=someid">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                            <?php foreach($users as $user): ?>
+                                                <tr>
+                                                    <td><?= $user->get_name() ?></td>
+                                                    <td><?= $user->get_email() ?></td>
+                                                    <td>
+                                                        <?php if($login['uid'] != $user->get_id()): ?>
+                                                            <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" 
+                                                                href="/backend/post_scripts/delete_user.php?id=<?= $user->get_id() ?>">
+                                                                <i class="fa-solid fa-trash-can"></i>
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>                                            
                                         </tbody>
                                     </table>
                                 </div>

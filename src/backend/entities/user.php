@@ -68,7 +68,7 @@
                 return NULL;
             }
 
-            $row = $result->fetch_assoc()[0];
+            $row = $result->fetch_assoc();
 
             $this->fill($row);
         }

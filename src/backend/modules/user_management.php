@@ -5,11 +5,11 @@
      * @subpackage modules
      * 
      * Contains all the methods to handle the User entities
-     * Version: 1.2.0
+     * Version: 1.3.0
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022
-     * @lastedit Aug 31, 2022
+     * @lastedit Sept 1, 2022
      * 
      * @issues no issues linked to this file
      * @todo no tasks pending
@@ -18,8 +18,37 @@
 
     class UserManagement {
 
-        /** Constructor, nothing else to initialize */
-        function __construct() { }
+       /** External Modules */
+       private $db_context;
+
+       /** Constructor, initializes the DbContext */
+       function __construct() { 
+           $this->db_context = new DbContext();
+       }
+
+       /**
+        * Gets an array with all project entities
+        */
+       function get_users() {
+
+           $connection = $this->db_context->initialize_connection();
+           if ($connection == NULL) {
+               $connection->close();
+               return array();
+           }
+
+           $sql = "SELECT * FROM users";
+           $result = $connection->query($sql);
+
+           $results = array();
+
+           while($row = $result->fetch_assoc()) {
+               array_push($results, UserEntity::fromRow($row));
+           }
+
+           return $results;
+
+       }
 
         /**
          * Attempts to login the user, if the login is successful it sets the session

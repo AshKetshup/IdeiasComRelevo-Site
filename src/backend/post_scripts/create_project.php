@@ -67,7 +67,7 @@
     // creates the project
     $app_instance->ProjectsManagement->create_project($images, $_POST, $_POST['tipologia']);
 
-    // just says that it's ok
-    echo "OK";
+    header("Location: /admin/projetos?err=false");
+    
 
 ?>

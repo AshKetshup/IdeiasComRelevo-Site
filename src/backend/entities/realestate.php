@@ -5,7 +5,7 @@
      * @subpackage entities
      * 
      * This file contains the Realestate entity class which maps the table to a PHP class
-     * Version: 1.3.1
+     * Version: 1.3.2
      * 
      * @developer Pedro Cavaleiro
      * @created Jan 11, 2022
@@ -185,6 +185,9 @@
                 $sql1 = "DELETE FROM realestate WHERE id='" . $this->id . "'";
                 $sql2 = "DELETE FROM typology WHERE rid='" . $this->id . "'";
                 if ($connection->query($sql1) === TRUE) {
+                    foreach($this->photos as $photo)
+                        unlink($_SERVER["DOCUMENT_ROOT"] . "/uploads/" . $photo);
+
                     if ($connection->query($sql2) === TRUE)
                         $result = true;
                     else

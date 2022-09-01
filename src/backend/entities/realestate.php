@@ -155,7 +155,9 @@
                 $escaped_value = $connection->real_escape_string($this->value);
                 $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
                 $escaped_main_photo = $connection->real_escape_string($this->main_photo);
-                $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
+                $escaped_photos = "";
+                if ($this->photos != NULL)
+                    $escaped_photos = $connection->real_escape_string(join(",", $this->photos));
                 $escaped_description = $connection->real_escape_string($this->description);
                 $escaped_title = $connection->real_escape_string($this->title);
                 $escaped_floor_count = $connection->real_escape_string($this->floor_count);

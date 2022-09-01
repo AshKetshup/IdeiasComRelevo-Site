@@ -154,45 +154,74 @@
             
         }
 
-        function edit_project($json) {            
-            $project = $json->projeto;
-            $typologies = $json->typologies;
-            $projectEntity = RealEstateEntity::fromId($json->id);
+        function edit_project($images, $post, $typologies) {            
+            $projectEntity = new RealEstateEntity();
 
-            $projectEntity->set_zone($project->zona);
-            $projectEntity->set_county($project->concelho);
-            $projectEntity->set_city($project->freguesia);
-            $projectEntity->set_building_type($project->tipoEdificio);
-            $projectEntity->set_floor_count($project->nPisos);
-            $projectEntity->set_description($project->descricao);
-            $projectEntity->set_state($project->estado);
-            $projectEntity->set_value($project->valor);
-            $projectEntity->set_has_elevator($project->elevador);
-            $projectEntity->set_title($project->titulo);
+            $projectEntity->set_zone($_POST['zona']);
+            $projectEntity->set_county($_POST['concelho']);
+            $projectEntity->set_city($_POST['freguesia']);
+            $projectEntity->set_building_type($_POST['tipoEdificio']);
+            $projectEntity->set_floor_count($_POST['nPisos']);
+            $projectEntity->set_description($_POST['descricao']);
+            $projectEntity->set_state($_POST['estado']);
 
-            // this should change
-            $projectEntity->set_photos(array());
+            if (isset($_POST['valor']))
+                $projectEntity->set_value($_POST['valor']);
+            else
+                $projectEntity->set_value(0);
+
+            if (isset($_POST['elevador']))
+                $projectEntity->set_has_elevator($_POST['elevador']);
+            else
+                $projectEntity->set_has_elevator(false);
+
+            $projectEntity->set_title($_POST['titulo']);
+
+            $projectEntity->set_photos($images);
+            $projectEntity->set_main_photo($images[0]);
 
             $projectEntity->update_changes();
-
             $projectEntity->clear_typologies();
 
 
             foreach($typologies as $typology) {
                 $typologyEntity = new TypologyEntity();
 
-                $typologyEntity->set_area($typology->area);
-                $typologyEntity->set_energy_category($typology->categoriaEnergetica);
-                $typologyEntity->set_typology($typology->tipologia);
-                $typologyEntity->set_state($typology->estado);
-                $typologyEntity->set_wc_count($typology->wcs);
-                $typologyEntity->set_has_garage($typology->hasGaragem);
-                $typologyEntity->set_has_parking($typology->hasParking);
-                $typologyEntity->set_description($typology->descricao);
-                $typologyEntity->set_sell_price($typology->venda);
-                $typologyEntity->set_rent_price($typology->aluguer);
-                if ($typology->piso != "")
-                    $typologyEntity->set_floor($typology->piso);
+                $typologyEntity->set_area($typology['area']);
+                $typologyEntity->set_energy_category($typology['categoriaEnergetica']);
+                $typologyEntity->set_typology($typology['tipologia']);
+
+                if (isset($typology['estado']) && $typology['estado'] != 0 && $typology['estado'] != -1)                    
+                    $typologyEntity->set_state($typology['estado']);
+                else
+                    $typologyEntity->set_state(0);
+
+                $typologyEntity->set_wc_count($typology['wcs']);
+
+                if (isset($typology['hasGaragem']))
+                    $typologyEntity->set_has_garage($typology['hasGaragem']);
+                else
+                    $typologyEntity->set_has_garage(false);
+
+                if (isset($typology['hasParking']))
+                    $typologyEntity->set_has_parking($typology['hasParking']);
+                else
+                    $typologyEntity->set_has_parking(false);
+
+                $typologyEntity->set_description($typology['descricao']);
+
+                if(isset($typology['venda']))
+                    $typologyEntity->set_sell_price($typology['venda']);
+                else
+                    $typologyEntity->set_sell_price(0);
+
+                if(isset($typology['aluguer']))
+                    $typologyEntity->set_rent_price($typology['aluguer']);
+                else
+                    $typologyEntity->set_rent_price(0);
+
+                if (isset($typology['piso']))
+                    $typologyEntity->set_floor($typology['piso']);
                 else
                     $typologyEntity->set_floor(0);
                     

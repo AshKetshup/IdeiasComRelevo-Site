@@ -90,8 +90,9 @@
                                                     <td><?= $user->get_email() ?></td>
                                                     <td>
                                                         <?php if($login['uid'] != $user->get_id()): ?>
-                                                            <a class="badge bg-danger p-1 px-2 mr-1" title="Eliminar" 
-                                                                href="/backend/post_scripts/delete_user.php?id=<?= $user->get_id() ?>">
+                                                            <a class="badge bg-danger p-1 px-2 mr-1 deleteBtn" title="Eliminar" 
+                                                                linkdel="/backend/post_scripts/delete_user.php?id=<?= $user->get_id() ?>"
+                                                                data-toggle="modal" data-target="#confirmElimination">
                                                                 <i class="fa-solid fa-trash-can"></i>
                                                             </a>
                                                         <?php endif; ?>
@@ -165,22 +166,55 @@
                     </div>
                 </div>
             </form>
-            <script>
-                function checkContent() {
-                    const pwd1 = document.getElementById("inputPwd1");
-                    const pwd2 = document.getElementById("inputPwd2");
-
-                    if (pwd1.value != pwd2.value) {
-                        event.preventDefault();
-                        return false;
-                    }
-
-                    return true;
-                }
-            </script>
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="confirmElimination" data-backdrop="static" data-keyboard="false" tabindex="-1" 
+        aria-labelledby="confirmEliminationLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmEliminationLabel">Confirmação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Ao confirmar irás eliminar o elemento selecionado. Tens a certeza?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a id="deleteModalBtn" class="btn btn-danger" href="">Confirmar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const delBtns = document.getElementsByClassName("deleteBtn");
+
+        for (const del of delBtns) {
+            del.addEventListener("click", () => {
+                const linkDel = del.getAttribute("linkdel");
+
+                document.getElementById("deleteModalBtn").setAttribute("href", linkDel);
+            });
+        }
+
+        function checkContent() {
+            const pwd1 = document.getElementById("inputPwd1");
+            const pwd2 = document.getElementById("inputPwd2");
+
+            if (pwd1.value != pwd2.value) {
+                event.preventDefault();
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
     <!-- REQUIRED SCRIPTS -->
     <?php include_once '../includes/admin/scripts.php'; ?>
     

@@ -554,7 +554,7 @@ include_once '../includes/admin/head.php';
             let xhr = new XMLHttpRequest();
             xhr.open(method, path, true);
             xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function() {
+            xhr.onreadystatechange = function(evt) {
                 console.log(xhr.status);
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     if (redirect !== '') {
@@ -569,7 +569,7 @@ include_once '../includes/admin/head.php';
         }
 
         function getData() {
-            const inputImages = document.getElementById("inputImages").value;
+            const inputImages = document.getElementById("inputImages").files;
             const inputTitle = document.getElementById("inputTitle").value;
             const inputZona = document.getElementById("inputZona").value;
             const inputConcelho = document.getElementById("inputConcelho").value;
@@ -581,9 +581,14 @@ include_once '../includes/admin/head.php';
             const inputValor = document.getElementById("inputValor").value;
             const inputElevador = document.getElementById("inputElevador").checked;
 
+            let images = [];
+            for (const image of inputImages) {
+                images.push(image.valueOf());
+            }
+
             return {
                 <?= isset($_GET['id']) ? "id: '".$_GET['id']."'," : "" ?>
-                // imagens: inputImages,
+                imagens: images,
                 titulo: inputTitle,
                 zona: inputZona,
                 concelho: inputConcelho,
@@ -634,7 +639,7 @@ include_once '../includes/admin/head.php';
             }
         }
 
-        let management = () => {
+        function management(deleteIt = true) {
             let tipoEdificio = document.getElementById("inputTipoEdificio");
             let tipologiaForm = document.getElementById("tipologia-form");
             let tipologiaTable = document.getElementById("tipologia-table");
@@ -646,7 +651,12 @@ include_once '../includes/admin/head.php';
             let inptTipDescricao = document.getElementById("inputTipDescricao");
 
             tableRows.innerHTML = "";
-            rows = [];
+
+
+            if (deleteIt) {
+                console.log("Aqui");
+                rows = [];
+            }
 
             LIMIT_TYPO = tipoEdificio.value != 1;
             if (!LIMIT_TYPO) {
@@ -709,7 +719,7 @@ include_once '../includes/admin/head.php';
                 aluguer.value = tip.aluguer;
             }
 
-            management();
+            management(false);
         });
     </script>
 </body>

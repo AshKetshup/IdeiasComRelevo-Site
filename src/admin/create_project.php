@@ -160,8 +160,8 @@ include_once '../includes/admin/head.php';
                                             </div>
                                             <div class="form-group col-lg-5">
                                                 <label for="inputValor">Valor (€)</label>
-                                                <input id="inputValor" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_value() . '"' : '' ?>>
-
+                                                <input id="inputValor" class="form-control" type="number" min="0" step="0.01" placeholder="Insira o Valor (€)" required <?= isset($_GET['id']) ? ($projeto->get_building_type() == 1 ? '' : 'value="' . $projeto->get_value() . '"') : '' ?>>
+                                                
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
@@ -355,22 +355,22 @@ include_once '../includes/admin/head.php';
                 return_value.classList.add("badge");
 
                 switch (this.#estado) {
-                    case "1":
+                    case 1:
                         return_value.appendChild(document.createTextNode("Vende-se"));
                         return_value.classList.add("badge-success");
                         break;
 
-                    case "2":
+                    case 2:
                         return_value.appendChild(document.createTextNode("Aluga-se"));
                         return_value.classList.add("badge-warning");
                         break;
 
-                    case "3":
+                    case 3:
                         return_value.appendChild(document.createTextNode("Vende-se e Aluga-se"));
                         return_value.classList.add("badge-info");
                         break;
 
-                    case "4":
+                    case 4:
                         return_value.appendChild(document.createTextNode("Vendido"));
                         return_value.classList.add("badge-danger");
                         break;
@@ -449,30 +449,76 @@ include_once '../includes/admin/head.php';
         }
 
         let adicionarBtn = document.getElementById("adicionar-btn");
+        let tableBody = document.getElementById("typology-table-body");
         let rows = [];
+        let indexCount = 0;
+
+        function composeRows(arr) {
+            for (const tip of arr) {
+                let newRow = tableBody.insertRow();
+
+                console.log(tip.estado());
+            
+                newRow.insertCell().appendChild(tip.area());
+                newRow.insertCell().appendChild(tip.categoriaEnergetica());
+                newRow.insertCell().appendChild(tip.tipologia());
+                newRow.insertCell().appendChild(tip.estado());
+                newRow.insertCell().appendChild(tip.wcs());
+                newRow.insertCell().appendChild(tip.piso());
+                newRow.insertCell().appendChild(tip.hasGaragem());
+                newRow.insertCell().appendChild(tip.hasParking());
+                newRow.insertCell().appendChild(tip.descricao());
+                newRow.insertCell().appendChild(tip.venda());
+                newRow.insertCell().appendChild(tip.aluguer());
+
+                let icon = document.createElement("i");
+                icon.classList.add("fa-solid", "fa-trash-can");
+
+                let elim = document.createElement("a");
+                elim.classList.add("badge", "bg-danger", "p-1", "px-2", "mr-1", "deleteBtn");
+                elim.id = indexCount;
+                elim.title = "Eliminar";
+                elim.appendChild(icon);
+                elim.onclick = function deleteSelf() {
+                    this.closest("tr").remove();
+                    rows.splice(this.id, 1);
+                };
+
+                newRow.insertCell().appendChild(elim);
+
+                rows.push(tip.toObj());
+                indexCount++;
+            }
+        }
+
+
         let auxArr = [];
 
         <?php if(isset($_GET['id'])): ?>
 
             <?php foreach($projeto->get_appartments() as $appartment): ?>
                 
-                auxArr.push((new Tipologia(
-                    <?= $appartment->get_area() ?>,
-                    '<?= $appartment->get_energy_category() ?>',
-                    '<?= $appartment->get_typology() ?>',
-                    <?= $appartment->get_state() ?>,
-                    <?= $appartment->get_wc_count() ?>,
-                    <?= $appartment->get_floor() ?>,
-                    <?= $appartment->get_has_garage() ? 'true' : 'false' ?>,
-                    <?= $appartment->get_has_parking() ? 'true' : 'false' ?>,
-                    '<?= $appartment->get_description() ?>',
-                    <?= $appartment->get_sell_price() ?>,
-                    <?= $appartment->get_rent_price() ?>
-                )).toObj());
+        auxArr.push(
+            new Tipologia(
+                <?= $appartment->get_area() ?>,
+                '<?= $appartment->get_energy_category() ?>',
+                '<?= $appartment->get_typology() ?>',
+                <?= $appartment->get_state() ?>,
+                <?= $appartment->get_wc_count() ?>,
+                <?= $appartment->get_floor() ?>,
+                <?= $appartment->get_has_garage() ? 'true' : 'false' ?>,
+                <?= $appartment->get_has_parking() ? 'true' : 'false' ?>,
+                '<?= $appartment->get_description() ?>',
+                <?= $appartment->get_sell_price() ?>,
+                <?= $appartment->get_rent_price() ?>
+            )
+        );
 
             <?php endforeach; ?>
 
         <?php endif; ?>
+
+        composeRows(auxArr);
 
         adicionarBtn.addEventListener("click", () => {
             let area = document.getElementById("inputTipArea");
@@ -487,51 +533,21 @@ include_once '../includes/admin/head.php';
             let venda = document.getElementById("inputTipValorVenda");
             let aluguer = document.getElementById("inputTipValorAluguer");
 
-            let tableBody = document.getElementById("typology-table-body");
-
-            // Insert a row at the end of table
-            var newRow = tableBody.insertRow();
-
-            let tip = new Tipologia(
-                area.value,
-                categ.value,
-                tipologia.value,
-                estado.value,
-                wcs.value,
-                piso.value,
-                garagem.checked,
-                parking.checked,
-                descricao.value,
-                venda.value,
-                aluguer.value
-            );
-
-            newRow.insertCell().appendChild(tip.area());
-            newRow.insertCell().appendChild(tip.categoriaEnergetica());
-            newRow.insertCell().appendChild(tip.tipologia());
-            newRow.insertCell().appendChild(tip.estado());
-            newRow.insertCell().appendChild(tip.wcs());
-            newRow.insertCell().appendChild(tip.piso());
-            newRow.insertCell().appendChild(tip.hasGaragem());
-            newRow.insertCell().appendChild(tip.hasParking());
-            newRow.insertCell().appendChild(tip.descricao());
-            newRow.insertCell().appendChild(tip.venda());
-            newRow.insertCell().appendChild(tip.aluguer());
-
-            let elim = document.createElement("a");
-            elim.classList.add("badge", "bg-danger", "p-1", "px-2", "mr-1");
-            elim.title = "Eliminar";
-            elim.onclick = function deleteSelf() {
-                this.closest("tr").remove();
-            };
-
-            let icon = document.createElement("i");
-            icon.classList.add("fa-solid", "fa-trash-can");
-            elim.appendChild(icon);
-
-            newRow.insertCell().appendChild(elim);
-
-            rows.push(tip.toObj());
+            composeRows([
+                new Tipologia(
+                    area.value,
+                    categ.value,
+                    tipologia.value,
+                    estado.value,
+                    wcs.value,
+                    piso.value,
+                    garagem.checked,
+                    parking.checked,
+                    descricao.value,
+                    venda.value,
+                    aluguer.value
+                )
+            ]);
         });
 
         function post(path, params, redirect = '', method = 'post') {
@@ -662,6 +678,39 @@ include_once '../includes/admin/head.php';
 
         finalizarBtn.addEventListener("click", wasValidated);
         tipoEdificio.addEventListener("change", management);
+        document.addEventListener("DOMContentLoaded", () => {
+            let tipoEdificio = document.getElementById("inputTipoEdificio");
+
+            let area = document.getElementById("inputTipArea");
+            let categ = document.getElementById("inputTipCategEnergia");
+            let tipologia = document.getElementById("inputTipTipologia");
+            let estado = document.getElementById("inputTipEstado");
+            let wcs = document.getElementById("inputTipWCQuantidade");
+            let piso = document.getElementById("inputTipPiso");
+            let garagem = document.getElementById("inputTipGaragem");
+            let parking = document.getElementById("inputTipEstacionamento");
+            let descricao = document.getElementById("inputTipDescricao");
+            let venda = document.getElementById("inputTipValorVenda");
+            let aluguer = document.getElementById("inputTipValorAluguer");
+
+            if (rows.length !== 0 && tipoEdificio.value !== 1) {
+                let tip = auxArr[rows.length - 1].toObj();
+                
+                area.value = tip.area;
+                categ.value = tip.categoriaEnergetica;
+                tipologia.value = tip.tipologia;
+                estado.value = tip.estado;
+                wcs.value = tip.wcs;
+                piso.value = tip.piso;
+                garagem.checked = tip.hasGaragem;
+                parking.checked = tip.hasParking;
+                descricao.value = tip.descricao;;
+                venda.value = tip.venda;
+                aluguer.value = tip.aluguer;
+            }
+
+            management();
+        });
     </script>
 </body>
 

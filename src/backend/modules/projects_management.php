@@ -326,7 +326,7 @@
 
             $results = array();
             while($row = $result->fetch_assoc())
-                array_push($results, $row['wc_count']);
+                array_push($results, $row['floor']);
 
             return $results;
         }

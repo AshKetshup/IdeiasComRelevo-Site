@@ -263,7 +263,7 @@ include_once '../includes/admin/head.php';
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipEstado">Estado</label>
                                             <select id="inputTipEstado" class="form-control" placeholder="Selecione o estado">
-                                                <option value selected style="display:none">Selecione o estado</option>
+                                                <option value="0" selected style="display:none">Selecione o estado</option>
                                                 <option value="1">Vende-se</option>
                                                 <option value="2">Aluga-se</option>
                                                 <option value="3">Vende-se e Aluga-se</option>
@@ -783,7 +783,8 @@ include_once '../includes/admin/head.php';
             } else {
                 inptValor.disabled = false;
 
-                inptEstado.value = 1;
+                inptEstado.value    = 1;
+                inptTipEstado.value = 0;
 
                 inptTipValorVenda.disabled   = true;
                 inptTipValorAluguer.disabled = true;

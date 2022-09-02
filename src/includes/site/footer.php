@@ -1,5 +1,6 @@
 <?php
     $contacts = $app_instance->ContactsManagement->get_contacts();
+    $associates = $app_instance->AssociateManagement->admin_get_associates();
 ?>
 <footer class="footer" id="footer" data-background-color="black">
     <div class="container py-5">
@@ -45,39 +46,11 @@
             <div class="col-7">
                 <h5>Associados</h5>
                     <ul class="image-gallery">
-                        <li>
-                            <img src="https://source.unsplash.com/VWcPlbHglYc" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/e6FMMambeO4" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/klCiPmzUw0Y" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/IdNOTjPeHrE" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/O0N9MF--hK4" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/FV3GConVSss" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/0ESjL-Nw22Y" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/KTVn62x6fFw" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/VSeVhmW4_JQ" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/07aFaTf24Kg" alt="">
-                        </li>
-                        <li>
-                            <img src="https://source.unsplash.com/DqyYTM7pR2o" alt="">
-                        </li>
+                        <?php foreach($associates as $associate): ?>
+                            <li>
+                                <a target="_blank" href="<?= (str_contains($associate->get_website(), "http") ? $associate->get_website() : "http://" . $associate->get_website()) ?>"><img src="/uploads/<?= $associate->get_logo() ?>" alt="<?= ($associate->get_name()) ?>"></a>
+                            </li>    
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>

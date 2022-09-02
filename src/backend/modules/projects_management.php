@@ -284,6 +284,138 @@
             return $building_states[$id];
         }
 
+        public function get_project_filters() {
+            return [
+                "typologies" => $this->get_typologies(),
+                "energetic_category" => $this->get_energetic_category(),
+                "building_types" => $this->get_building_types(),
+                "floor_count" => $this->get_floor_count(),
+                "wc_count" => $this->get_wc_count(),
+                "floor" => $this->get_floor(),
+                "state" => $this->get_state()
+            ];
+
+        }
+
+        private function get_state() {
+            $connection = $this->db_context->initialize_connection();
+            if ($connection == NULL) {
+                $connection->close();
+                return array();
+            }
+
+            $sql = "SELECT `state` FROM ( SELECT `state` FROM `realestate` WHERE `state` NOT IN (0) UNION ALL SELECT `state` FROM `typology` WHERE `state` NOT IN (0) ) AS T GROUP BY `state`";
+            $result = $connection->query($sql);
+
+            $results = array();
+            while($row = $result->fetch_assoc())
+                array_push($results, $row['state']);
+
+            return $results;
+        }
+
+        private function get_floor() {
+            $connection = $this->db_context->initialize_connection();
+            if ($connection == NULL) {
+                $connection->close();
+                return array();
+            }
+
+            $sql = "SELECT `floor` FROM `typology` GROUP BY `floor`";
+            $result = $connection->query($sql);
+
+            $results = array();
+            while($row = $result->fetch_assoc())
+                array_push($results, $row['wc_count']);
+
+            return $results;
+        }
+
+        private function get_wc_count() {
+            $connection = $this->db_context->initialize_connection();
+            if ($connection == NULL) {
+                $connection->close();
+                return array();
+            }
+
+            $sql = "SELECT `wc_count` FROM `typology` GROUP BY `wc_count`";
+            $result = $connection->query($sql);
+
+            $results = array();
+            while($row = $result->fetch_assoc())
+                array_push($results, $row['wc_count']);
+
+            return $results;
+        }
+
+        private function get_floor_count() {
+            $connection = $this->db_context->initialize_connection();
+            if ($connection == NULL) {
+                $connection->close();
+                return array();
+            }
+
+            $sql = "SELECT `floor_count` FROM `realestate` GROUP BY `floor_count`";
+            $result = $connection->query($sql);
+
+            $results = array();
+            while($row = $result->fetch_assoc())
+                array_push($results, $row['floor_count']);
+
+            return $results;
+        }
+
+        private function get_building_types() {
+            $connection = $this->db_context->initialize_connection();
+            if ($connection == NULL) {
+                $connection->close();
+                return array();
+            }
+
+            $sql = "SELECT `building_type` FROM `realestate` GROUP BY `building_type`";
+            $result = $connection->query($sql);
+
+            $results = array();
+            while($row = $result->fetch_assoc())
+                array_push($results, $row['building_type']);
+
+            return $results;
+        }
+
+        private function get_typologies() {
+            $connection = $this->db_context->initialize_connection();
+            if ($connection == NULL) {
+                $connection->close();
+                return array();
+            }
+
+            $sql = "SELECT UPPER(`typology`) AS typology FROM `typology` GROUP BY `typology`";
+            $result = $connection->query($sql);
+
+            $results = array();
+            while($row = $result->fetch_assoc())
+                array_push($results, $row['typology']);
+
+            return $results;
+        }
+
+        private function get_energetic_category() {
+            $connection = $this->db_context->initialize_connection();
+            if ($connection == NULL) {
+                $connection->close();
+                return array();
+            }
+
+            $sql = "SELECT UPPER(`energy_category`) AS energy_category FROM `typology` GROUP BY `energy_category`";
+            $result = $connection->query($sql);
+
+            $results = array();
+            while($row = $result->fetch_assoc())
+                array_push($results, $row['energy_category']);
+
+            return $results;
+        }
+
     }
 
 ?>

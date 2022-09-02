@@ -44,10 +44,78 @@
             </div>
             <div class="col-7">
                 <h5>Associados</h5>
-                <div class="d-flex flex-wrap">
-
+                    <ul class="image-gallery">
+                        <li>
+                            <img src="https://source.unsplash.com/VWcPlbHglYc" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/e6FMMambeO4" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/klCiPmzUw0Y" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/IdNOTjPeHrE" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/O0N9MF--hK4" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/FV3GConVSss" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/0ESjL-Nw22Y" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/KTVn62x6fFw" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/VSeVhmW4_JQ" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/07aFaTf24Kg" alt="">
+                        </li>
+                        <li>
+                            <img src="https://source.unsplash.com/DqyYTM7pR2o" alt="">
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <style>
+                ul {
+                    list-style: none;
+                }
+
+                /* Responsive image gallery rules begin*/
+                .image-gallery {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+
+                    max-height: 150px;
+                    overflow-y: auto;
+                }
+
+                .image-gallery > li {
+                    flex: 1 1 auto; /* or flex: auto; */
+                    height: 100px;
+                    cursor: pointer;
+                    position: relative;
+                }
+
+                .image-gallery::after {
+                    content: "";
+                    flex-grow: 999;
+                }
+
+                .image-gallery li img {
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                    vertical-align: middle;
+                    border-radius: 5px;
+                }
+            </style>
         </div>
         <div class="pt-5 row w-100 small ">
             <p class="col-12 text-center text-muted">Designed and built by <a class="p-1 link-dark text-decoration-none" href="index.html#devs">Diogo Simões</a> and <a class="p-1 link-dark text-decoration-none" href="index.html#devs">Pedro Cavaleiro</a></p>

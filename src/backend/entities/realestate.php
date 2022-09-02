@@ -5,7 +5,7 @@
      * @subpackage entities
      * 
      * This file contains the Realestate entity class which maps the table to a PHP class
-     * Version: 1.3.1
+     * Version: 1.3.2
      * 
      * @developer Pedro Cavaleiro
      * @created Jan 11, 2022
@@ -155,7 +155,9 @@
                 $escaped_value = $connection->real_escape_string($this->value);
                 $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
                 $escaped_main_photo = $connection->real_escape_string($this->main_photo);
-                $escaped_photos = $connection->real_escape_string(join(",", $this->photo));
+                $escaped_photos = "";
+                if ($this->photos != NULL)
+                    $escaped_photos = $connection->real_escape_string(join(",", $this->photos));
                 $escaped_description = $connection->real_escape_string($this->description);
                 $escaped_title = $connection->real_escape_string($this->title);
                 $escaped_floor_count = $connection->real_escape_string($this->floor_count);
@@ -185,6 +187,9 @@
                 $sql1 = "DELETE FROM realestate WHERE id='" . $this->id . "'";
                 $sql2 = "DELETE FROM typology WHERE rid='" . $this->id . "'";
                 if ($connection->query($sql1) === TRUE) {
+                    foreach($this->photos as $photo)
+                        unlink($_SERVER["DOCUMENT_ROOT"] . "/uploads/" . $photo);
+
                     if ($connection->query($sql2) === TRUE)
                         $result = true;
                     else

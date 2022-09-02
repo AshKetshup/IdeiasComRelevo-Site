@@ -5,11 +5,11 @@
      * @subpackage entities
      * 
      * This file contains the Realestate entity class which maps the table to a PHP class
-     * Version: 1.3.2
+     * Version: 1.3.3
      * 
      * @developer Pedro Cavaleiro
      * @created Jan 11, 2022
-     * @lastedit Sep 1, 2022
+     * @lastedit Sep 2, 2022
      * 
      * @issues no issues linked to this file
      * @todo no tasks pending
@@ -55,7 +55,8 @@
         
         /** Constructor converts database entry to Entity */
         function __construct() {
-            $this->db_context = new DbContext();        
+            $this->db_context = new DbContext();  
+            $this->photos = array();      
         }
 
         /** Creates a new Instance from the typology id */
@@ -222,6 +223,14 @@
                 $this->reload_appartments();
 
             return $result;
+        }
+
+        public function delete_image($imageName) {
+            unset($this->photos[$imageName]);
+            unlink($_SERVER["DOCUMENT_ROOT"] . "/uploads/" . $imageName);
+        }
+        public function add_image($imageName) {
+            array_push($this->photos, $imageName);
         }
 
         /** Getters */

@@ -5,7 +5,7 @@
      * @subpackage modules
      * 
      * Contains all the methods to handle the Projects entities
-     * Version: 2.0.1
+     * Version: 2.1.0
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022
@@ -155,7 +155,9 @@
         }
 
         function edit_project($images, $imagesToRemove, $post, $typologies) {            
-            $projectEntity = new RealEstateEntity();
+            $projectEntity = RealEstateEntity::fromId($post['id']);
+
+            $projectEntity->delete_image($imagesToRemove);
 
             $projectEntity->set_zone($_POST['zona']);
             $projectEntity->set_county($_POST['concelho']);
@@ -177,7 +179,9 @@
 
             $projectEntity->set_title($_POST['titulo']);
 
-            $projectEntity->set_photos($images);
+            foreach($images as $image)
+                $projectEntity->add_image($image);
+
             $projectEntity->set_main_photo($images[0]);
 
             $projectEntity->update_changes();

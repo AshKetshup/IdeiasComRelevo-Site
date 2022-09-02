@@ -5,7 +5,7 @@
      * @subpackage modules
      * 
      * Contains all the methods to handle the Projects entities
-     * Version: 2.1.0
+     * Version: 2.1.1
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022
@@ -138,7 +138,7 @@
                 else
                     $typologyEntity->set_rent_price(0);
 
-                if (isset($typology['piso']))
+                if (isset($typology['piso']) && $typology['piso'] != "")
                     $typologyEntity->set_floor($typology['piso']);
                 else
                     $typologyEntity->set_floor(0);
@@ -154,10 +154,11 @@
             
         }
 
-        function edit_project($images, $imagesToRemove, $post, $typologies) {            
-            $projectEntity = RealEstateEntity::fromId($post['id']);
+        function edit_project($id, $images, $imagesToRemove, $post, $typologies) {            
+            $projectEntity = RealEstateEntity::fromId($id);
 
-            $projectEntity->delete_image($imagesToRemove);
+            foreach($imagesToRemove as $imageToRemove)
+                $projectEntity->delete_image($imageToRemove);
 
             $projectEntity->set_zone($_POST['zona']);
             $projectEntity->set_county($_POST['concelho']);
@@ -182,7 +183,7 @@
             foreach($images as $image)
                 $projectEntity->add_image($image);
 
-            $projectEntity->set_main_photo($images[0]);
+            $projectEntity->set_main_photo($projectEntity->get_photos()[0]);
 
             $projectEntity->update_changes();
             $projectEntity->clear_typologies();
@@ -224,7 +225,7 @@
                 else
                     $typologyEntity->set_rent_price(0);
 
-                if (isset($typology['piso']))
+                if (isset($typology['piso']) && $typology['piso'] != "")
                     $typologyEntity->set_floor($typology['piso']);
                 else
                     $typologyEntity->set_floor(0);

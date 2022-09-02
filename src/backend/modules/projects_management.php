@@ -5,7 +5,7 @@
      * @subpackage modules
      * 
      * Contains all the methods to handle the Projects entities
-     * Version: 2.1.1
+     * Version: 2.2.0
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022

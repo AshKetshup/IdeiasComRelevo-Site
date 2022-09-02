@@ -35,6 +35,40 @@ include_once '../includes/admin/head.php';
     input[type=number] {
         -moz-appearance: textfield;
     }
+
+    .carousel{
+        display: block;
+        width: 100%;
+        height: 200px;
+        overflow-x: scroll;
+        padding: 10px;
+        margin: 0;
+        white-space: nowrap; 
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-item {
+        display: inline-block;
+        height: 100%;
+        max-width: 300px;
+        margin: 0 10px;
+        float: none;
+        background-size: cover;
+        position: relative;
+    }
+
+    .carousel-item img {
+        height: 100%;
+    }
+
+    .carousel-item:nth-child(1) img {
+        border-style: solid;
+        border-color:white;
+
+    }
+
+
 </style>
 
 <body class="hold-transition sidebar-mini dark-mode">
@@ -86,40 +120,56 @@ include_once '../includes/admin/head.php';
                                     </div>
                                     <div class="card-body">
                                         <div class="w-100 d-flex flex-wrap">
+                                            <div class=" overflow-hidden w-100 d-block">
+                                                <?php if (isset($projeto)): ?>
+                                                    <div class="carousel d-block">
+                                                        <?php foreach($projeto->get_photos() as $photo): ?>
+                                                            <div class="carousel-item">
+                                                                <a class="badge badge-danger position-absolute m-1 p-1 delBtn" 
+                                                                    id="<?= $photo ?>">
+                                                                    <i class="fa-solid fa-2x fa-trash-can"></i>
+                                                                </a>
+                                                                <img src="/uploads/<?= $photo ?>">
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
                                             <div class="form-group col-lg-12">
-                                                <label for="inputImages">Images</label>
+
+                                                <label for="inputImages">Imagens (*)</label>
                                                 <input type="file" name="imagens[]" class="form-control" id="inputImages" accept="image/png, image/jpeg" multiple required>
                                             </div>
                                             <div class="form-group col-lg-12">
-                                                <label for="inputTitle">Title</label>
+                                                <label for="inputTitle">Titulo (*)</label>
                                                 <input id="inputTitle" name="titulo" class="form-control" type="text" placeholder="Insira o titulo"required <?= isset($_GET['id']) ? 'value="' . $projeto->get_title() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
-                                                <label for="inputZona">Zona</label>
+                                                <label for="inputZona">Zona (*)</label>
                                                 <input id="inputZona" name="zona" class="form-control" type="text" placeholder="Insira a zona" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_zone() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
-                                                <label for="inputConcelho">Concelho</label>
+                                                <label for="inputConcelho">Concelho (*)</label>
                                                 <input id="inputConcelho" name="concelho" class="form-control" type="text" placeholder="Insira o concelho" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_county() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-4">
-                                                <label for="inputFreguesia">Freguesia</label>
+                                                <label for="inputFreguesia">Freguesia (*)</label>
                                                 <input id="inputFreguesia" name="freguesia" class="form-control" type="text" placeholder="Insira a freguesia" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_city() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                <label for="inputTipoEdificio">Tipo de Edificio</label>
+                                                <label for="inputTipoEdificio">Tipo de Edificio (*)</label>
                                                 <select id="inputTipoEdificio" name="tipoEdificio" class="form-control" placeholder="Tipo de Edificio" required>
                                                     <option <?= isset($_GET['id']) ? '' : 'selected' ?> value style="display:none">Escolha o tipo de Edificio</option>
                                                     <option <?= isset($_GET['id']) ? ($projeto->get_building_type() == 1 ? 'selected' : '') : '' ?> value="1">Prédio</option>
@@ -132,21 +182,21 @@ include_once '../includes/admin/head.php';
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-6">
-                                                <label for="inputNPisos">Nº de Pisos</label>
+                                                <label for="inputNPisos">Nº de Pisos (*)</label>
                                                 <input id="inputNPisos" name="nPisos" class="form-control" type="number" min="0" placeholder="Insira o Nº de Pisos" required <?= isset($_GET['id']) ? 'value="' . $projeto->get_floor_count() . '"' : '' ?>>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-12">
-                                                <label for="inputDescricao">Descrição</label>
+                                                <label for="inputDescricao">Descrição (*)</label>
                                                 <textarea id="inputDescricao" name="descricao" class="form-control" type="text" placeholder="Descreva o projeto" style="min-height:12rem" required><?= isset($_GET['id']) ? $projeto->get_description() : '' ?></textarea>
 
                                                 <div class="valid-feedback">Valido.</div>
                                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-5">
-                                                <label for="inputEstado">Estado</label>
+                                                <label for="inputEstado">Estado (*)</label>
                                                 <select id="inputEstado" name="estado" class="form-control" type="text" placeholder="Selecione o estado" required>
                                                     <option <?= isset($_GET['id']) ? '' : 'selected' ?> value style="display:none">Selecione o estado</option>
                                                     <option <?= isset($_GET['id']) ? ($projeto->get_state() == 0 ? 'selected' : '') : '' ?> value="0">-</option>
@@ -199,21 +249,21 @@ include_once '../includes/admin/head.php';
                                     </div>
                                     <div class="card-body row">
                                         <div class="form-group col-lg-3">
-                                            <label for="inputTipArea">Area (m<sup>2</sup>)</label>
+                                            <label for="inputTipArea">Area (m<sup>2</sup>) (*)</label>
                                             <input id="inputTipArea" class="form-control" type="number" placeholder="Insira a Area">
                                         </div>
                                         <div class="form-group col-lg-3">
-                                            <label for="inputTipCategEnergia">Categoria Energética</label>
+                                            <label for="inputTipCategEnergia">Categoria Energética (*)</label>
                                             <input id="inputTipCategEnergia" class="form-control" type="text" placeholder="Insira a Categoria">
                                         </div>
                                         <div class="form-group col-lg-3">
-                                            <label for="inputTipTipologia">Tipologia</label>
+                                            <label for="inputTipTipologia">Tipologia (*)</label>
                                             <input id="inputTipTipologia" class="form-control" type="text" placeholder="Insira a Tipologia">
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipEstado">Estado</label>
                                             <select id="inputTipEstado" class="form-control" placeholder="Selecione o estado">
-                                                <option selected>Selecione o estado</option>
+                                                <option value selected style="display:none">Selecione o estado</option>
                                                 <option value="1">Vende-se</option>
                                                 <option value="2">Aluga-se</option>
                                                 <option value="3">Vende-se e Aluga-se</option>
@@ -221,11 +271,11 @@ include_once '../includes/admin/head.php';
                                             </select>
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <label for="inputTipWCQuantidade">WCs</label>
+                                            <label for="inputTipWCQuantidade">WCs (*)</label>
                                             <input id="inputTipWCQuantidade" class="form-control" type="number" placeholder="Insira quantas WCs">
                                         </div>
                                         <div class="form-group col-lg-4">
-                                            <label for="inputTipPiso">Piso</label>
+                                            <label for="inputTipPiso">Piso (*)</label>
                                             <input id="inputTipPiso" class="form-control" type="number" placeholder="Insira o Piso">
                                         </div>
                                         <div class="col-md-2 d-flex flex-row justify-content-start">
@@ -310,6 +360,7 @@ include_once '../includes/admin/head.php';
 
     <!-- REQUIRED SCRIPTS -->
     <?php include_once '../includes/admin/scripts.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
         let LIMIT_TYPO = true;
@@ -553,24 +604,6 @@ include_once '../includes/admin/head.php';
             ]);
         });
 
-        function post(path, params, redirect = '', method = 'post') {
-            let xhr = new XMLHttpRequest();
-            xhr.open(method, path, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function(evt) {
-                console.log(xhr.status);
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    if (redirect !== '') {
-                        location.replace(redirect);
-                    }
-                }
-            }
-
-            let data = JSON.stringify(params);
-            console.log(data);
-            xhr.send(data);
-        }
-
         function getData() {
             const inputImages = document.getElementById("inputImages").files;
             const inputTitle = document.getElementById("inputTitle").value;
@@ -605,21 +638,9 @@ include_once '../includes/admin/head.php';
             }
         }
 
-        // return {
-        //     area: this.#area,
-        //     categoriaEnergetica: this.#categoriaEnergetica,
-        //     tipologia: this.#tipologia,
-        //     estado: this.#estado,
-        //     wcs: this.#wcs,
-        //     piso: this.#piso,
-        //     hasGaragem: this.#hasGaragem,
-        //     hasParking: this.#hasParking,
-        //     descricao: this.#descricao,
-        //     venda: this.#venda,
-        //     aluguer: this.#aluguer
-        // };
+        let imagesIDs = [];
 
-        function addContentToForm(rowList) {
+        function addContentToForm(rowList, iID = []) {
             function createHInput(data, index) {
                 let inputs = [];
 
@@ -636,6 +657,20 @@ include_once '../includes/admin/head.php';
                 return inputs;
             }
 
+            function createHInputID(id) {
+                let inputs = [];
+
+                let hInput   = document.createElement("input");
+
+                hInput.type  = "hidden";
+                hInput.name  = "delete[]";
+                hInput.value = id;
+
+                inputs.push(hInput);
+
+                return inputs;
+            }
+
             let hInputs = [];
             
             for (let index = 0; index < rowList.length; index++) {
@@ -646,30 +681,31 @@ include_once '../includes/admin/head.php';
                 );
             }
 
+            for (const id of iID) {
+                hInputs = hInputs.concat(
+                    createHInputID(id)
+                );
+            }
+
             const hiddenInputs = document.getElementById("hiddenInputs");
 
             hInputs.forEach(el => {
                 hiddenInputs.appendChild(el);
             });
         }
-        
+
+        let inputImagens = document.getElementById("inputImages");
         let formProject = document.getElementById("form-project")
         formProject.addEventListener("submit", () => {
-            // event.preventDefault();
-            if (rows.length === 0)
+            console.log('rows.length === 0 || (inputImagens.files.length === 0 && document.getElementsByClassName("carousel-item").length === 0) \n' + rows.length === 0 || (inputImagens.files.length === 0 && document.getElementsByClassName("carousel-item").length === 0))
+            if (rows.length === 0 || (inputImagens.files.length === 0 && document.getElementsByClassName("carousel-item").length === 0)) {
+                event.preventDefault();
                 return false;
-
+            }
             // console.log(rows)
 
-            // const JSONContent = {
-            //     projeto: getData(),
-            //     typologies: LIMIT_TYPO ? [rows[rows.length - 1]] : rows
-            // };
-            
-            addContentToForm(LIMIT_TYPO ? [rows[rows.length - 1]] : rows);
+            addContentToForm(LIMIT_TYPO ? [rows[rows.length - 1]] : rows, imagesIDs);
 
-            // post("/backend/post_scripts/create_project.php", JSONContent, "/admin/projetos");
-            // post("/backend/post_scripts/edit_project.php", JSONContent, "/admin/projetos");
             <?php if (!isset($_GET['id'])): ?>
             formProject.setAttribute("action", "/backend/post_scripts/create_project.php");
             <?php else: ?>
@@ -678,10 +714,17 @@ include_once '../includes/admin/head.php';
 
             formProject.setAttribute("method", "post");
             formProject.setAttribute("enctype", "multipart/form-data");
-            // formProject.setAttribute("enctype", "application/json");
-
+            
             return true;
         });
+
+        let delBtns = document.getElementsByClassName("delBtn");
+        for (const btn of delBtns) {
+            btn.addEventListener("click", () => {
+                imagesIDs.push(btn.getAttribute("id"));
+                btn.closest("div").remove();
+            });
+        }
     </script>
 
     <script>
@@ -696,7 +739,7 @@ include_once '../includes/admin/head.php';
                 x.classList.add("was-validated");
             }
         }
-
+        
         function management(deleteIt = true) {
             let tipoEdificio = document.getElementById("inputTipoEdificio");
             let tipologiaForm = document.getElementById("tipologia-form");
@@ -708,11 +751,9 @@ include_once '../includes/admin/head.php';
             let inptTipValorAluguer = document.getElementById("inputTipValorAluguer");
             let inptTipDescricao = document.getElementById("inputTipDescricao");
 
-            tableRows.innerHTML = "";
-
-
             if (deleteIt) {
                 console.log("Aqui");
+                tableRows.innerHTML = "";
                 rows = [];
             }
 
@@ -761,25 +802,30 @@ include_once '../includes/admin/head.php';
             let venda = document.getElementById("inputTipValorVenda");
             let aluguer = document.getElementById("inputTipValorAluguer");
 
-            if (rows.length !== 0 && tipoEdificio.value !== 1) {
-                let tip = auxArr[rows.length - 1].toObj();
-                
-                area.value = tip.area;
-                categ.value = tip.categoriaEnergetica;
-                tipologia.value = tip.tipologia;
-                estado.value = tip.estado;
-                wcs.value = tip.wcs;
-                piso.value = tip.piso;
-                garagem.checked = tip.hasGaragem;
-                parking.checked = tip.hasParking;
-                descricao.value = tip.descricao;;
-                venda.value = tip.venda;
-                aluguer.value = tip.aluguer;
+            if (rows.length !== 0) {
+                inputImagens.removeAttribute("required");
+
+                if (tipoEdificio.value !== "1") {
+                    let tip = auxArr[rows.length - 1].toObj();
+                    
+                    area.value = tip.area;
+                    categ.value = tip.categoriaEnergetica;
+                    tipologia.value = tip.tipologia;
+                    estado.value = tip.estado;
+                    wcs.value = tip.wcs;
+                    piso.value = tip.piso;
+                    garagem.checked = tip.hasGaragem;
+                    parking.checked = tip.hasParking;
+                    descricao.value = tip.descricao;;
+                    venda.value = tip.venda;
+                    aluguer.value = tip.aluguer;
+                }
             }
 
             management(false);
         });
-    </script>
+            
+        </script>
 </body>
 
 </html>

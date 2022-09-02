@@ -206,7 +206,7 @@ include_once '../includes/admin/head.php';
                                                     <option <?= isset($_GET['id']) ? ($projeto->get_state() == 0 ? 'selected' : '') : '' ?> value="0">-</option>
                                                     <option <?= isset($_GET['id']) ? ($projeto->get_state() == 1 ? 'selected' : '') : '' ?> value="1">Vende-se</option>
                                                     <option <?= isset($_GET['id']) ? ($projeto->get_state() == 2 ? 'selected' : '') : '' ?> value="2">Aluga-se</option>
-                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 3 ? 'selected' : '') : '' ?> value="3">Vendido</option>
+                                                    <option <?= isset($_GET['id']) ? ($projeto->get_state() == 4 ? 'selected' : '') : '' ?> value="4">Vendido</option>
                                                 </select>
 
                                                 <div class="valid-feedback">Valido.</div>

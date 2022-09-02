@@ -256,24 +256,10 @@
         }
 
         /**
-         * Converts the building state id (int) to the matching string
-         * @param $id the building state as string
-         */
-        public static function building_state_id_to_string($id) {
-            $building_states = array(
-                0 => "-",
-                1 => "Vende-se",
-                2 => "Aluga-se",
-                3 => "Vendido"
-            );
-            return $building_states[$id];
-        }
-
-        /**
          * Converts the typology state id (int) to the matching string
          * @param $id the typology state as string
          */
-        public static function typology_state_id_to_string($id) {
+        public static function state_id_to_string($id) {
             $building_states = array(
                 0 => "-",
                 1 => "Vende-se",

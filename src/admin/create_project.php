@@ -43,9 +43,10 @@ include_once '../includes/admin/head.php';
         overflow-x: scroll;
         padding: 10px;
         margin: 0;
+        margin-bottom: 10px;
         white-space: nowrap; 
-        border-top: 2px solid rgba(0, 0, 0, 0.1);
-        border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
     }
 
     .carousel-item {
@@ -139,6 +140,9 @@ include_once '../includes/admin/head.php';
 
                                                 <label for="inputImages">Imagens (*)</label>
                                                 <input type="file" name="imagens[]" class="form-control" id="inputImages" accept="image/png, image/jpeg" multiple required>
+                                                                                                                                            
+                                                <div class="valid-feedback">Valido.</div>
+                                                <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <label for="inputTitle">Titulo (*)</label>
@@ -242,7 +246,7 @@ include_once '../includes/admin/head.php';
 
                         <!-- /.col-md-12 -->
                         <div class="col-lg-6" id="tipologia-form">
-                            <form>
+                            <form id="tipo-form" class="needs-validation">
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="m-0">Formulário Tipologia</h5>
@@ -250,15 +254,24 @@ include_once '../includes/admin/head.php';
                                     <div class="card-body row">
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipArea">Area (m<sup>2</sup>) (*)</label>
-                                            <input id="inputTipArea" class="form-control" type="number" placeholder="Insira a Area">
+                                            <input id="inputTipArea" class="form-control" type="number" placeholder="Insira a Area" required>
+                                                                                                                                    
+                                            <div class="valid-feedback">Valido.</div>
+                                            <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipCategEnergia">Categoria Energética (*)</label>
-                                            <input id="inputTipCategEnergia" class="form-control" type="text" placeholder="Insira a Categoria">
+                                            <input id="inputTipCategEnergia" class="form-control" type="text" placeholder="Insira a Categoria" required>
+                                                                                                                                    
+                                            <div class="valid-feedback">Valido.</div>
+                                            <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipTipologia">Tipologia (*)</label>
-                                            <input id="inputTipTipologia" class="form-control" type="text" placeholder="Insira a Tipologia">
+                                            <input id="inputTipTipologia" class="form-control" type="text" placeholder="Insira a Tipologia" required>
+                                                                                        
+                                            <div class="valid-feedback">Valido.</div>
+                                            <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="inputTipEstado">Estado</label>
@@ -272,11 +285,17 @@ include_once '../includes/admin/head.php';
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="inputTipWCQuantidade">WCs (*)</label>
-                                            <input id="inputTipWCQuantidade" class="form-control" type="number" placeholder="Insira quantas WCs">
+                                            <input id="inputTipWCQuantidade" class="form-control" type="number" placeholder="Insira quantas WCs" required>
+                                                                                        
+                                            <div class="valid-feedback">Valido.</div>
+                                            <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="inputTipPiso">Piso (*)</label>
-                                            <input id="inputTipPiso" class="form-control" type="number" placeholder="Insira o Piso">
+                                            <input id="inputTipPiso" class="form-control" type="number" placeholder="Insira o Piso" required>
+                                                                                        
+                                            <div class="valid-feedback">Valido.</div>
+                                            <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                         </div>
                                         <div class="col-md-2 d-flex flex-row justify-content-start">
                                             <div class="form-check d-flex align-self-center justify-content-center" title="Inclui Garagem">
@@ -292,7 +311,10 @@ include_once '../includes/admin/head.php';
                                         </div>
                                         <div class="form-group col-lg-12">
                                             <label for="inputTipDescricao">Descrição</label>
-                                            <textarea id="inputTipDescricao" class="form-control" type="text" placeholder="Descreva o projeto" style="min-height:12rem"></textarea>
+                                            <textarea id="inputTipDescricao" class="form-control" type="text" placeholder="Descreva o projeto" style="min-height:12rem" required></textarea>
+                                                                                        
+                                            <div class="valid-feedback">Valido.</div>
+                                            <div class="invalid-feedback">Por favor, preencher este campo.</div>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label for="inputTipValorVenda">Valor Venda (€)</label>
@@ -304,7 +326,7 @@ include_once '../includes/admin/head.php';
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 d-flex justify-content-end">
-                                        <a class="btn btn-primary" id="adicionar-btn">Adicionar</a>
+                                        <button type="submit" class="btn btn-primary" id="adicionar-btn">Adicionar</button>
                                     </div>
                                 </div>
                             </form>
@@ -360,7 +382,6 @@ include_once '../includes/admin/head.php';
 
     <!-- REQUIRED SCRIPTS -->
     <?php include_once '../includes/admin/scripts.php'; ?>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
         let LIMIT_TYPO = true;
@@ -502,7 +523,10 @@ include_once '../includes/admin/head.php';
             }
         }
 
-        let adicionarBtn = document.getElementById("adicionar-btn");
+    </script>
+
+    <script>
+        let tipoForm = document.getElementById("tipo-form");
         let tableBody = document.getElementById("typology-table-body");
         let rows = [];
         let indexCount = 0;
@@ -510,8 +534,6 @@ include_once '../includes/admin/head.php';
         function composeRows(arr) {
             for (const tip of arr) {
                 let newRow = tableBody.insertRow();
-
-                console.log(tip.estado());
             
                 newRow.insertCell().appendChild(tip.area());
                 newRow.insertCell().appendChild(tip.categoriaEnergetica());
@@ -536,6 +558,8 @@ include_once '../includes/admin/head.php';
                 elim.onclick = function deleteSelf() {
                     this.closest("tr").remove();
                     rows.splice(this.id, 1);
+
+                    toastDanger("Tipologia", "Foi eliminado 1 tipologia.")
                 };
 
                 newRow.insertCell().appendChild(elim);
@@ -574,7 +598,14 @@ include_once '../includes/admin/head.php';
 
         composeRows(auxArr);
 
-        adicionarBtn.addEventListener("click", () => {
+        tipoForm.addEventListener("submit", () => {
+            event.preventDefault();
+
+            if (tipoForm.classList.contains("needs-validation")) {
+                tipoForm.classList.remove("needs-validation");
+                tipoForm.classList.add("was-validated");
+            }
+
             let area = document.getElementById("inputTipArea");
             let categ = document.getElementById("inputTipCategEnergia");
             let tipologia = document.getElementById("inputTipTipologia");
@@ -602,41 +633,11 @@ include_once '../includes/admin/head.php';
                     aluguer.value
                 )
             ]);
+
+            toastSuccess("Tipologias", "Foi adicionado com sucesso tipologia(s).");
+
+            return false;
         });
-
-        // function getData() {
-        //     const inputImages = document.getElementById("inputImages").files;
-        //     const inputTitle = document.getElementById("inputTitle").value;
-        //     const inputZona = document.getElementById("inputZona").value;
-        //     const inputConcelho = document.getElementById("inputConcelho").value;
-        //     const inputFreguesia = document.getElementById("inputFreguesia").value;
-        //     const inputTipoEdificio = document.getElementById("inputTipoEdificio").value;
-        //     const inputNPisos = document.getElementById("inputNPisos").value;
-        //     const inputDescricao = document.getElementById("inputDescricao").value;
-        //     const inputEstado = document.getElementById("inputEstado").value;
-        //     const inputValor = document.getElementById("inputValor").value;
-        //     const inputElevador = document.getElementById("inputElevador").checked;
-
-        //     let images = [];
-        //     for (const image of inputImages) {
-        //         images.push(image.valueOf());
-        //     }
-
-        //     return {
-                
-        //         imagens: images,
-        //         titulo: inputTitle,
-        //         zona: inputZona,
-        //         concelho: inputConcelho,
-        //         freguesia: inputFreguesia,
-        //         tipoEdificio: inputTipoEdificio,
-        //         nPisos: inputNPisos,
-        //         descricao: inputDescricao,
-        //         estado: inputEstado,
-        //         valor: inputValor,
-        //         elevador: inputElevador
-        //     }
-        // }
 
         let imagesIDs = [];
 
@@ -697,17 +698,20 @@ include_once '../includes/admin/head.php';
         let inputImagens = document.getElementById("inputImages");
         let formProject = document.getElementById("form-project")
         formProject.addEventListener("submit", () => {
-            console.log('rows.length === 0 || (inputImagens.files.length === 0 && document.getElementsByClassName("carousel-item").length === 0) \n' + rows.length === 0 || (inputImagens.files.length === 0 && document.getElementsByClassName("carousel-item").length === 0))
+            if (rows.length === 0)
+                toastDanger("Tipologia", "É necessario pelo menos 1 tipologia adicionada.");
+
+            if (inputImagens.files.length === 0 && document.getElementsByClassName("carousel-item").length === 0)
+                toastDanger("Criar", "É necessario pelo menos 1 imagem carregada.");
+
             if (rows.length === 0 || (inputImagens.files.length === 0 && document.getElementsByClassName("carousel-item").length === 0)) {
                 event.preventDefault();
                 return false;
             }
-            // console.log(rows)
 
             if (inputImagens.files.length === 0) {
                 inputImagens.disabled = true;
             }
-
 
             addContentToForm(LIMIT_TYPO ? [rows[rows.length - 1]] : rows, imagesIDs);
 
@@ -759,9 +763,10 @@ include_once '../includes/admin/head.php';
             let inptTipPiso         = document.getElementById("inputTipPiso");
 
             if (deleteIt) {
-                console.log("Aqui");
                 tableRows.innerHTML = "";
                 rows = [];
+
+                toastWarning("Tipologias", "Todas as Tipologias foram apagadas");
             }
 
             LIMIT_TYPO = tipoEdificio.value != 1;
@@ -849,19 +854,7 @@ include_once '../includes/admin/head.php';
             management(false);
         });
             
-        </script>
-
-        <script>
-            function toastSuccess(title, msg) {
-                $(document).Toasts('create', {
-                    title: title,
-                    body: msg,
-                    class: "card card-success"
-                });
-            }
-
-            toastSuccess("Teste", "Teste msg")
-        </script>
+    </script>
 </body>
 
 </html>

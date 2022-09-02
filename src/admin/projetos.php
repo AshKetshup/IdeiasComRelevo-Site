@@ -93,9 +93,9 @@ include_once '../includes/admin/head.php';
                                                     <td><?= ProjectsManagement::building_state_id_to_string($project->get_state()) ?></td>
                                                     <td>
                                                         <a class="badge bg-warning p-1 px-2 mr-1" title="Editar" href="/admin/create_project.php?id=<?= $project->get_id() ?>"><i class="fa-solid fa-pen"></i></a>
-                                                        <button class="badge bg-danger p-1 px-2 mr-1 btn-delete" title="Eliminar" data-toggle="modal" data-target="#confirmElimination">
+                                                        <a class="badge bg-danger p-1 px-2 mr-1 btn-delete" title="Eliminar" data-toggle="modal" data-target="#confirmElimination">
                                                             <i class="fa-solid fa-trash-can"></i>
-                                                        </button>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>

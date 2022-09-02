@@ -25,6 +25,9 @@
 
     $target_dir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
 
+    var_dump($_POST);
+    die();
+
     $images = array();
     $count = count($_FILES['imagens']['name']);
     for ($i=0; $i < $count; $i++) {

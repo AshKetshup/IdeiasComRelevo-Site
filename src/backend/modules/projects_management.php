@@ -5,11 +5,11 @@
      * @subpackage modules
      * 
      * Contains all the methods to handle the Projects entities
-     * Version: 2.0.0
+     * Version: 2.0.1
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022
-     * @lastedit Sep 1, 2022
+     * @lastedit Sep 2, 2022
      * 
      * @issues no issues linked to this file
      * @todo no tasks pending
@@ -90,7 +90,7 @@
                 $projectEntity->set_value(0);
 
             if (isset($_POST['elevador']))
-                $projectEntity->set_has_elevator($_POST['elevador']);
+                $projectEntity->set_has_elevator($_POST['elevador'] == 'on');
             else
                 $projectEntity->set_has_elevator(false);
 
@@ -117,23 +117,23 @@
                 $typologyEntity->set_wc_count($typology['wcs']);
 
                 if (isset($typology['hasGaragem']))
-                    $typologyEntity->set_has_garage($typology['hasGaragem']);
+                    $typologyEntity->set_has_garage($typology['hasGaragem'] == "true");
                 else
                     $typologyEntity->set_has_garage(false);
 
                 if (isset($typology['hasParking']))
-                    $typologyEntity->set_has_parking($typology['hasParking']);
+                    $typologyEntity->set_has_parking($typology['hasParking'] == "true");
                 else
                     $typologyEntity->set_has_parking(false);
 
                 $typologyEntity->set_description($typology['descricao']);
 
-                if(isset($typology['venda']))
+                if(isset($typology['venda']) && $typology['venda'] != "")
                     $typologyEntity->set_sell_price($typology['venda']);
                 else
                     $typologyEntity->set_sell_price(0);
 
-                if(isset($typology['aluguer']))
+                if(isset($typology['aluguer']) && $typology['aluguer'] != "")
                     $typologyEntity->set_rent_price($typology['aluguer']);
                 else
                     $typologyEntity->set_rent_price(0);
@@ -154,7 +154,7 @@
             
         }
 
-        function edit_project($images, $post, $typologies) {            
+        function edit_project($images, $imagesToRemove, $post, $typologies) {            
             $projectEntity = new RealEstateEntity();
 
             $projectEntity->set_zone($_POST['zona']);
@@ -171,7 +171,7 @@
                 $projectEntity->set_value(0);
 
             if (isset($_POST['elevador']))
-                $projectEntity->set_has_elevator($_POST['elevador']);
+                $projectEntity->set_has_elevator($_POST['elevador'] == 'on');
             else
                 $projectEntity->set_has_elevator(false);
 
@@ -199,23 +199,23 @@
                 $typologyEntity->set_wc_count($typology['wcs']);
 
                 if (isset($typology['hasGaragem']))
-                    $typologyEntity->set_has_garage($typology['hasGaragem']);
+                    $typologyEntity->set_has_garage($typology['hasGaragem'] == "true");
                 else
                     $typologyEntity->set_has_garage(false);
 
                 if (isset($typology['hasParking']))
-                    $typologyEntity->set_has_parking($typology['hasParking']);
+                    $typologyEntity->set_has_parking($typology['hasParking'] == "true");
                 else
                     $typologyEntity->set_has_parking(false);
 
                 $typologyEntity->set_description($typology['descricao']);
 
-                if(isset($typology['venda']))
+                if(isset($typology['venda']) && $typology['venda'] != "")
                     $typologyEntity->set_sell_price($typology['venda']);
                 else
                     $typologyEntity->set_sell_price(0);
 
-                if(isset($typology['aluguer']))
+                if(isset($typology['aluguer']) && $typology['aluguer'] != "")
                     $typologyEntity->set_rent_price($typology['aluguer']);
                 else
                     $typologyEntity->set_rent_price(0);

@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
     To set the page name change the $PAGE_NAME variable
 -->
 <?php
-$PAGE_NAME = "Criar Projeto";
+$PAGE_NAME = (isset($_GET['id']) ? "Editar" : "Criar") . " Projeto";
 $PAGE_ID = "criar_projeto";
 include_once '../includes/admin/head.php';
 ?>
@@ -88,7 +88,7 @@ include_once '../includes/admin/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="pb-2">Criar Projeto</h1>
+                            <h1 class="pb-2"><?= isset($_GET['id']) ? "Editar" : "Criar" ?> Projeto</h1>
                             <p class="mb-0">Aqui podem preencher o seguinte formulario para criar um projeto.</p>
                             <p class="mb-1">No campo <a href="#inputDescricao">descrição</a> tem a capacidade de
                                 interpretar markdown. Seguindo estas <a href="https://www.markdownguide.org/basic-syntax/">regras</a>.</p>

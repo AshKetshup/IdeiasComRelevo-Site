@@ -769,11 +769,13 @@ include_once '../includes/admin/head.php';
                 inptTipValorAluguer.disabled = false;
                 inptTipDescricao.disabled    = false;
                 inptTipPiso.disabled         = false;
+                inptTipEstado.disabled       = false;
 
                 inptTipValorVenda.closest("div").hidden   = false;
                 inptTipValorAluguer.closest("div").hidden = false;
                 inptTipDescricao.closest("div").hidden    = false;
                 inptTipPiso.closest("div").hidden         = false;
+                inptTipEstado.closest("div").hidden       = false;
 
                 tipologiaTable.hidden = false;
                 tipologiaForm.classList.remove("col-lg-12");
@@ -787,11 +789,13 @@ include_once '../includes/admin/head.php';
                 inptTipValorAluguer.disabled = true;
                 inptTipDescricao.disabled    = true;
                 inptTipPiso.disabled         = true;
+                inptTipEstado.disabled       = true;
 
                 inptTipValorVenda.closest("div").hidden   = true;
                 inptTipValorAluguer.closest("div").hidden = true;
                 inptTipDescricao.closest("div").hidden    = true;
                 inptTipPiso.closest("div").hidden         = true;
+                inptTipEstado.closest("div").hidden       = true;
 
                 tipologiaTable.hidden = true;
                 tipologiaForm.classList.remove("col-lg-6");

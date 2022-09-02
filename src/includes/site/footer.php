@@ -67,12 +67,12 @@
 
                     max-height: 150px;
                     overflow-y: auto;
+                    overflow-x: hidden;
                 }
 
                 .image-gallery > li {
                     flex: 1 1 auto; /* or flex: auto; */
                     height: 100px;
-                    cursor: pointer;
                     position: relative;
                 }
 
@@ -82,7 +82,7 @@
                 }
 
                 .image-gallery li img {
-                    object-fit: cover;
+                    object-fit: fill;
                     width: 100%;
                     height: 100%;
                     vertical-align: middle;

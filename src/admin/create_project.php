@@ -704,6 +704,11 @@ include_once '../includes/admin/head.php';
             }
             // console.log(rows)
 
+            if (inputImagens.files.length === 0) {
+                inputImagens.disabled = true;
+            }
+
+
             addContentToForm(LIMIT_TYPO ? [rows[rows.length - 1]] : rows, imagesIDs);
 
             <?php if (!isset($_GET['id'])): ?>
@@ -844,6 +849,17 @@ include_once '../includes/admin/head.php';
             management(false);
         });
             
+        </script>
+
+        <script>
+            function toastSuccess(title, msg) {
+                $(document).Toasts('create', {
+                    title: title,
+                    body: msg
+                });
+            }
+
+            toastSuccess("Teste", "Teste msg")
         </script>
 </body>
 

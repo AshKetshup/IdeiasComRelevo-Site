@@ -604,39 +604,39 @@ include_once '../includes/admin/head.php';
             ]);
         });
 
-        function getData() {
-            const inputImages = document.getElementById("inputImages").files;
-            const inputTitle = document.getElementById("inputTitle").value;
-            const inputZona = document.getElementById("inputZona").value;
-            const inputConcelho = document.getElementById("inputConcelho").value;
-            const inputFreguesia = document.getElementById("inputFreguesia").value;
-            const inputTipoEdificio = document.getElementById("inputTipoEdificio").value;
-            const inputNPisos = document.getElementById("inputNPisos").value;
-            const inputDescricao = document.getElementById("inputDescricao").value;
-            const inputEstado = document.getElementById("inputEstado").value;
-            const inputValor = document.getElementById("inputValor").value;
-            const inputElevador = document.getElementById("inputElevador").checked;
+        // function getData() {
+        //     const inputImages = document.getElementById("inputImages").files;
+        //     const inputTitle = document.getElementById("inputTitle").value;
+        //     const inputZona = document.getElementById("inputZona").value;
+        //     const inputConcelho = document.getElementById("inputConcelho").value;
+        //     const inputFreguesia = document.getElementById("inputFreguesia").value;
+        //     const inputTipoEdificio = document.getElementById("inputTipoEdificio").value;
+        //     const inputNPisos = document.getElementById("inputNPisos").value;
+        //     const inputDescricao = document.getElementById("inputDescricao").value;
+        //     const inputEstado = document.getElementById("inputEstado").value;
+        //     const inputValor = document.getElementById("inputValor").value;
+        //     const inputElevador = document.getElementById("inputElevador").checked;
 
-            let images = [];
-            for (const image of inputImages) {
-                images.push(image.valueOf());
-            }
+        //     let images = [];
+        //     for (const image of inputImages) {
+        //         images.push(image.valueOf());
+        //     }
 
-            return {
-                <?= isset($_GET['id']) ? "id: '".$_GET['id']."'," : "" ?>
-                imagens: images,
-                titulo: inputTitle,
-                zona: inputZona,
-                concelho: inputConcelho,
-                freguesia: inputFreguesia,
-                tipoEdificio: inputTipoEdificio,
-                nPisos: inputNPisos,
-                descricao: inputDescricao,
-                estado: inputEstado,
-                valor: inputValor,
-                elevador: inputElevador
-            }
-        }
+        //     return {
+                
+        //         imagens: images,
+        //         titulo: inputTitle,
+        //         zona: inputZona,
+        //         concelho: inputConcelho,
+        //         freguesia: inputFreguesia,
+        //         tipoEdificio: inputTipoEdificio,
+        //         nPisos: inputNPisos,
+        //         descricao: inputDescricao,
+        //         estado: inputEstado,
+        //         valor: inputValor,
+        //         elevador: inputElevador
+        //     }
+        // }
 
         let imagesIDs = [];
 
@@ -714,7 +714,7 @@ include_once '../includes/admin/head.php';
             <?php if (!isset($_GET['id'])): ?>
             formProject.setAttribute("action", "/backend/post_scripts/create_project.php");
             <?php else: ?>
-            formProject.setAttribute("action", "/backend/post_scripts/edit_project.php");
+            formProject.setAttribute("action", "/backend/post_scripts/edit_project.php?id=<?= $_GET['id'] ?>");
             <?php endif; ?>
 
             formProject.setAttribute("method", "post");
@@ -855,7 +855,8 @@ include_once '../includes/admin/head.php';
             function toastSuccess(title, msg) {
                 $(document).Toasts('create', {
                     title: title,
-                    body: msg
+                    body: msg,
+                    class: "card card-success"
                 });
             }
 

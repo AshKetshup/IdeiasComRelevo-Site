@@ -5,11 +5,11 @@
      * @subpackage entities
      * 
      * This file contains the Realestate entity class which maps the table to a PHP class
-     * Version: 1.3.2
+     * Version: 1.3.4
      * 
      * @developer Pedro Cavaleiro
      * @created Jan 11, 2022
-     * @lastedit Sep 1, 2022
+     * @lastedit Sep 2, 2022
      * 
      * @issues no issues linked to this file
      * @todo no tasks pending
@@ -55,7 +55,8 @@
         
         /** Constructor converts database entry to Entity */
         function __construct() {
-            $this->db_context = new DbContext();        
+            $this->db_context = new DbContext();  
+            $this->photos = array();      
         }
 
         /** Creates a new Instance from the typology id */
@@ -153,7 +154,6 @@
                 $escaped_building_type = $connection->real_escape_string($this->building_type);
                 $escaped_state = $connection->real_escape_string($this->state);
                 $escaped_value = $connection->real_escape_string($this->value);
-                $escaped_has_elevator = $connection->real_escape_string($this->has_elevator);
                 $escaped_main_photo = $connection->real_escape_string($this->main_photo);
                 $escaped_photos = "";
                 if ($this->photos != NULL)
@@ -162,7 +162,7 @@
                 $escaped_title = $connection->real_escape_string($this->title);
                 $escaped_floor_count = $connection->real_escape_string($this->floor_count);
 
-                $sql = "UPDATE realestate SET `description`='" . $escaped_description . "' photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', `zone`='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', `state`='" . $escaped_state . "', `value`='" . $escaped_value . "', has_elevator='" . $escaped_has_elevator . ", title='" . $escaped_title . "', floor_count='" . $escaped_floor_count . "' WHERE id='" . $this->id . "'";
+                $sql = "UPDATE realestate SET `description`='" . $escaped_description . "', photos='" . $escaped_photos . "', main_photo='" . $escaped_main_photo . "', `zone`='" . $escaped_zone . "', county='" . $escaped_county . "', city='" . $escaped_city . "', building_type='" . $escaped_building_type . "', `state`='" . $escaped_state . "', `value`='" . $escaped_value . "', has_elevator='" .($this->has_elevator == true ? 1 : 0) . "', title='" . $escaped_title . "', floor_count='" . $escaped_floor_count . "' WHERE id='" . $this->id . "'";
                 if ($connection->query($sql) === TRUE)
                     $result = true;
                 else
@@ -222,6 +222,17 @@
                 $this->reload_appartments();
 
             return $result;
+        }
+
+        public function delete_image($imageName) {
+            $key = array_search($imageName, $this->photos);
+            if (false !== $key) {
+                array_splice($this->photos, array_search($val, $this->photos), 1);
+            }
+            unlink($_SERVER["DOCUMENT_ROOT"] . "/uploads/" . $imageName);
+        }
+        public function add_image($imageName) {
+            array_push($this->photos, $imageName);
         }
 
         /** Getters */

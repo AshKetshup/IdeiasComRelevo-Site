@@ -5,11 +5,11 @@
      * @subpackage post_scripts
      * 
      * Handles a post sent from the frontend to create a project
-     * Version: 2.0.0
+     * Version: 2.0.1
      * 
      * @developer Pedro Cavaleiro
      * @created Aug 29, 2022
-     * @lastedit Sep 1, 2022
+     * @lastedit Sep 2, 2022
      * 
      * @issues no issues linked to this file
      * @todo no tasks pending
@@ -25,8 +25,8 @@
 
     $target_dir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
 
-    var_dump($_POST);
-    die();
+    // var_dump($_POST);
+    // die();
 
     $images = array();
     $count = count($_FILES['imagens']['name']);

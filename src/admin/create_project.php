@@ -741,15 +741,17 @@ include_once '../includes/admin/head.php';
         }
         
         function management(deleteIt = true) {
-            let tipoEdificio = document.getElementById("inputTipoEdificio");
-            let tipologiaForm = document.getElementById("tipologia-form");
-            let tipologiaTable = document.getElementById("tipologia-table");
-            let inptEstado = document.getElementById("inputEstado");
-            let inptValor = document.getElementById("inputValor");
+            let tipoEdificio        = document.getElementById("inputTipoEdificio");
+            let tipologiaForm       = document.getElementById("tipologia-form");
+            let tipologiaTable      = document.getElementById("tipologia-table");
+            let inptEstado          = document.getElementById("inputEstado");
+            let inptValor           = document.getElementById("inputValor");
 
-            let inptTipValorVenda = document.getElementById("inputTipValorVenda");
+            let inptTipValorVenda   = document.getElementById("inputTipValorVenda");
             let inptTipValorAluguer = document.getElementById("inputTipValorAluguer");
-            let inptTipDescricao = document.getElementById("inputTipDescricao");
+            let inptTipDescricao    = document.getElementById("inputTipDescricao");
+            let inptTipEstado       = document.getElementById("inputTipEstado");
+            let inptTipPiso         = document.getElementById("inputTipPiso");
 
             if (deleteIt) {
                 console.log("Aqui");
@@ -763,9 +765,15 @@ include_once '../includes/admin/head.php';
 
                 inptValor.disabled = true; 
 
-                inptTipValorVenda.closest("div").hidden = false;
+                inptTipValorVenda.disabled   = false;
+                inptTipValorAluguer.disabled = false;
+                inptTipDescricao.disabled    = false;
+                inptTipPiso.disabled         = false;
+
+                inptTipValorVenda.closest("div").hidden   = false;
                 inptTipValorAluguer.closest("div").hidden = false;
-                inptTipDescricao.closest("div").hidden = false;
+                inptTipDescricao.closest("div").hidden    = false;
+                inptTipPiso.closest("div").hidden         = false;
 
                 tipologiaTable.hidden = false;
                 tipologiaForm.classList.remove("col-lg-12");
@@ -775,9 +783,15 @@ include_once '../includes/admin/head.php';
 
                 inptEstado.value = 1;
 
-                inptTipValorVenda.closest("div").hidden = true;
+                inptTipValorVenda.disabled   = true;
+                inptTipValorAluguer.disabled = true;
+                inptTipDescricao.disabled    = true;
+                inptTipPiso.disabled         = true;
+
+                inptTipValorVenda.closest("div").hidden   = true;
                 inptTipValorAluguer.closest("div").hidden = true;
-                inptTipDescricao.closest("div").hidden = true;
+                inptTipDescricao.closest("div").hidden    = true;
+                inptTipPiso.closest("div").hidden         = true;
 
                 tipologiaTable.hidden = true;
                 tipologiaForm.classList.remove("col-lg-6");
@@ -816,7 +830,7 @@ include_once '../includes/admin/head.php';
                     piso.value = tip.piso;
                     garagem.checked = tip.hasGaragem;
                     parking.checked = tip.hasParking;
-                    descricao.value = tip.descricao;;
+                    descricao.value = tip.descricao;
                     venda.value = tip.venda;
                     aluguer.value = tip.aluguer;
                 }

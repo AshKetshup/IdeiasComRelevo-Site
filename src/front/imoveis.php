@@ -46,8 +46,8 @@
                                     <fieldset class="d-flex m-1">
                                         <ul class="list-unstyled m-0">
                                             <legend for="vendaInput" class="" style="font-size: 1rem;">Tipo de Venda</legend>
-                                            <li><input type="checkbox" name="TipoVenda" value="0" class="m-1">Aluga-se</li>
-                                            <li><input type="checkbox" name="TipoVenda" value="1" class="m-1">Vende-se</li>
+                                            <li><input type="checkbox" name="TipoVenda[]" value="0" class="m-1">Aluga-se</li>
+                                            <li><input type="checkbox" name="TipoVenda[]" value="1" class="m-1">Vende-se</li>
                                         </ul>
                                     </fieldset>
                                 </div>

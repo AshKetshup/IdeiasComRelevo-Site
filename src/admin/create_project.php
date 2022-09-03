@@ -429,7 +429,7 @@ include_once '../includes/admin/head.php';
                 var return_value = document.createElement("span");
                 return_value.classList.add("badge");
 
-                switch (this.#estado) {
+                switch (parseInt(this.#estado)) {
                     case 1:
                         return_value.appendChild(document.createTextNode("Vende-se"));
                         return_value.classList.add("badge-success");

@@ -1,6 +1,8 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
     $app_instance = new IdeiasComRelevo();
+
+    $project = $app_instance->ProjectsManagement->get_project($_GET['id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,21 +29,29 @@
     <div class="container d-flex justify-content-center mb-2 flex-column" style="margin-top: 90px;">
         <div id="carousel-product" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#carousel-product" data-slide-to="0"></li>
-                <li data-target="#carousel-product" data-slide-to="1" class="active"></li>
-                <li data-target="#carousel-product" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="carousel-item">
-                    <img class="d-block" src="assets/img/Template/bg1.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item active">
-                    <img class="d-block" src="assets/img/Template/bg3.jpg" alt="Second slide">
+                <?php for ($i=0; $i < count($project->get_photos()); $i++) { 
+                    if ($i == 0) {
+                        echo '<li data-target="#carousel-product" data-slide-to="'.$i.'" class="active"></li>';
+                        continue;
+                    }
 
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block" src="assets/img/Template/bg4.jpg" alt="Third slide">
-                </div>
+                    echo '<li data-target="#carousel-product" data-slide-to="'.$i.'"></li>';
+                } ?>
+            </ol>
+            <div class="carousel-inner" style="height: 500px" role="listbox">
+                <?php 
+                    $x = 0;
+                    foreach ($project->get_photos() as $photo) {
+                        
+                        echo (
+                            ($x == 0) 
+                                ? '<div class="carousel-item active">'
+                                : '<div class="carousel-item">'
+                        ).'<img class="d-block" src="/uploads/'.$photo.'"></div>';
+                    
+                        $x++;
+                    } 
+                ?>
             </div>
             <a class="carousel-control-prev" href="#carousel-product" role="button" data-slide="prev">
                 <i class="now-ui-icons arrows-1_minimal-left"></i>
@@ -51,9 +61,9 @@
             </a>
         </div>
 
-        <h2 class="w-100 m-0 p-0 mt-3" id="product-title"><b>Moradia T3 Vilar dos Cantos</b></h2>
-        <h4 class="w-100 m-0 p-0 mt-1" id="product-location">Freguesia, Concelho, Distrito</h4>
-        <h2 class="w-100 m-0 p-0 mt-3 TEXT" id="product-price">Preço €</h2>
+        <h2 class="w-100 m-0 p-0 mt-3" id="product-title"><b><?= $project->get_title() ?></b></h2>
+        <h4 class="w-100 m-0 p-0 mt-1" id="product-location"><?= $project->get_city() ?>, <?= $project->get_county() ?>, <?= $project->get_zone() ?></h4>
+        <h2 class="w-100 m-0 p-0 mt-3" id="product-price"><?= $project->get_value() ?> €</h2>
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs nav-fill m-0 p-0 mt-3 mb-2" id="myTab" role="tablist">
@@ -73,9 +83,11 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-            <div class="tab-pane active" id="descrição" role="tabpanel" aria-labelledby="descrição-tab">...</div>
-            <div class="tab-pane" id="pisos" role="tabpanel" aria-labelledby="pisos-tab">....</div>
-            <div class="tab-pane" id="info" role="tabpanel" aria-labelledby="info-tab">.....</div>
+            <div class="tab-pane active" id="descrição" role="tabpanel" aria-labelledby="descrição-tab" style="height: 50vh;">
+                <?= $project->get_description() ?>
+            </div>
+            <div class="tab-pane" id="pisos" role="tabpanel" aria-labelledby="pisos-tab" style="height: 50vh;">....</div>
+            <div class="tab-pane" id="info" role="tabpanel" aria-labelledby="info-tab" style="height: 50vh;">.....</div>
         </div>
 
 

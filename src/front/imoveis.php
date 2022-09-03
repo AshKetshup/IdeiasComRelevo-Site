@@ -1,8 +1,8 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
-    $app_instance = new IdeiasComRelevo();
-    
-    $projects = $app_instance->ProjectsManagement->admin_get_projects();
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
+$app_instance = new IdeiasComRelevo();
+
+$projects = $app_instance->ProjectsManagement->admin_get_projects();
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -19,9 +19,9 @@
 
 <body class="index-page sidebar-collapse">
     <!-- Navbar -->
-    <?php 
-        $PAGE_ID = "imoveis";
-        include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/nav.php'; 
+    <?php
+    $PAGE_ID = "imoveis";
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/nav.php';
     ?>
 
     <!-- End Navbar -->
@@ -32,8 +32,7 @@
                 <div class="card-header w-100 d-flex flex-row bg-white" role="tab" id="headingOne">
                     <button type="submit" class="btn btn-link col-1"><i class="fas fa-2x fa-search"></i></button>
                     <input type="text" name="searchField" class="col-10 form-text border-0" id="searchContent">
-                    <a data-toggle="collapse" data-parent="#searchAccordion" href="#filter" aria-expanded="false"
-                        aria-controls="filter" class="btn btn-link col-1">
+                    <a data-toggle="collapse" data-parent="#searchAccordion" href="#filter" aria-expanded="false" aria-controls="filter" class="btn btn-link col-1">
                         <i class="fas fa-2x fa-filter"></i>
                     </a>
                 </div>
@@ -67,100 +66,87 @@
     <hr class="container">
     <div class="container d-flex align-items-start flex-column">
         <h3>Resultados para ""</h3>
-        <?php foreach($projects as $project): ?>
+        <?php foreach ($projects as $project) : ?>
             <?php $project->reload_appartments(); ?>
-            <div class="w-100 d-flex row mb-3 shop-item">
-                <div class="col-3 image-head">
-                    <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
+            <div class="col-12 d-flex m-0 my-2 p-0 shopItem" href="/produto?id=<?= $project->get_id() ?>" style="max-height: 200px; height: 200px; cursor: pointer;">
+                <div class="col-3 m-0 pl-0 overflow-hidden">
+                    <img class="" style="min-width: 100%; height: 100%; vertical-align: middle; object-fit: cover;" src="/uploads/<?= $project->get_main_photo() ?>" 
+                        alt="<?= $project->get_title() ?>" srcset="">
                 </div>
-                <div class="col-9 body-content">
-                    <div class="row">
-                        <h4 class="col text-truncate text-left text m-1"><?= $project->get_title() ?></h4>
-                    </div>
-                    <div class="row">
-                        <p class="col text-truncate text-left m-1"><?php if($project->get_building_type() == 1) { echo ProjectsManagement::building_state_id_to_string($project->get_sale_type()); } else { echo ProjectsManagement::building_state_id_to_string($project->get_state()); } ?> <?= ProjectsManagement::building_type_id_to_string($project->get_building_type()) ?>: <?= $project->get_zone() ?>, <?= $project->get_county() ?>, <?= $project->get_city() ?></p>
-                    </div>
-                    <ul class="row list-inline p-0">
-                        <li class="col text-left text-muted m-1 h3"><?php if($project->get_building_type() == 1) { echo "N/A"; } else { echo $project->get_appartments()[0]->get_typology(); } ?></li>
-                        <li class="col text-left text-muted m-1 h3"><?php if($project->get_building_type() == 1) { echo "N/A"; } else { echo $project->get_appartments()[0]->get_area(); } ?>m2</li>
-                        <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                        <li class="col text-right m-1 h2"><?= $project->get_value() ?>€</li>
+                <div class="col-9 m-0 pr-0 py-0 h-100 d-flex flex-column">
+                    <h4 class="col-12 m-0 p-0">
+                        <?= $project->get_title() ?>
+                    </h4>
+                    <p class="col-12 m-0 p-0 text-truncate text-left">
+
+                        <?php if ($project->get_building_type() == 1): ?>
+                            <?= ProjectsManagement::state_id_to_string($project->get_sale_type()) ?>
+                        <?php else: ?>
+                            <?= ProjectsManagement::state_id_to_string($project->get_state()) ?>
+                        <?php endif; ?> <?= ProjectsManagement::building_type_id_to_string($project->get_building_type()) ?>: <?= 
+                        $project->get_zone() ?>, <?= $project->get_county() ?>, <?= $project->get_city() ?>
+                    
+                    </p>
+                    <ul class="col-12 list-unstyled my-1 m-0 p-0 text-muted text-left" style="gap: 1rem">
+                        <li class="p">
+                            Área: <b><?php 
+                                if ($project->get_building_type() == 1) {
+                                    echo "N/A";
+                                } else {
+                                    echo $project->get_appartments()[0]->get_area();
+                                }
+                            ?> m<sup>2</sup></b>
+                        </li>
+                        <li class="p">
+                            Tipologia: <b><?php 
+                                if ($project->get_building_type() == 1) {   
+                                    echo "N/A";
+                                } else {
+                                    echo $project->get_appartments()[0]->get_typology();
+                                } 
+                            ?></b>
+                        </li>
+                        <li class="p">
+                            Categoria Energética: <b><?php 
+                                echo $project->get_appartments()[0]->get_energy_category();
+                            ?></b>
+                        </li>
+                        <li class="p">
+                            Pisos: <b><?php 
+                                echo $project->get_floor_count();
+                            ?></b>
+                        </li>
                     </ul>
-                    <div class="row w-100 col-12 m-0 p-0">
-                        <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                            <?php if($project->get_building_type() != 1 && $project->get_appartments()[0]->get_has_parking()): ?>
-                                <i class="fas fa-2x fa-parking text-muted"></i>                            
-                            <?php endif; ?>
-                            <i class="fas fa-2x fa-warehouse text-muted"></i>
+                    <div class="col-12 my-1 m-0 p-0 d-flex align-items-end h-100 align-self-end justify-content-between">
+                        <div class="col-3 m-0 p-0 d-flex align-items-end" style="gap: 5px;">
+
+                        <?php if ($project->get_building_type() != 1 && $project->get_appartments()[0]->get_has_parking()) : ?>
+                            <i class="fas fa-2x fa-parking text-muted" title="Inclui Estacionamento"></i>
+                        <?php endif; ?>
+                            <?php if ($project->get_appartments()[0]->get_has_garage()) : ?>
+                            <i class="fas fa-2x fa-warehouse text-muted" title="Inclui Garagem"></i>
+                        <?php endif; ?>
+                        <?php if ($project->get_has_elevator()) : ?>
+                            <i class="fas fa-2x fa-elevator text-muted" title="Inclui Elevador"></i>
+                        <?php endif; ?>
+
                         </div>
-                        <div class="col d-flex m-0 p-0 justify-content-end">
-                            <a role="button" href="" class="btn btn-primary">Saber mais</a>
-                        </div>
+                        <h3 class="col-4 text-right m-0 p-0">
+                            <?= $project->get_value() ?>€<?php if($project->get_state() == 2): ?>/mês<?php endif; ?>
+                        </h3>
                     </div>
                 </div>
             </div>
         <?php endforeach; ?>
-        
-        <div class="w-100 d-flex row mb-3 shop-item">
-            <div class="col-3 image-head">
-                <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
-            </div>
-            <div class="col-9 body-content">
-                <div class="row">
-                    <h4 class="col text-truncate text-left text m-1">Terreno de 2.000 m2 junto ao Polo Universitário da Ajuda</h4>
-                </div>
-                <div class="row">
-                    <p class="col text-truncate text-left m-1">$(Tipo) para $(Tipo de venda): $(localização)</p>
-                </div>
-                <ul class="row list-inline p-0">
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Area m2)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-right m-1 h2">$(Preço)</li>
-                </ul>
-                <div class="row w-100 col-12 m-0 p-0">
-                    <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                    </div>
-                    <div class="col d-flex m-0 p-0 justify-content-end">
-                        <a role="button" href="" class="btn btn-primary">Saber mais</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-100 d-flex row mb-3 shop-item">
-            <div class="col-3 image-head">
-                <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
-            </div>
-            <div class="col-9 body-content">
-                <div class="row">
-                    <h4 class="col text-truncate text-left text m-1">Terreno de 2.000 m2 junto ao Polo Universitário da Ajuda</h4>
-                </div>
-                <div class="row">
-                    <p class="col text-truncate text-left m-1">$(Tipo) para $(Tipo de venda): $(localização)</p>
-                </div>
-                <ul class="row list-inline p-0">
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Area m2)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-right m-1 h2">$(Preço)</li>
-                </ul>
-                <div class="row w-100 col-12 m-0 p-0">
-                    <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                    </div>
-                    <div class="col d-flex m-0 p-0 justify-content-end">
-                        <a role="button" href="" class="btn btn-primary">Saber mais</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    
+
+    <script>
+        for (const item of document.getElementsByClassName("shopItem")) {
+            item.addEventListener("click", () => {
+                location.assign(item.getAttribute("href"));
+            });
+        }
+    </script>
     <!-- Sart Modal -->
     <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
@@ -209,13 +195,13 @@
             </div>
         </div> -->
     <!--  End Modal -->
-    
+
     <!-- footer -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/footer.php'; ?>
-    
+
     <!-- scripts -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/scripts.php'; ?>
-   
+
     <!-- <script>
         $(document).ready(function () {
             // the body of this function is in assets/js/now-ui-kit.js

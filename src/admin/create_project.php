@@ -749,19 +749,19 @@ include_once '../includes/admin/head.php';
             }
         }
         
+        // let tipoEdificio        = document.getElementById("inputTipoEdificio");
+        let tipologiaForm       = document.getElementById("tipologia-form");
+        let tipologiaTable      = document.getElementById("tipologia-table");
+        let inptEstado          = document.getElementById("inputEstado");
+        let inptValor           = document.getElementById("inputValor");
+
+        let inptTipValorVenda   = document.getElementById("inputTipValorVenda");
+        let inptTipValorAluguer = document.getElementById("inputTipValorAluguer");
+        let inptTipDescricao    = document.getElementById("inputTipDescricao");
+        let inptTipEstado       = document.getElementById("inputTipEstado");
+        let inptTipPiso         = document.getElementById("inputTipPiso");
+
         function management(deleteIt = true) {
-            let tipoEdificio        = document.getElementById("inputTipoEdificio");
-            let tipologiaForm       = document.getElementById("tipologia-form");
-            let tipologiaTable      = document.getElementById("tipologia-table");
-            let inptEstado          = document.getElementById("inputEstado");
-            let inptValor           = document.getElementById("inputValor");
-
-            let inptTipValorVenda   = document.getElementById("inputTipValorVenda");
-            let inptTipValorAluguer = document.getElementById("inputTipValorAluguer");
-            let inptTipDescricao    = document.getElementById("inputTipDescricao");
-            let inptTipEstado       = document.getElementById("inputTipEstado");
-            let inptTipPiso         = document.getElementById("inputTipPiso");
-
             if (deleteIt) {
                 tableRows.innerHTML = "";
                 rows = [];
@@ -790,6 +790,41 @@ include_once '../includes/admin/head.php';
                 tipologiaTable.hidden = false;
                 tipologiaForm.classList.remove("col-lg-12");
                 tipologiaForm.classList.add("col-lg-6");
+
+                function eraseIt(element, bool) {
+                    element.value = "";
+                    element.disabled = !bool;
+                    element.closest("div").hidden   = !bool;
+                }
+
+                switch (parseInt(inptTipEstado.value)) {
+                    case 1:
+                        // Vende-se
+                        eraseIt(inptTipValorVenda, true);
+                        eraseIt(inptTipValorAluguer,false);
+
+                        break;
+                    case 2:
+                        // Aluga-se
+                        eraseIt(inptTipValorAluguer, true);
+                        eraseIt(inptTipValorVenda, false);
+
+                        break;
+                    case 3:
+                        // Vende-se e Aluga-se
+                        eraseIt(inptTipValorVenda, true);
+                        eraseIt(inptTipValorAluguer,true);
+                        
+                        break;
+                    case 0:
+                    case 4:
+                    default:
+                        eraseIt(inptTipValorVenda, false);
+                        eraseIt(inptTipValorAluguer, false);
+
+                        break;
+                }
+
             } else {
                 inptValor.disabled = false;
 
@@ -816,6 +851,7 @@ include_once '../includes/admin/head.php';
 
         finalizarBtn.addEventListener("click", wasValidated);
         tipoEdificio.addEventListener("change", management);
+        inptTipEstado.addEventListener("change", () => { management(false); })
         document.addEventListener("DOMContentLoaded", () => {
             let tipoEdificio = document.getElementById("inputTipoEdificio");
 

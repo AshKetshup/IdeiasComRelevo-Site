@@ -4,3 +4,5 @@ src/.vscode
 src/admin/create_account.php
 *.jpg
 *.png
+
+!src/assets/*

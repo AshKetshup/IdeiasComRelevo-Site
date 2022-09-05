@@ -68,12 +68,12 @@ $projects = $app_instance->ProjectsManagement->admin_get_projects();
         <h3>Resultados para ""</h3>
         <?php foreach ($projects as $project) : ?>
             <?php $project->reload_appartments(); ?>
-            <div class="col-12 d-flex m-0 my-2 p-0 shopItem" href="/produto?id=<?= $project->get_id() ?>" style="max-height: 200px; height: 200px; cursor: pointer;">
-                <div class="col-3 m-0 pl-0 overflow-hidden">
-                    <img class="" style="min-width: 100%; height: 100%; vertical-align: middle; object-fit: cover;" src="/uploads/<?= $project->get_main_photo() ?>" 
+            <div class="col-12 d-flex m-0 my-2 p-0 shopItem overflow-hidden card flex-row align-items-center" href="/produto?id=<?= $project->get_id() ?>" style="height: 200px; cursor: pointer;">
+                <div class="col-3 m-0 p-0 overflow-hidden">
+                    <img class="" style="min-width: 100%; height: 200px; vertical-align: middle; object-fit: cover;" src="/uploads/<?= $project->get_main_photo() ?>" 
                         alt="<?= $project->get_title() ?>" srcset="">
                 </div>
-                <div class="col-9 m-0 pr-0 py-0 h-100 d-flex flex-column">
+                <div class="col-9 m-0 px-3 py-0 h-100 d-flex flex-column">
                     <h4 class="col-12 m-0 p-0">
                         <?= $project->get_title() ?>
                     </h4>
@@ -87,53 +87,83 @@ $projects = $app_instance->ProjectsManagement->admin_get_projects();
                         $project->get_zone() ?>, <?= $project->get_county() ?>, <?= $project->get_city() ?>
                     
                     </p>
-                    <ul class="col-12 list-unstyled my-1 m-0 p-0 text-muted text-left" style="gap: 1rem">
-                        <li class="p">
-                            Área: <b><?php 
-                                if ($project->get_building_type() == 1) {
-                                    echo "N/A";
-                                } else {
-                                    echo $project->get_appartments()[0]->get_area();
-                                }
-                            ?> m<sup>2</sup></b>
-                        </li>
-                        <li class="p">
-                            Tipologia: <b><?php 
-                                if ($project->get_building_type() == 1) {   
-                                    echo "N/A";
-                                } else {
-                                    echo $project->get_appartments()[0]->get_typology();
-                                } 
-                            ?></b>
-                        </li>
-                        <li class="p">
-                            Categoria Energética: <b><?php 
-                                echo $project->get_appartments()[0]->get_energy_category();
-                            ?></b>
-                        </li>
-                        <li class="p">
-                            Pisos: <b><?php 
-                                echo $project->get_floor_count();
-                            ?></b>
-                        </li>
-                    </ul>
-                    <div class="col-12 my-1 m-0 p-0 d-flex align-items-end h-100 align-self-end justify-content-between">
-                        <div class="col-3 m-0 p-0 d-flex align-items-end" style="gap: 5px;">
+                    <div class="col-12 my-1 m-0 p-0 d-flex justify-content-between">
+                        <div class="col-8 m-0 p-0">
+                            <ul class="col-12 list-unstyled my-1 m-0 p-0 text-muted text-left" style="gap: 1rem">
+                                <li class="p">
+                                    Área: <b><?php
+                                        if ($project->get_building_type() == 1) {
+                                            $minArea = min(
+                                                array_map(function($x) { return $x->get_area(); }, $project->get_appartments())
+                                            );
 
-                        <?php if ($project->get_building_type() != 1 && $project->get_appartments()[0]->get_has_parking()) : ?>
-                            <i class="fas fa-2x fa-parking text-muted" title="Inclui Estacionamento"></i>
-                        <?php endif; ?>
-                            <?php if ($project->get_appartments()[0]->get_has_garage()) : ?>
-                            <i class="fas fa-2x fa-warehouse text-muted" title="Inclui Garagem"></i>
-                        <?php endif; ?>
-                        <?php if ($project->get_has_elevator()) : ?>
-                            <i class="fas fa-2x fa-elevator text-muted" title="Inclui Elevador"></i>
-                        <?php endif; ?>
+                                            echo "A partir de " . $minArea;
+                                        } else {
+                                            echo $minArea;
+                                        }
+                                    ?> m<sup>2</sup></b>
+                                </li>
+                                <?php if ($project->get_building_type() != 1): ?>
+                                <li class="p">
+                                    Tipologia: <b><?= $project->get_appartments()[0]->get_typology() ?></b>
+                                </li>
+                                <?php endif; ?>
+                                <?php if ($project->get_building_type() != 1): ?>
+                                <li class="p">
+                                    Categoria Energética: <b><?php 
+                                        echo $project->get_appartments()[0]->get_energy_category();
+                                    ?></b>
+                                </li>
+                                <?php endif; ?>
 
+                                <li class="p">
+                                    Pisos: <b><?php echo $project->get_floor_count(); ?></b>
+                                </li>
+                                <?php
+                                    $has_garage   = false;
+                                    $has_parking  = false;
+                                    $has_elevator = $project->get_has_elevator();
+                                    foreach ($project->get_appartments() as $appart) {
+                                        $has_garage += $appart->get_has_garage();
+                                        $has_parking += $appart->get_has_parking();
+                                    }
+                                ?>
+
+                                <?php if ($has_garage || $has_parking || $has_elevator): ?>
+                                    <li class="col-12 m-0 p-0 text_caps-small">Inclui: <b><?php if ($has_parking): ?> Estacionamento<?php endif; ?><?php if ($has_garage) : ?> Garagem<?php endif; ?><?php if ($has_elevator) : ?> Elevador<?php endif; ?>
+                                    </b></li>
+                                <?php endif; ?>
+                            </ul>
                         </div>
-                        <h3 class="col-4 text-right m-0 p-0">
-                            <?= $project->get_value() ?>€<?php if($project->get_state() == 2): ?>/mês<?php endif; ?>
-                        </h3>
+                        <div class="col-4 m-0 p-0 text-right">
+                        <?php $value = $project->get_value();?>
+                            <?php if ($project->get_building_type() == 1): ?>
+                                <p class="col-12 m-0 p-0">A partir de:</p>
+                                <h3 class="col-12 m-0 p-0">
+                                
+                                <?php if (isset($value["rent"])): ?>
+                                    <?= $value["rent"] ?>€/mês
+                                <?php endif; ?>
+                                <?php if (isset($value["sell"])): ?>
+                                    <br>
+                                    <?= $value["sell"] ?>€
+                                <?php endif; ?>
+                                
+                                </h3>
+                            <?php else: ?>
+                                <h3 class="col-12 m-0 p-0">
+                                    <?php if ($project->get_state() == 1): ?>
+                                        <?= $value ?>€
+                                    <?php else: ?> 
+                                        <?php if ($project->get_state() == 2): ?>
+                                            <?= $value ?>€/mês
+                                        <?php else: ?>
+                                            <?= "" ?>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </h3>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -147,76 +177,11 @@ $projects = $app_instance->ProjectsManagement->admin_get_projects();
             });
         }
     </script>
-    <!-- Sart Modal -->
-    <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <h4 class="title title-up">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
-                            Semantics, a large language ocean. A small river named Duden flows by their place and
-                            supplies it with the necessary regelialia. It is a paradisematic country, in which roasted
-                            parts of sentences fly into your mouth.
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default">Nice Button</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    <!--  End Modal -->
-    <!-- Mini Modal -->
-    <!-- <div class="modal fade modal-mini modal-primary" id="myModal1" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center">
-                        <div class="modal-profile">
-                            <i class="now-ui-icons users_circle-08"></i>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <p>Always have an access to your profile</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link btn-neutral">Back</button>
-                        <button type="button" class="btn btn-link btn-neutral" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    <!--  End Modal -->
-
     <!-- footer -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/footer.php'; ?>
 
     <!-- scripts -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/scripts.php'; ?>
-
-    <!-- <script>
-        $(document).ready(function () {
-            // the body of this function is in assets/js/now-ui-kit.js
-            nowuiKit.initSliders();
-        });
-
-        function scrollToDownload() {
-
-            if ($('.section-download').length != 0) {
-                $("html, body").animate({
-                    scrollTop: $('.section-download').offset().top
-                }, 1000);
-            }
-        }
-    </script> -->
 </body>
 
 </html>

@@ -293,22 +293,36 @@
             $connection->close();
             return $rtn;
         }
+
+        /**
+         * If it's a appt building the function will fetch from the typologies the lowest rent and sell prices
+         * and will return an array with the keys "rent" and "sell" with the according values
+         * 
+         * Any other kind of building it will only return it's value
+         */
         public function get_value() {
             if ($this->building_type == 1) {
                 $result = array();
 
                 $connection = $this->db_context->initialize_connection();
-                if ($connection != NULL) {            
-                    $sql = "SELECT rent_price, sell_price FROM typology WHERE rid='" . $this->id . "' ORDER BY rent_price ASC, sell_price ASC";
-                    $result = $connection->query($sql);
+                if ($connection != NULL) {                              
+                    $sql1 = "SELECT rent_price AS `value` FROM typology WHERE rid='" . $this->id . "' AND (`state` = 2 OR `state` = 3) ORDER BY rent_price ASC LIMIT 1";
+                    $sql2 = "SELECT sell_price AS `value` FROM typology WHERE rid='" . $this->id . "' AND (`state` = 1 OR `state` = 3) ORDER BY sell_price ASC LIMIT 1";
+                    
+                    $result1 = $connection->query($sql1);
+                    $result2 = $connection->query($sql2);
 
-                    if ($result->num_rows <= 0) {
+                    if ($result1->num_rows <= 0 && $result2->num_rows <= 0) {
                         $connection->close();
                         return NULL;
                     }
 
-                    $connection->close();
-                    return $result->fetch_assoc()[0];
+                    $connection->close();                    
+                    $values = [
+                        "rent" => $result1->fetch_assoc()['value'],
+                        "sell" => $result2->fetch_assoc()['value']
+                    ];
+                    return $values;
                 } else 
                     $result = false;
 

@@ -108,85 +108,114 @@ $project = $app_instance->ProjectsManagement->get_project($_GET['id']);
             ?></div>
             <div class="tab-pane" id="pisos" role="tabpanel" aria-labelledby="pisos-tab" style="min-height: 50vh;">
                 <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
-                    <div class="card">
-                        <div class="card-header" role="tab" id="headingOne">
-                            <button class="btn btn-link btn-block text-left h4 my-3 py-0" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <i class="now-ui-icons arrows-1_minimal-down mx-2"></i>
-                                Piso 1
-                            </button>
-                        </div>
+                    <?php 
+                    $pisosArray = array();
+                    foreach ($project->get_appartments() as $typ) {
+                        $pisosArray[$typ->get_floor()][] = $typ;
+                    }
+                    ?>
 
-                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-                            <div class="card-body d-flex flex-wrap justify-content-around" style="gap: 1.5rem">
-
-                                <div class="col-lg-5 card p-0 m-0 d-flex flex-wrap flex-row">
-                                    <h4 class="col-12 m-0 py-1 px-3 text-center bg-primary card-header text-white">
-                                        <b>Apartamentos T1</b>
-                                    </h4>
-                                    <div class="col-md-6 py-2">
-                                        <div class="col-12 px-0">
-                                            <b>Área:</b>
-                                        </div>
-                                        <div class="col-12 px-0">
-                                            70 m<sup>2</sup>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 py-2">
-                                        <div class="col-12 px-0">
-                                            <b>Categoria Energética</b>:
-                                        </div>
-                                        <div class="col-12 px-0">
-                                            A++
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 py-2">
-                                        <div class="col-12 px-0">
-                                            <b>Tipologia:</b>
-                                        </div>
-                                        <div class="col-12 px-0">
-                                            T2
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 py-2">
-                                        <div class="col-12 px-0">
-                                            <b>WCs:</b>
-                                        </div>
-                                        <div class="col-12 px-0">
-                                            2
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 py-2">
-                                        <div class="col-12 px-0">
-                                            <b>Estacionamento:</b>
-                                        </div>
-                                        <div class="col-12 px-0">
-                                            Sim
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 py-2">
-                                        <div class="col-12 px-0">
-                                            <b>Garagem:</b>
-                                        </div>
-                                        <div class="col-12 px-0">
-                                            Sim
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2">
-                                        <div class="col-12 px-0">
-                                            <b>Descrição:</b>
-                                        </div>
-                                        <div class="col-12 px-0">
-                                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia eligendi quae nesciunt accusamus aliquid quisquam corrupti dignissimos voluptas quibusdam similique, molestiae nulla. Autem aspernatur pariatur id rem velit a beatae?
-                                        </div>
-                                    </div>
-                                    <h4 class="col-12 m-0 py-1 px-3 text-right bg-primary card-footer text-white">
-                                        <b>150€/mês  ou  5000€</b>
-                                    </h4>
-                                </div>
-
+                    <?php
+                    foreach ($pisosArray as $floor) {
+                        $floorKey = array_search($floor, $pisosArray);
+                        echo '
+                        <div class="card my-2">
+                            <div class="card-header" role="tab" id="heading'.$floorKey.'">
+                                <button class="btn btn-link btn-block text-left h4 my-3 py-0" data-toggle="collapse" data-parent="#accordion" href="#collapse'.$floorKey.'" aria-expanded="true" aria-controls="collapse'.$floorKey.'">
+                                    <i class="now-ui-icons arrows-1_minimal-down mx-2"></i>
+                                    Piso '.$floorKey.'
+                                </button>
                             </div>
-                        </div>
-                    </div>
+
+                            <div id="collapse'.$floorKey.'" class="collapse" role="tabpanel" aria-labelledby="heading'.$floorKey.'">
+                                <div class="card-body d-flex flex-wrap justify-content-around">';
+
+                            foreach ($floor as $appt) {
+                                echo '
+                                    <div class="col-lg-5 card p-0 m-0 d-flex flex-wrap flex-row">
+                                        <h4 class="col-12 m-0 py-1 px-3 text-center bg-primary card-header text-white">
+                                            <b>Apartamentos '.$appt->get_typology().'</b>
+                                        </h4>
+                                        <div class="col-md-6 py-2">
+                                            <div class="col-12 px-0">
+                                                <b>Área:</b>
+                                            </div>
+                                            <div class="col-12 px-0">
+                                                '.$appt->get_area().' m<sup>2</sup>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 py-2">
+                                            <div class="col-12 px-0">
+                                                <b>Categoria Energética</b>:
+                                            </div>
+                                            <div class="col-12 px-0">
+                                                '.$appt->get_energy_category().'
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 py-2">
+                                            <div class="col-12 px-0">
+                                                <b>Tipologia:</b>
+                                            </div>
+                                            <div class="col-12 px-0">
+                                                '.$appt->get_typology().'
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 py-2">
+                                            <div class="col-12 px-0">
+                                                <b>WCs:</b>
+                                            </div>
+                                            <div class="col-12 px-0">
+                                                '.$appt->get_wc_count().'
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 py-2">
+                                            <div class="col-12 px-0">
+                                                <b>Estacionamento:</b>
+                                            </div>
+                                            <div class="col-12 px-0">
+                                                '.(($appt->get_has_parking()) ? "Sim" : "Não").'
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 py-2">
+                                            <div class="col-12 px-0">
+                                                <b>Garagem:</b>
+                                            </div>
+                                            <div class="col-12 px-0">
+                                                '.(($appt->get_has_garage()) ? "Sim" : "Não").'
+                                            </div>
+                                        </div>
+                                        <div class="col-12 py-2">
+                                            <div class="col-12 px-0">
+                                                <b>Descrição:</b>
+                                            </div>
+                                            <div class="col-12 px-0">
+                                                '.$appt->get_description().'
+                                            </div>
+                                        </div>
+                                        <h4 class="col-12 m-0 py-1 px-3 text-right bg-primary card-footer text-white">
+                                            <b>'.(
+                                            function ($appt) { 
+                                                if ($appt->get_rent_price() == 0 && $appt->get_sell_price() == 0) 
+                                                    return "Vendido";
+
+                                                $result = "";
+                                                if ($appt->get_rent_price() != 0)
+                                                    $result = $result.$appt->get_rent_price()."€/mês".(($appt->get_sell_price() != 0) ? " ou " : "");
+
+                                                if ($appt->get_sell_price() != 0)
+                                                    $result = $result.$appt->get_sell_price()."€";
+
+                                                return $result;
+                                            })($appt).'
+                                            </b>
+                                        </h4>
+                                    </div>
+                                ';
+                            }
+
+                        echo '</div></div></div>';
+                    }
+                    ?>
                 </div>
             </div>
             <div class="tab-pane" id="info" role="tabpanel" aria-labelledby="info-tab" style="min-height: 50vh;">.....</div>

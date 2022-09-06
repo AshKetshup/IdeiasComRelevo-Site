@@ -136,33 +136,35 @@ $projects = $app_instance->ProjectsManagement->admin_get_projects();
                             </ul>
                         </div>
                         <div class="col-4 m-0 p-0 text-right">
+                        
                         <?php $value = $project->get_value();?>
-                            <?php if ($project->get_building_type() == 1): ?>
-                                <p class="col-12 m-0 p-0">A partir de:</p>
-                                <h3 class="col-12 m-0 p-0">
-                                
-                                <?php if (isset($value["rent"])): ?>
-                                    <?= $value["rent"] ?>€/mês
-                                <?php endif; ?>
-                                <?php if (isset($value["sell"])): ?>
-                                    <br>
-                                    <?= $value["sell"] ?>€
-                                <?php endif; ?>
-                                
-                                </h3>
-                            <?php else: ?>
-                                <h3 class="col-12 m-0 p-0">
-                                    <?php if ($project->get_state() == 1): ?>
-                                        <?= $value ?>€
-                                    <?php else: ?> 
-                                        <?php if ($project->get_state() == 2): ?>
-                                            <?= $value ?>€/mês
-                                        <?php else: ?>
-                                            <?= "" ?>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                </h3>
+                        <?php if ($project->get_building_type() == 1): ?>
+                            <p class="col-12 m-0 p-0">A partir de:</p>
+                            <h3 class="col-12 m-0 p-0">
+                            
+                            <?php if (isset($value["rent"])): ?>
+                                <?= $value["rent"] ?>€/mês
                             <?php endif; ?>
+                            <?php if (isset($value["sell"])): ?>
+                                <br>
+                                <?= $value["sell"] ?>€
+                            <?php endif; ?>
+                            
+                            </h3>
+                        <?php else: ?>
+                            <h3 class="col-12 m-0 p-0">
+                                <?php if ($project->get_state() == 1): ?>
+                                    <?= $value ?>€
+                                <?php else: ?> 
+                                    <?php if ($project->get_state() == 2): ?>
+                                        <?= $value ?>€/mês
+                                    <?php else: ?>
+                                        <?= "" ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </h3>
+                        <?php endif; ?>
+
                         </div>
                     </div>
                 </div>

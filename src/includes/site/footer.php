@@ -5,7 +5,7 @@
 <footer class="footer" id="footer" data-background-color="black">
     <div class="container py-5">
         <div class="row">
-            <div class="col-3">
+            <div class="col-lg-3 my-2">
                 <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none" href="index.html">
                     <span class="h5 m-0">Ideias com Relevo</span>
                 </a>
@@ -34,7 +34,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-2">
+            <div class="col-lg-2 my-2">
                 <h5>Navigation</h5>
                 <ul class="list-unstyled">
                     <li class="mb-2 w-100"><a href="/">Home</a></li>
@@ -43,7 +43,7 @@
                     <li class="mb-2 w-100"><a href="#footer">Contactos</a></li>
                 </ul>
             </div>
-            <div class="col-7">
+            <div class="col-lg-7 my-2">
                 <h5>Associados</h5>
                     <ul class="image-gallery">
                         <?php foreach($associates as $associate): ?>

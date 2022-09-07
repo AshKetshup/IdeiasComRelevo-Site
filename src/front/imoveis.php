@@ -136,7 +136,7 @@ $filter_values = $app_instance->ProjectsManagement->get_project_filters();
     </div>
     <hr class="container">
     <div class="container d-flex align-items-start flex-column">
-        <h3 id="resultados">Resultados para ""</h3>
+        <h3 id="resultados">Resultados para "<b id="resultsFor"></b>"</h3>
         <?php foreach ($projects as $project) : ?>
             <?php $project->reload_appartments(); ?>
             <div class="col-12 d-flex m-0 my-2 p-0 shopItem overflow-hidden card flex-row align-items-center" 
@@ -270,6 +270,9 @@ $filter_values = $app_instance->ProjectsManagement->get_project_filters();
             let items = Array.from(document.getElementsByClassName("shopItem"));
             let itemCopy = Array.from(items);
             let search = document.getElementById("searchContent").value;
+
+            let results = document.getElementById("resultsFor")
+            results.innerText = search;
 
             items.forEach(el => {
                 if (document.getElementById(el.getAttribute("id")).classList.contains("d-none")) {

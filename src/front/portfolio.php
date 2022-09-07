@@ -202,7 +202,7 @@ $finishes = [
 
             <div class="tab-pane" id="about" role="tabpanel" aria-labelledby="about-tab">
                 <div class="card my-2">
-                    <div class="card-body" id="about-us"><?= $app_instance->ContactsManagement->get_contacts()["aboutus"] ?>
+                    <div class="card-body text-justify" id="about-us"><?= $app_instance->ContactsManagement->get_contacts()["aboutus"] ?>
                     </div>
                 </div>
             </div>

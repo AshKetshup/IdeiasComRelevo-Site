@@ -218,7 +218,11 @@ $project = $app_instance->ProjectsManagement->get_project($_GET['id']);
                                 ';
                         }
 
-                        echo '</div></div></div>';
+                        echo '
+                                </div>
+                            </div>
+                        </div>
+                        ';
                     }
                     ?>
                 </div>

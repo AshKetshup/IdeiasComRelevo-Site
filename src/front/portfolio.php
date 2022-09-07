@@ -1,9 +1,16 @@
 <?php
-    require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
-    $app_instance = new IdeiasComRelevo();
+require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
+$app_instance = new IdeiasComRelevo();
+
+$finishes = [
+    "WC" => $app_instance->FinishesManagement->admin_get_finishes(FinishesManagement::catshort_to_id("WC")),
+    "CS" => $app_instance->FinishesManagement->admin_get_finishes(FinishesManagement::catshort_to_id("CS")),
+    "AS" => $app_instance->FinishesManagement->admin_get_finishes(FinishesManagement::catshort_to_id("AS")),
+    "OP" => $app_instance->FinishesManagement->admin_get_finishes(FinishesManagement::catshort_to_id("OP"))
+];
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/head.php'; ?>
 
@@ -17,212 +24,203 @@
 
 <body class="index-page sidebar-collapse">
     <!-- Navbar -->
-    <?php 
-        $PAGE_ID = "portfolio";
-        include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/nav.php'; 
+    <?php
+    $PAGE_ID = "portfolio";
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/nav.php';
+    ?>
+
+    <?php
+
+    function finishTracker($finishes, $id)
+    {
+        for ($i = 0; $i < count($finishes[$id]); $i++) {
+            $finish = $finishes[$id][$i];
+
+            if ($i == 0) {
+                echo '<li data-target="#carousel-' . $id . '" data-slide-to="' . $finish->get_id() . '" class="active"></li>';
+                continue;
+            }
+
+            echo '<li data-target="#carousel-' . $id . '" data-slide-to="' . $finish->get_id() . '"></li>';
+        }
+    }
+
+    function finishImages($finishes, $id)
+    {
+        $x = 0;
+
+        foreach ($finishes[$id] as $finish) {
+            echo (
+                ($x == 0)
+                ? '<div class="carousel-item h-100 w-100 active">'
+                : '<div class="carousel-item h-100 w-100">'
+            ) . '<img class="d-block" src="/uploads/' . $finish->get_image() . '" style="min-width: 100%; height: 100%; vertical-align: middle; object-fit: cover;"></div>';
+
+            $x++;
+        }
+    }
+
     ?>
 
     <!-- End Navbar -->
-    <div class="container vh-100 d-flex justify-content-start align-items-center">
-        <form id="searchAccordion" class="w-100 card-collapse" aria-multiselectable="true" action="">
-            <div class="card card-plain shadow bg-primary">
-                <div class="card-header w-100 d-flex flex-row bg-white" role="tab" id="headingOne">
-                    <button type="submit" class="btn btn-link col-1"><i class="fas fa-2x fa-search"></i></button>
-                    <input type="text" class="col-10 form-text border-0" id="searchContent">
-                    <a data-toggle="collapse" data-parent="#searchAccordion" href="#filter" aria-expanded="false"
-                        aria-controls="filter" class="btn btn-link col-1">
-                        <i class="fas fa-2x fa-filter"></i>
-                    </a>
-                </div>
-                <div id="filter" class="collapse" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="card-body m-2 mx-4 text-white">
-                        <h4 class="m-0 mb-4">Filtro Avançado</h4>
-                        <div class="row text-black d-flex">
-                            <div class="col-4">
-                                <div class="card bg-white shadow p-2 form-control">
-                                    <fieldset class="d-flex m-1">
-                                        <ul class="list-unstyled m-0">
-                                            <legend for="vendaInput" class="" style="font-size: 1rem;">Tipo de Venda</legend>
-                                            <li><input type="checkbox" name="TipoVenda" value="0" class="m-1">Aluga-se</li>
-                                            <li><input type="checkbox" name="TipoVenda" value="1" class="m-1">Vende-se</li>
-                                        </ul>
-                                    </fieldset>
+    <div class="container" style="margin-top: 90px; min-height: 50vh">
+        <h1 class="py-3">Portfolio</h1>
+
+        <ul class="nav nav-tabs nav-fill m-0 p-0 mt-3 mb-2" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="acabamentos-tab" data-toggle="tab" href="#acabamentos" role="tab" aria-controls="acabamentos" aria-selected="true">Acabamentos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">Sobre Nós</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active px-4" id="acabamentos" role="tabpanel" aria-labelledby="acabamentos-tab" style="min-height: 50vh;">
+                <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+                    <div class="card my-2">
+                        <div class="card-header" role="tab" id="headingWCs">
+                            <button class="btn btn-link btn-block text-left h4 my-3 py-0" data-toggle="collapse" data-parent="#accordion" href="#collapseWCs" aria-expanded="false" aria-controls="collapseWCs">
+                                <i class="now-ui-icons arrows-1_minimal-down mx-2"></i>
+                                Casas De Banho
+                            </button>
+                        </div>
+
+                        <div id="collapseWCs" class="collapse" role="tabpanel" aria-labelledby="headingWCs">
+                            <div class="card-body d-flex">
+
+                                <div id="carousel-WC" class="carousel slide w-100" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <?php finishTracker($finishes, "WC"); ?>
+                                    </ol>
+                                    <div class="carousel-inner" style="height: 500px; width: 100%" role="listbox">
+                                        <?php finishImages($finishes, "WC"); ?>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carousel-WC" role="button" data-slide="prev">
+                                        <i class="now-ui-icons arrows-1_minimal-left"></i>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-WC" role="button" data-slide="next">
+                                        <i class="now-ui-icons arrows-1_minimal-right"></i>
+                                    </a>
                                 </div>
+
                             </div>
-                            <div class="col-4">
-                                <div class="card bg-white shadow p-2">asd</div>
+                        </div>
+                    </div>
+
+                    <div class="card my-2">
+                        <div class="card-header" role="tab" id="headingCozSalas">
+                            <button class="btn btn-link btn-block text-left h4 my-3 py-0" data-toggle="collapse" data-parent="#accordion" href="#collapseCozSalas" aria-expanded="false" aria-controls="collapseCozSalas">
+                                <i class="now-ui-icons arrows-1_minimal-down mx-2"></i>
+                                Cozinhas e Salas
+                            </button>
+                        </div>
+
+                        <div id="collapseCozSalas" class="collapse" role="tabpanel" aria-labelledby="headingCozSalas">
+                            <div class="card-body d-flex">
+
+                                <div id="carousel-CS" class="carousel slide w-100" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <?php finishTracker($finishes, "CS"); ?>
+                                    </ol>
+                                    <div class="carousel-inner" style="height: 500px; width: 100%" role="listbox">
+                                        <?php finishImages($finishes, "CS"); ?>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carousel-CS" role="button" data-slide="prev">
+                                        <i class="now-ui-icons arrows-1_minimal-left"></i>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-CS" role="button" data-slide="next">
+                                        <i class="now-ui-icons arrows-1_minimal-right"></i>
+                                    </a>
+                                </div>
+
                             </div>
-                            <div class="col-4">
-                                <div class="card bg-white shadow p-2">asd</div>
+                        </div>
+                    </div>
+
+                    <div class="card my-2">
+                        <div class="card-header" role="tab" id="headingArranjos">
+                            <button class="btn btn-link btn-block text-left h4 my-3 py-0" data-toggle="collapse" data-parent="#accordion" href="#collapseArranjos" aria-expanded="false" aria-controls="collapseArranjos">
+                                <i class="now-ui-icons arrows-1_minimal-down mx-2"></i>
+                                Arranjos e Soluções Exteriores
+                            </button>
+                        </div>
+
+                        <div id="collapseArranjos" class="collapse" role="tabpanel" aria-labelledby="headingArranjos">
+                            <div class="card-body d-flex">
+
+                                <div id="carousel-AS" class="carousel slide w-100" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <?php finishTracker($finishes, "AS"); ?>
+                                    </ol>
+                                    <div class="carousel-inner" style="height: 500px; width: 100%" role="listbox">
+                                        <?php finishImages($finishes, "AS"); ?>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carousel-AS" role="button" data-slide="prev">
+                                        <i class="now-ui-icons arrows-1_minimal-left"></i>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-AS" role="button" data-slide="next">
+                                        <i class="now-ui-icons arrows-1_minimal-right"></i>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card my-2">
+                        <div class="card-header" role="tab" id="headingProjetos">
+                            <button class="btn btn-link btn-block text-left h4 my-3 py-0" data-toggle="collapse" data-parent="#accordion" href="#collapseProjetos" aria-expanded="false" aria-controls="collapseProjetos">
+                                <i class="now-ui-icons arrows-1_minimal-down mx-2"></i>
+                                Outros Projetos e Obras
+                            </button>
+                        </div>
+
+                        <div id="collapseProjetos" class="collapse" role="tabpanel" aria-labelledby="headingProjetos">
+                            <div class="card-body d-flex">
+
+                                <div id="carousel-OP" class="carousel slide w-100" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <?php finishTracker($finishes, "OP"); ?>
+                                    </ol>
+                                    <div class="carousel-inner" style="height: 500px; width: 100%" role="listbox">
+                                        <?php finishImages($finishes, "OP"); ?>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carousel-OP" role="button" data-slide="prev">
+                                        <i class="now-ui-icons arrows-1_minimal-left"></i>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-OP" role="button" data-slide="next">
+                                        <i class="now-ui-icons arrows-1_minimal-right"></i>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <hr class="container">
-    <div class="container d-flex align-items-start flex-column">
-        <h3>Resultados para ""</h3>
-        <div class="w-100 d-flex row mb-3 shop-item">
-            <div class="col-3 image-head">
-                <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
-            </div>
-            <div class="col-9 body-content">
-                <div class="row">
-                    <h4 class="col text-truncate text-left text m-1">Terreno de 2.000 m2 junto ao Polo Universitário da Ajuda</h4>
-                </div>
-                <div class="row">
-                    <p class="col text-truncate text-left m-1">$(Tipo) para $(Tipo de venda): $(localização)</p>
-                </div>
-                <ul class="row list-inline p-0">
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Area m2)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-right m-1 h2">$(Preço)</li>
-                </ul>
-                <div class="row w-100 col-12 m-0 p-0">
-                    <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                        <i class="fas fa-2x fa-parking text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                    </div>
-                    <div class="col d-flex m-0 p-0 justify-content-end">
-                        <a role="button" href="" class="btn btn-primary">Saber mais</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-100 d-flex row mb-3 shop-item">
-            <div class="col-3 image-head">
-                <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
-            </div>
-            <div class="col-9 body-content">
-                <div class="row">
-                    <h4 class="col text-truncate text-left text m-1">Terreno de 2.000 m2 junto ao Polo Universitário da Ajuda</h4>
-                </div>
-                <div class="row">
-                    <p class="col text-truncate text-left m-1">$(Tipo) para $(Tipo de venda): $(localização)</p>
-                </div>
-                <ul class="row list-inline p-0">
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Area m2)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-right m-1 h2">$(Preço)</li>
-                </ul>
-                <div class="row w-100 col-12 m-0 p-0">
-                    <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                    </div>
-                    <div class="col d-flex m-0 p-0 justify-content-end">
-                        <a role="button" href="" class="btn btn-primary">Saber mais</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w-100 d-flex row mb-3 shop-item">
-            <div class="col-3 image-head">
-                <img class="img-fluid m-1" src="https://fakeimg.pl/1000x750" alt="" srcset="">
-            </div>
-            <div class="col-9 body-content">
-                <div class="row">
-                    <h4 class="col text-truncate text-left text m-1">Terreno de 2.000 m2 junto ao Polo Universitário da Ajuda</h4>
-                </div>
-                <div class="row">
-                    <p class="col text-truncate text-left m-1">$(Tipo) para $(Tipo de venda): $(localização)</p>
-                </div>
-                <ul class="row list-inline p-0">
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Area m2)</li>
-                    <li class="col text-left text-muted m-1 h3">$(Tipologia)</li>
-                    <li class="col text-right m-1 h2">$(Preço)</li>
-                </ul>
-                <div class="row w-100 col-12 m-0 p-0">
-                    <div class="icons col-3 m-2 p-1 d-flex justify-content-between align-content-center">
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                        <i class="fas fa-2x fa-warehouse text-muted"></i>
-                    </div>
-                    <div class="col d-flex m-0 p-0 justify-content-end">
-                        <a role="button" href="" class="btn btn-primary">Saber mais</a>
-                    </div>
-                </div>
+
+            <div class="tab-pane" id="about" role="tabpanel" aria-labelledby="about-tab" style="min-height: 50vh;">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa beatae velit explicabo quisquam! Veritatis aperiam accusamus ratione reprehenderit similique ducimus at commodi, sint soluta error exercitationem ab in vero eligendi!
             </div>
         </div>
     </div>
-    
-    <!-- Sart Modal -->
-    <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            <i class="now-ui-icons ui-1_simple-remove"></i>
-                        </button>
-                        <h4 class="title title-up">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
-                            Semantics, a large language ocean. A small river named Duden flows by their place and
-                            supplies it with the necessary regelialia. It is a paradisematic country, in which roasted
-                            parts of sentences fly into your mouth.
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default">Nice Button</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    <!--  End Modal -->
-    <!-- Mini Modal -->
-    <!-- <div class="modal fade modal-mini modal-primary" id="myModal1" tabindex="-1" role="dialog"
-            aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center">
-                        <div class="modal-profile">
-                            <i class="now-ui-icons users_circle-08"></i>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <p>Always have an access to your profile</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link btn-neutral">Back</button>
-                        <button type="button" class="btn btn-link btn-neutral" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    <!--  End Modal -->
-    
+    <style>
+        .nav-tabs {
+            border-bottom: solid rgb(249, 99, 50);
+        }
+
+        .nav-link.active {
+            background-color: rgb(249, 99, 50) !important;
+            border-radius: 0 !important;
+        }
+    </style>
+
     <!-- footer -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/footer.php'; ?>
-    
+
     <!-- scripts -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/scripts.php'; ?>
 
-    <!-- <script>
-        $(document).ready(function () {
-            // the body of this function is in assets/js/now-ui-kit.js
-            nowuiKit.initSliders();
-        });
-
-        function scrollToDownload() {
-
-            if ($('.section-download').length != 0) {
-                $("html, body").animate({
-                    scrollTop: $('.section-download').offset().top
-                }, 1000);
-            }
-        }
-    </script> -->
 </body>
 
 </html>

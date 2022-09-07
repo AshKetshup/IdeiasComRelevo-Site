@@ -16,7 +16,7 @@
     To set the page name change the $PAGE_NAME variable
 -->
 <?php
-$PAGE_NAME = "Contactos";
+$PAGE_NAME = "Informações";
 $PAGE_ID = "contactos";
 include_once '../includes/admin/head.php';
 ?>
@@ -49,14 +49,16 @@ include_once '../includes/admin/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="pb-2">Contactos</h1>
-                            <p class="mb-0">Lista dos contactos disponiveis no site.</p>
+                            <h1 class="pb-2">Informações</h1>
+                            <p class="mb-0">Lista das informações disponiveis no site.</p>
                             <p class="mb-1"></p>
+                            <p class="mb-1">O campo <b>Sobre Nós</b> tem a capacidade de
+                                interpretar markdown. Seguindo estas <a href="https://www.markdownguide.org/basic-syntax/">regras</a>.</p>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Contactos</li>
+                                <li class="breadcrumb-item active">Informações</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -72,7 +74,7 @@ include_once '../includes/admin/head.php';
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="m-0">Contactos</h5>
+                                    <h5 class="m-0">Informações</h5>
                                 </div>
                                 <div class="card-body">
                                     <table class="table table-bordered table-hover shadow">
@@ -94,6 +96,10 @@ include_once '../includes/admin/head.php';
                                             <tr>
                                                 <td>Sede</td>
                                                 <td><?= str_replace("\n", "<br />", $contacts["office"]) ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sobre Nós</td>
+                                                <td><?= str_replace("\n", "<br />", $contacts["aboutus"]) ?></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -149,6 +155,16 @@ include_once '../includes/admin/head.php';
                                 <label for="inputSede">Sede</label>
                                 <textarea id="inputSede" class="form-control" type="text" name="sede"
                                 placeholder="Insira a morada da Sede" required><?= $contacts["office"] ?></textarea>
+
+                                <div class="valid-feedback">Valido.</div>
+                                <div class="invalid-feedback">Por favor, preencher este campo.</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="inputSobreNos">Sobre Nós</label>
+                                <textarea id="inputSobreNos" class="form-control" type="text" name="sobrenos"
+                                placeholder="Insira algo sobre nós" style="min-height: 100px;" required><?= $contacts["aboutus"] ?></textarea>
 
                                 <div class="valid-feedback">Valido.</div>
                                 <div class="invalid-feedback">Por favor, preencher este campo.</div>

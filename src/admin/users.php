@@ -17,7 +17,7 @@
 -->
 <?php 
     $PAGE_NAME = "Utilizadores";
-    $PAGE_ID = "utilizadores";
+    $PAGE_ID = "users";
     include_once '../includes/admin/head.php'; 
 ?>
 <style>

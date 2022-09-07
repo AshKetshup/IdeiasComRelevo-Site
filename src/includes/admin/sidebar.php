@@ -26,9 +26,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-item nav-link <?= $PAGE_ID == 'contactos' ? 'active' : '' ?>" href="/admin/contactos">
-                        <i class="nav-icon fas fa-phone"></i>
-                        Contactos
+                    <a class="nav-item nav-link <?= $PAGE_ID == 'contactos' ? 'active' : '' ?>" href="/admin/informacoes">
+                    <i class="nav-icon fas fa-info-circle"></i>
+                        Informações
                     </a>
                 </li>
                 <li class="nav-item">

@@ -65,6 +65,7 @@ $finishes = [
     <!-- End Navbar -->
     <div class="container" style="margin-top: 90px; min-height: 50vh">
         <h1 class="py-3">Portfolio</h1>
+        
 
         <ul class="nav nav-tabs nav-fill m-0 p-0 mt-3 mb-2" id="myTab" role="tablist">
             <li class="nav-item">
@@ -74,8 +75,8 @@ $finishes = [
                 <a class="nav-link" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">Sobre Nós</a>
             </li>
         </ul>
-        <div class="tab-content">
-            <div class="tab-pane active px-4" id="acabamentos" role="tabpanel" aria-labelledby="acabamentos-tab" style="min-height: 50vh;">
+        <div class="tab-content mb-4 pt-2">
+            <div class="tab-pane active" id="acabamentos" role="tabpanel" aria-labelledby="acabamentos-tab">
                 <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
                     <div class="card my-2">
                         <div class="card-header" role="tab" id="headingWCs">
@@ -199,8 +200,11 @@ $finishes = [
                 </div>
             </div>
 
-            <div class="tab-pane" id="about" role="tabpanel" aria-labelledby="about-tab" style="min-height: 50vh;">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa beatae velit explicabo quisquam! Veritatis aperiam accusamus ratione reprehenderit similique ducimus at commodi, sint soluta error exercitationem ab in vero eligendi!
+            <div class="tab-pane" id="about" role="tabpanel" aria-labelledby="about-tab">
+                <div class="card my-2">
+                    <div class="card-body" id="about-us"><?= $app_instance->ContactsManagement->get_contacts()["aboutus"] ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -220,7 +224,12 @@ $finishes = [
 
     <!-- scripts -->
     <?php include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/scripts.php'; ?>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        let aboutus = document.getElementById("about-us");
 
+        aboutus.innerHTML = marked.parse(aboutus.innerText);
+    </script>
 </body>
 
 </html>

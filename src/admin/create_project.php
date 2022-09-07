@@ -93,7 +93,6 @@ include_once '../includes/admin/head.php';
                             <p class="mb-0">Aqui podem preencher o seguinte formulario para criar um projeto.</p>
                             <p class="mb-1">No campo <a href="#inputDescricao">descrição</a> tem a capacidade de
                                 interpretar markdown. Seguindo estas <a href="https://www.markdownguide.org/basic-syntax/">regras</a>.</p>
-                            <p class="mb-0">Para pré-visualizar pode usar o botão <b>Visualizar</b>.</p>
                             <p class="mb-0">Assim que estiver feliz com o resultado poderá <b>Finalizar</b> para enviar
                                 para o site.</p>
                         </div><!-- /.col -->

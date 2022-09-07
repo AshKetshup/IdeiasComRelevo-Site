@@ -42,7 +42,7 @@
         private $value;
         private $has_elevator;
         private $description;
-        private $floor_clount;
+        private $floor_count;
 
         /** Refs */
         private $appts;
@@ -292,6 +292,43 @@
 
             $connection->close();
             return $rtn;
+        }
+
+        /**
+         * Gets all the variables from the current object
+         * it ignores the "db_context" and "loaded_appts" as they should not be included on the array
+         * during processing of the typologies the "db_context", "photos", "realestate" and "loaded_realestate" variables are also removed
+         */
+        private function obj_to_array() {
+            $dta_appts = array();
+            foreach($this->appts as $appt) {
+                $apptVars = $appt->expose();
+                unset($apptVars['db_context']);
+                unset($apptVars['photos']);
+                unset($apptVars['realestate']);
+                unset($apptVars['loaded_realestate']);
+                array_push($dta_appts, $apptVars);
+            }                
+            $currVars = get_object_vars($this);
+            unset($currVars['db_context']);
+            unset($currVars['loaded_appts']);
+            
+            $currVars['appts'] = $dta_appts;
+            return $currVars;
+        }
+
+        /**
+         * Gets the current object instance as a JSON
+         * @param bool $ignorePhotos ignores the photos by not adding them to the json. Defaults to true
+         * @return string The JSON string corresponding to the current object
+         */
+        public function get_json($ignorePhotos = true) {
+            $vars = $this->obj_to_array();
+            if ($ignorePhotos) {
+                unset($vars['main_photo']);
+                unset($vars['photos']);
+            }
+            return json_encode($vars);
         }
 
         /**

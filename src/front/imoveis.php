@@ -66,7 +66,7 @@ $projects = $app_instance->ProjectsManagement->admin_get_projects();
     <hr class="container">
     <div class="container d-flex align-items-start flex-column">
         <h3>Resultados para ""</h3>
-        <?php foreach ($projects as $project) : ?>
+        <?php foreach ($projects as $project) : ?>            
             <?php $project->reload_appartments(); ?>
             <div class="col-12 d-flex m-0 my-2 p-0 shopItem overflow-hidden card flex-row align-items-center" href="/produto?id=<?= $project->get_id() ?>" style="height: 200px; cursor: pointer;">
                 <div class="col-3 m-0 p-0 overflow-hidden">

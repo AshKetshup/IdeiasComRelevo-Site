@@ -242,6 +242,10 @@
             return $result;
         }
 
+        public function expose() {
+            return get_object_vars($this);
+        }
+
         /* SETTERS */
         public function set_area($value) { $this->area = $value; }
         public function set_energy_category($value) { $this->energy_category = $value; }

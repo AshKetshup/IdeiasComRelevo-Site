@@ -21,11 +21,11 @@
     $app_instance = new IdeiasComRelevo();
 
     // verifies if all fields contain data if not redirects to the same page setting the err to true
-    if (!isset($_POST["telemovel"]) || !isset($_POST["email"]) || !isset($_POST["sede"]))
+    if (!isset($_POST["telemovel"]) || !isset($_POST["email"]) || !isset($_POST["sede"]) || !isset($_POST['sobrenos']))
         header("Location: /admin/contactos?err=true");
 
     // updates the contacts and redirects to the same page setting the err to false
-    $app_instance->ContactsManagement->update_contacts($_POST["telemovel"], $_POST["email"], $_POST["sede"]);
+    $app_instance->ContactsManagement->update_contacts($_POST["telemovel"], $_POST["email"], $_POST["sede"], $_POST['sobrenos']);
     header("Location: /admin/contactos?err=false");
 
 ?>

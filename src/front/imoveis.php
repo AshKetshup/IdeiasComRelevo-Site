@@ -257,8 +257,8 @@ $filter_values = $app_instance->ProjectsManagement->get_project_filters();
         const fields = () => {
             return {
                 "state":           document.querySelectorAll("#state input[type=checkbox]:checked"), 
-                "typologies":      document.querySelectorAll("#typologies input[type=checkbox]:checked"), 
-                "building_types":  document.querySelectorAll("#building_types input[type=checkbox]:checked"), 
+                "typology":        document.querySelectorAll("#typologies input[type=checkbox]:checked"), 
+                "building_type":  document.querySelectorAll("#building_types input[type=checkbox]:checked"), 
                 "floor_count":     document.querySelectorAll("#floor_count input[type=checkbox]:checked"), 
                 "floor":           document.querySelectorAll("#floor input[type=checkbox]:checked"), 
                 "energy_category": document.querySelectorAll("#energetic_category input[type=checkbox]:checked"), 

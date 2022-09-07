@@ -16,6 +16,8 @@
      * 
      */
 
+use function PHPSTORM_META\map;
+
     $APP_PATHS = array(
         "entities" => $_SERVER["DOCUMENT_ROOT"] . "/backend/entities",
         "database" => $_SERVER["DOCUMENT_ROOT"] . "/backend/database",
@@ -372,20 +374,56 @@
         public function get_title() { return $this->title; }
         public function get_floor_count() { return $this->floor_count; }
 
+        public function isHomogenous(array $arr, $testValue = null) {
+            // If they did not pass the 2nd func argument, then we will use an arbitrary value in the $arr (that happens to be the first value).
+            // By using func_num_args() to test for this, we can properly support testing for an array filled with nulls, if desired.
+            // ie isHomogenous([null, null], null) === true
+            $testValue = func_num_args() > 1 ? $testValue : reset($arr);
+            foreach ($arr as $val) {
+                if ($testValue !== $val) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public function get_sale_type() {
             $this->reload_appartments();
-            $id = -1;
-            foreach($this->appts as $appt) {
-                if ($id == -1 && $appt->get_state() != 4)
-                    $id = $appt->get_state();
-                if ($id == 1 && $appt->get_state() == 2)
-                    $id = 3;
-                if ($id == 2 && $appt->get_state() == 1)
-                    $id = 3;
-                if ($appt->get_state() == 4)
-                    continue;
-            }
-            return $id;
+
+            $appt_mapped = array_map(function($el) { return $el->get_state(); }, $this->appts );
+
+            if ((in_array(1, $appt_mapped) && in_array(2, $appt_mapped)) || in_array(3, $appt_mapped))
+                return 3;
+
+            if ($this->isHomogenous($appt_mapped))
+                return $appt_mapped[0];
+            else
+                return array_filter(
+                    $appt_mapped, 
+                    function($el) {
+                        return $el !== 4;
+                    }
+                )[0];
+
+            // foreach($this->appts as $appt) {
+            //     // case unset $id and the state of this appartment aint 4
+            //     if ($id == -1 && $appt->get_state() != 4)
+            //         $id = $appt->get_state();               // we define it to self state (0,1,2,3)
+                
+            //     // case $id = vende-se and the current appartment state being aluga-se
+            //     if ($id == 1 && $appt->get_state() == 2)
+            //         $id = 3;                                // $id = vende-se e aluga-se
+
+            //     // case $id = aluga-se and the current appartment state being vende-se
+            //     if ($id == 2 && $appt->get_state() == 1)
+            //         $id = 3;                                // $id = vende-se e aluga-se
+
+            //     // case current state is vendido it ignores
+            //     if ($appt->get_state() == 4)
+            //         continue;
+            // }
+            // return $id;
         }
 
         /** Setters */        

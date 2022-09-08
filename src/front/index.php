@@ -37,7 +37,7 @@
                         <?php else: ?>
                             <div class="carousel-item">
                         <?php endif; ?>
-                            <img class="d-inline w-100" src="<?= $image ?>">
+                            <img class="d-inline w-100" src="/uploads/<?= $image->get_image() ?>">
                         </div>
                     <?php endfor; ?>
                     </div>

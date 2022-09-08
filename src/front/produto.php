@@ -332,18 +332,6 @@ $project = $app_instance->ProjectsManagement->get_project($_GET['id']);
                 </div>
             </div>
         </div>
-
-
-        <style>
-            .nav-tabs {
-                border-bottom: solid rgb(249, 99, 50);
-            }
-
-            .nav-link.active {
-                background-color: rgb(249, 99, 50) !important;
-                border-radius: 0 !important;
-            }
-        </style>
     </div>
 
     <!-- footer -->

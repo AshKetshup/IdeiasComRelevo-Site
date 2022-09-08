@@ -24,7 +24,7 @@
 
     <!-- End Navbar -->
     <div class="wrapper">
-        <div class="page-header clear-filter vh-100" filter-color="yellow">
+        <div class="page-header clear-filter vh-100" filter-color="primary">
             <div class="page-header-image" data-parallax="false">
                 <div id="carouselLandingPage" class="carousel slide w-100" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">

@@ -32,4 +32,13 @@
 
 <style>
     *:focus {outline:0;}
+    
+    .nav-tabs {
+        border-bottom: solid rgb(21, 61, 89);
+    }
+
+    .nav-link.active {
+        background-color: rgb(21, 61, 89) !important;
+        border-radius: 0 !important;
+    }
 </style>

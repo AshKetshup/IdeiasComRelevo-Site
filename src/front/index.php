@@ -1,6 +1,8 @@
 <?php
     require_once $_SERVER["DOCUMENT_ROOT"] . '/backend/app.php';
     $app_instance = new IdeiasComRelevo();
+
+    $carousselImages = $app_instance->FinishesManagement->admin_get_finishes(FinishesManagement::catshort_to_id("I"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,7 @@
     <!-- Navbar -->
     <?php 
         $PAGE_ID = "index";
-        include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/nav.php'; 
+        include_once $_SERVER["DOCUMENT_ROOT"] . '/includes/site/nav.php';
     ?>
 
     <!-- End Navbar -->
@@ -28,19 +30,16 @@
             <div class="page-header-image" data-parallax="false">
                 <div id="carouselLandingPage" class="carousel slide w-100" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item">
-                            <!-- .img-fluid. max-width: 100% -->
-                            <img class="d-inline w-100"
-                                src="https://images.unsplash.com/photo-1521574873411-508db8dbe55f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8"
-                                alt="First slide"> <!-- PHP -->
+                    <?php for ($i = 0; $i < count($carousselImages); $i++): ?>
+                        <?php $image = $carousselImages[$i]; ?>
+                        <?php if ($i == 0): ?>
+                            <div class="carousel-item active">
+                        <?php else: ?>
+                            <div class="carousel-item">
+                        <?php endif; ?>
+                            <img class="d-inline w-100" src="<?= $image ?>">
                         </div>
-                        <div class="carousel-item active">
-                            <img class="d-inline" src="/assets/img/exemplos/IMG_20220402_102058823.jpg" alt="Second slide">
-                            <!-- PHP -->
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-inline" src="/assets/img/Template/bg4.jpg" alt="Third slide"> <!-- PHP -->
-                        </div>
+                    <?php endfor; ?>
                     </div>
                 </div>
                 <style>

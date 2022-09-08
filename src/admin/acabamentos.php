@@ -104,6 +104,28 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-header">
+                                    <h5 class="m-0">Index</h5>
+                                </div>
+                                <div class="card-body overflow-hidden w-100 d-block">
+                                    <div class="carousel d-block">
+                                        <?php foreach($app_instance->FinishesManagement->admin_get_finishes(4) as $finish): ?>
+                                            <div class="carousel-item">
+                                                <a class="badge badge-danger position-absolute m-1 p-1" href="/backend/post_scripts/delete_finish.php?id=<?= $finish->get_id() ?>"><i class="fa-solid fa-2x fa-trash-can"></i></a>
+                                                <img src="/uploads/<?= $finish->get_image() ?>">
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="w-100 d-flex justify-content-end">
+                                        <button id="btnAddIndex" class="btn btn-primary" data-toggle="modal" 
+                                            data-target="#modalSendImage">Adicionar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
                                     <h5 class="m-0">Casas de Banho</h5>
                                 </div>
                                 <div class="card-body overflow-hidden w-100 d-block">
@@ -233,6 +255,13 @@
     <script>
         let actionLink = "/backend/post_scripts/add_finish.php";
         let formModal = document.getElementById("formModal");
+
+        document.getElementById("btnAddIndex").addEventListener("click", () => {
+            let category = "I";
+
+            // CHANGE MODAL ACTION PATH
+            formModal.action = actionLink + "?categoria=" + category;
+        });
 
         document.getElementById("btnAddWC").addEventListener("click", () => {
             let category = "WC";

@@ -22,7 +22,7 @@
         private $servername = "localhost";
         private $username = "ideiasc8_icr";
         private $password = "XqbWI)^S0n\$p";
-        private $database = "ideias_com_relevo";
+        private $database = "ideiasc8_icr";
 
         /**
          * Opens the database connection

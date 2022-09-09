@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Sep 09, 2022 at 01:14 PM
+-- Generation Time: Sep 09, 2022 at 03:28 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `ideas_com_relevo`
 --
-CREATE DATABASE IF NOT EXISTS `ideias_com_relevo` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `ideias_com_relevo`;
 
 -- --------------------------------------------------------
 

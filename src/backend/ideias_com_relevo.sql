@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 31, 2022 at 06:25 PM
+-- Generation Time: Sep 09, 2022 at 01:14 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -20,8 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `ideas_com_relevo`
 --
-CREATE DATABASE IF NOT EXISTS `ideas_com_relevo` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `ideas_com_relevo`;
+CREATE DATABASE IF NOT EXISTS `ideias_com_relevo` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `ideias_com_relevo`;
 
 -- --------------------------------------------------------
 
@@ -35,13 +35,6 @@ CREATE TABLE `associates` (
   `name` text NOT NULL,
   `website` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `associates`
---
-
-INSERT INTO `associates` (`id`, `logo`, `name`, `website`) VALUES
-('da4c7351-e282-4b06-9561-23a79a8cd7e7', '354ff668-9e3b-4633-b7a3-676397465c50.png', 'Moogle Inc', 'moogle.pcdev.pt');
 
 -- --------------------------------------------------------
 
@@ -60,9 +53,10 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`id`, `field`, `value`) VALUES
-('1992e773-3e40-492d-a773-1ca8a73feee8', 'office', 'Entroncamento da santa cona do assobio\r\nNº 69'),
-('82507761-1134-4488-b503-2d78302141b4', 'phone', '+351 922 222 233'),
-('89f09396-9237-4f24-9e86-e698a2cbdb73', 'email', 'email@email.com');
+('1992e773-3e40-492d-a773-1ca8a73feee8', 'office', ''),
+('19a6cf16-2e47-11ed-96ff-4f2be91094b7', 'aboutus', ''),
+('82507761-1134-4488-b503-2d78302141b4', 'phone', ''),
+('89f09396-9237-4f24-9e86-e698a2cbdb73', 'email', '');
 
 -- --------------------------------------------------------
 
@@ -75,14 +69,6 @@ CREATE TABLE `finishes` (
   `image` text NOT NULL,
   `area` smallint(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `finishes`
---
-
-INSERT INTO `finishes` (`id`, `image`, `area`) VALUES
-('877ce98e-20eb-4998-9cda-cb38dcd2d5ae', '316d26c1-3279-4534-9ca7-8048dbbba2c7.jpg', 1),
-('f053648e-6e92-4089-8a69-5daf3bcb219c', '0e612904-59fc-405c-a7f7-de8467815ecc.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -106,13 +92,6 @@ CREATE TABLE `realestate` (
   `has_elevator` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `realestate`
---
-
-INSERT INTO `realestate` (`id`, `title`, `main_photo`, `photos`, `description`, `zone`, `county`, `city`, `building_type`, `floor_count`, `state`, `value`, `has_elevator`) VALUES
-('7d9165c4-9e12-4366-8aa9-3b0bce0f2745', 'Small house', '', '', 'Big house', 'Centro', 'Figueira da Foz', 'Alhadas', 2, 1, 1, '200000', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -127,21 +106,14 @@ CREATE TABLE `typology` (
   `typology` text,
   `state` text,
   `has_garage` tinyint(4) DEFAULT NULL,
-  `rent_price` text,
-  `sell_price` text,
+  `rent_price` text NOT NULL,
+  `sell_price` text NOT NULL,
   `floor` int(11) DEFAULT NULL,
   `has_parking` tinyint(4) DEFAULT NULL,
   `wc_count` int(11) DEFAULT NULL,
   `description` text,
   `rid` char(36) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `typology`
---
-
-INSERT INTO `typology` (`id`, `area`, `photos`, `energy_category`, `typology`, `state`, `has_garage`, `rent_price`, `sell_price`, `floor`, `has_parking`, `wc_count`, `description`, `rid`) VALUES
-('552c10e9-606c-4938-b767-a5cbcd6286c9', 2000, '', 'A++', 'T4', '1', 1, '', '', 0, 1, 4, 'Big house', '7d9165c4-9e12-4366-8aa9-3b0bce0f2745');
 
 -- --------------------------------------------------------
 
@@ -161,8 +133,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-('537a913f-ad48-47e1-9110-9f17c1f12f64', 'Pedro Cavaleiro', 'pm.cavaleiro@hotmail.com', '$2y$10$uTldF2zNDvpPCyOs15dsYeyeNU3RGI.OADHlJSDdrzJ3R6ZeNnCLe'),
-('5a672782-9efe-4fd0-8c6f-8ec398765343', '', '', '$2y$10$zrg8vH.v1Y1r.9QtGsue3OXxpDG.TRnEIXxFVF8EShB9eItJmZ4eq'),
 ('bcd28c29-700d-4c4f-946b-a1b3277d546b', 'Super Admin', 'root@server.com', '$2y$10$ebxFpYqweJFm6BTJNh3NqOyr.ehcjpGlRC31WwT/zXV3Avh.XK9Cq');
 
 --

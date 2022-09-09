@@ -20,7 +20,7 @@
 
         /** Db Credentials (dummy or empty for repo) */
         private $servername = "localhost";
-        private $username = "icr";
+        private $username = "ideiasc8_icr";
         private $password = "o6WsrKas";
         private $database = "ideias_com_relevo";
 

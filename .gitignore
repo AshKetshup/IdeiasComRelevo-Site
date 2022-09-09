@@ -6,3 +6,4 @@ src/admin/create_account.php
 *.png
 
 !src/assets/*
+src/uploads/

@@ -108,7 +108,7 @@ $project = $app_instance->ProjectsManagement->get_project($_GET['id']);
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane active px-4" id="descrição" role="tabpanel" aria-labelledby="descrição-tab" style="min-height: 50vh;"><?=
-                $project->get_description()
+                str_replace("\n", "<br />", $project->get_description())
             ?></div>
 
             <?php if ($project->get_building_type() == 1): ?>
